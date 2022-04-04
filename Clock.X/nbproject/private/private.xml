@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Clock/Clock.X/main.h</file>
             <file>file:/C:/Clock/Clock.X/main.c</file>
+            <file>file:/C:/Clock/Clock.X/DS3231.h</file>
+            <file>file:/C:/Clock/Clock.X/DS3231.c</file>
         </group>
     </open-files>
 </project-private>
