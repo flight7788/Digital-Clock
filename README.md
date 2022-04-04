@@ -1,6 +1,6 @@
-# RTC_Clock
+# Digital-Clock
 
-![Project Image](https://github.com/flight7788/Grippall_BLE_APP/blob/main/GrippallBLE_UI.png)
+![Project Image](https://github.com/flight7788//blob/main/GrippallBLE_UI.png)
 
 ---
 
@@ -16,14 +16,18 @@
 
 ## Description
 
-UI interface for Grippall BLE application. Can read the value from the sensor and also plot , record it realtime.
+This DIY clock that has a 24-hour systema and we can use it as desktop clock.
+
+It contain a PIC microcontroller, which will controll the 7-segment display and the 2 buttons are used to set Time、Date and Brightness.
+
+It comes with auto power-off memory function. So, when there is power cut, it will run in background. Once the power is back, you don’t have to manually correct the time. It will automatically show the right time.
 
 #### Technologies
 
-- C# UI design
-- Windows 10 BLE control
+- Circuit design
+- PIC microcontroller develop
 
-[Back To The Top](#Grippall_BLE_APP)
+[Back To The Top](#Digital-Clock)
 
 ---
 
@@ -31,42 +35,40 @@ UI interface for Grippall BLE application. Can read the value from the sensor an
 
 #### Installation
 
-   Just excute: Grippall_BLE_APP\Grippall_BLE_APP\Grippall_BLE\Grippall_BLE\bin\Debug\Grippall_BLE.exe
+   1. Prepare the physical components of the clock. 
+   2. Prototyping on the breadboard.
+   3. Creat the circuit.
+   4. Programming.
 
 #### Control steps
 
-- Scan/Stop Button:
+- Function Button(SW1):
  
-   Will scan for nearby BLE device
-- Connect/Disconnect Button:
+   Will keep switching to the different function.
+- Select Button(SW2):
  
-   Will reach the device you select in listbox
+   Will select the current function.
 
-[Back To The Top](#Grippall_BLE_APP)
+[Back To The Top](#Digital-Clock)
 
 ---
 
 ## References
 
-- BLE_Client:
-https://docs.microsoft.com/zh-tw/windows/uwp/devices-sensors/gatt-client
-- UI structure design:
-https://www.youtube.com/watch?v=B_1Jk6_7aPU
+- PIC microcontroller:
+https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors
+- Digital clock:
+https://en.wikipedia.org/wiki/Digital_clock
 
-[Back To The Top](#Grippall_BLE_APP)
+[Back To The Top](#Digital-Clock)
 
 ---
 
 ## Author Info
 
-#### Daniel Chung
+#### Daniel JHUANG
 
 - Email - t110368004@ntut.org.tw
 - LAB - SPIE LAB, National Taipei University of Technology
 
-#### Alan QIU
-
-- Email - s100096.tw@gmail.com
-- LAB - SPIE LAB, National Taipei University of Technology
-
-[Back To The Top](#Grippall_BLE_APP)
+[Back To The Top](#Digital-Clock)
