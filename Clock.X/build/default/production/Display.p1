@@ -1,17 +1,102 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"16 ./I2C.h
-[; ;./I2C.h: 16: void I2C_Init(void);
-[v _I2C_Init `(v ~T0 @X0 0 ef ]
-"24
-[; ;./I2C.h: 24: void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data);
-[v _I2C_Mem_Transmit `(v ~T0 @X0 0 ef3`uc`uc`uc ]
-"25
-[; ;./I2C.h: 25: void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data);
-[v _I2C_Mem_Read `(v ~T0 @X0 0 ef3`uc`uc`*uc ]
-"19 ./DS3231.h
-[; ;./DS3231.h: 19: typedef struct {
-[s S1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Hour Min Sec Year Month Week Date ]
+"7 ./Display.h
+[; ;./Display.h: 7: typedef struct {
+[s S1 `uc -> 4 `i `uc -> 4 `i `a -> 4 `i ]
+[n S1 . Brightness NumVal Point ]
+"3079 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3079:     struct {
+[s S131 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S131 . LATB0 LATB1 LATB2 LATB3 LATB4 LATB5 LATB6 LATB7 ]
+"3089
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3089:     struct {
+[s S132 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S132 . LB0 LB1 LB2 LB3 LB4 LB5 LB6 LB7 ]
+"3078
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3078: typedef union {
+[u S130 `S131 1 `S132 1 ]
+[n S130 . . . ]
+"3100
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3100: extern volatile LATBbits_t LATBbits __attribute__((address(0xF8A)));
+[v _LATBbits `VS130 ~T0 @X0 0 e@3978 ]
+"3263
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3263: extern volatile unsigned char LATD __attribute__((address(0xF8C)));
+[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
+"6 ./main.h
+[p x PLLDIV = 4 ]
+"7
+[p x CPUDIV = OSC1_PLL2 ]
+"8
+[p x USBDIV = 2 ]
+"11
+[p x FOSC = HSPLL_HS ]
+"12
+[p x FCMEN = OFF ]
+"13
+[p x IESO = OFF ]
+"16
+[p x PWRT = OFF ]
+"17
+[p x BOR = OFF ]
+"18
+[p x BORV = 3 ]
+"19
+[p x VREGEN = OFF ]
+"22
+[p x WDT = OFF ]
+"23
+[p x WDTPS = 32768 ]
+"26
+[p x CCP2MX = ON ]
+"27
+[p x PBADEN = ON ]
+"28
+[p x LPT1OSC = OFF ]
+"29
+[p x MCLRE = ON ]
+"32
+[p x STVREN = OFF ]
+"33
+[p x LVP = OFF ]
+"34
+[p x ICPRT = OFF ]
+"35
+[p x XINST = OFF ]
+"38
+[p x CP0 = OFF ]
+"39
+[p x CP1 = OFF ]
+"40
+[p x CP2 = OFF ]
+"41
+[p x CP3 = OFF ]
+"44
+[p x CPB = OFF ]
+"45
+[p x CPD = OFF ]
+"48
+[p x WRT0 = OFF ]
+"49
+[p x WRT1 = OFF ]
+"50
+[p x WRT2 = OFF ]
+"51
+[p x WRT3 = OFF ]
+"54
+[p x WRTC = OFF ]
+"55
+[p x WRTB = OFF ]
+"56
+[p x WRTD = OFF ]
+"59
+[p x EBTR0 = OFF ]
+"60
+[p x EBTR1 = OFF ]
+"61
+[p x EBTR2 = OFF ]
+"62
+[p x EBTR3 = OFF ]
+"65
+[p x EBTRB = OFF ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -522,485 +607,261 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8893
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"5 DS3231.c
-[; ;DS3231.c: 5: void DS3231_Init(void) {
-[v _DS3231_Init `(v ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_Init ]
-[f ]
-"6
-[; ;DS3231.c: 6:     I2C_Init();
-[e ( _I2C_Init ..  ]
-"7
-[; ;DS3231.c: 7: }
-[e :UE 368 ]
-}
-"9
-[; ;DS3231.c: 9: void DS3231_SetSec(uint8_t data) {
-[v _DS3231_SetSec `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetSec ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"10
-[; ;DS3231.c: 10:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"11
-[; ;DS3231.c: 11:     if(data < 60) {
-[e $ ! < -> _data `i -> 60 `i 370  ]
-{
-"12
-[; ;DS3231.c: 12:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"13
-[; ;DS3231.c: 13:         I2C_Mem_Transmit(0xD0, 0x00, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 0 `i `uc _BCD_Data ]
-"14
-[; ;DS3231.c: 14:     }
-}
-[e :U 370 ]
-"15
-[; ;DS3231.c: 15: }
-[e :UE 369 ]
-}
+"13 Display.c
+[; ;Display.c: 13: const uint8_t NumOut_Table[] = { 0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92,
+[v _NumOut_Table `Cuc ~T0 @X0 -> 13 `i e ]
+[i _NumOut_Table
+:U ..
+-> -> 192 `i `uc
+-> -> 249 `i `uc
+-> -> 164 `i `uc
+-> -> 176 `i `uc
+-> -> 153 `i `uc
+-> -> 146 `i `uc
+-> -> 130 `i `uc
+-> -> 248 `i `uc
+-> -> 128 `i `uc
+-> -> 144 `i `uc
+-> -> 191 `i `uc
+-> -> 255 `i `uc
+-> -> 198 `i `uc
+..
+]
 "17
-[; ;DS3231.c: 17: void DS3231_SetMin(uint8_t data) {
-[v _DS3231_SetMin `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetMin ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"18
-[; ;DS3231.c: 18:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"19
-[; ;DS3231.c: 19:     if(data < 60) {
-[e $ ! < -> _data `i -> 60 `i 372  ]
-{
-"20
-[; ;DS3231.c: 20:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"21
-[; ;DS3231.c: 21:         I2C_Mem_Transmit( 0xD0, 0x01, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 1 `i `uc _BCD_Data ]
-"22
-[; ;DS3231.c: 22:     }
-}
-[e :U 372 ]
+[; ;Display.c: 17: Display_t MyDisplay = {
+[v _MyDisplay `S1 ~T0 @X0 1 e ]
+[i _MyDisplay
+:U ..
+:U ..
+:U ..
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+-> -> 9 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 9 `i `uc
+-> -> 8 `i `uc
+..
+:U ..
+-> -> 0 `i `a
+-> -> 0 `i `a
+-> -> 0 `i `a
+-> -> 0 `i `a
+..
+..
+..
+]
 "23
-[; ;DS3231.c: 23: }
-[e :UE 371 ]
-}
+[; ;Display.c: 23: void Display_Set_Brightness(
+[v _Display_Set_Brightness `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
 "25
-[; ;DS3231.c: 25: void DS3231_SetHour(uint8_t data) {
-[v _DS3231_SetHour `(v ~T0 @X0 1 ef1`uc ]
+[; ;Display.c: 25:         uint8_t digit2_val, uint8_t digit3_val) {
 {
-[e :U _DS3231_SetHour ]
-[v _data `uc ~T0 @X0 1 r1 ]
+[e :U _Display_Set_Brightness ]
+"24
+[; ;Display.c: 24:         uint8_t digit0_val, uint8_t digit1_val,
+[v _digit0_val `uc ~T0 @X0 1 r1 ]
+[v _digit1_val `uc ~T0 @X0 1 r2 ]
+"25
+[; ;Display.c: 25:         uint8_t digit2_val, uint8_t digit3_val) {
+[v _digit2_val `uc ~T0 @X0 1 r3 ]
+[v _digit3_val `uc ~T0 @X0 1 r4 ]
 [f ]
 "26
-[; ;DS3231.c: 26:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
+[; ;Display.c: 26:     MyDisplay.Brightness[0] = digit0_val;
+[e = *U + &U . _MyDisplay 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _MyDisplay 0 `ui `ux _digit0_val ]
 "27
-[; ;DS3231.c: 27:     if(data < 24) {
-[e $ ! < -> _data `i -> 24 `i 374  ]
-{
+[; ;Display.c: 27:     MyDisplay.Brightness[1] = digit1_val;
+[e = *U + &U . _MyDisplay 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _MyDisplay 0 `ui `ux _digit1_val ]
 "28
-[; ;DS3231.c: 28:         BCD_Data = (((data/10)<<4)|(data%10))&0x3F;
-[e = _BCD_Data -> & | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i -> 63 `i `uc ]
+[; ;Display.c: 28:     MyDisplay.Brightness[2] = digit2_val;
+[e = *U + &U . _MyDisplay 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _MyDisplay 0 `ui `ux _digit2_val ]
 "29
-[; ;DS3231.c: 29:         I2C_Mem_Transmit( 0xD0,0x02, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 2 `i `uc _BCD_Data ]
+[; ;Display.c: 29:     MyDisplay.Brightness[3] = digit3_val;
+[e = *U + &U . _MyDisplay 0 * -> -> -> 3 `i `ui `ux -> -> # *U &U . _MyDisplay 0 `ui `ux _digit3_val ]
 "30
-[; ;DS3231.c: 30:     }
+[; ;Display.c: 30: }
+[e :UE 368 ]
 }
-[e :U 374 ]
-"31
-[; ;DS3231.c: 31: }
-[e :UE 373 ]
-}
-"33
-[; ;DS3231.c: 33: void DS3231_SetDate(uint8_t data) {
-[v _DS3231_SetDate `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetDate ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
+"32
+[; ;Display.c: 32: void Display_Set_NumVal(
+[v _Display_Set_NumVal `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
 "34
-[; ;DS3231.c: 34:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"35
-[; ;DS3231.c: 35:     if(data>=1 && data<32){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 32 `i 376  ]
+[; ;Display.c: 34:         uint8_t digit2_val, uint8_t digit3_val) {
 {
+[e :U _Display_Set_NumVal ]
+"33
+[; ;Display.c: 33:         uint8_t digit0_val, uint8_t digit1_val,
+[v _digit0_val `uc ~T0 @X0 1 r1 ]
+[v _digit1_val `uc ~T0 @X0 1 r2 ]
+"34
+[; ;Display.c: 34:         uint8_t digit2_val, uint8_t digit3_val) {
+[v _digit2_val `uc ~T0 @X0 1 r3 ]
+[v _digit3_val `uc ~T0 @X0 1 r4 ]
+[f ]
+"35
+[; ;Display.c: 35:     MyDisplay.NumVal[0] = digit0_val;
+[e = *U + &U . _MyDisplay 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _MyDisplay 1 `ui `ux _digit0_val ]
 "36
-[; ;DS3231.c: 36:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
+[; ;Display.c: 36:     MyDisplay.NumVal[1] = digit1_val;
+[e = *U + &U . _MyDisplay 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _MyDisplay 1 `ui `ux _digit1_val ]
 "37
-[; ;DS3231.c: 37:         I2C_Mem_Transmit( 0xD0, 0x04, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 4 `i `uc _BCD_Data ]
+[; ;Display.c: 37:     MyDisplay.NumVal[2] = digit2_val;
+[e = *U + &U . _MyDisplay 1 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _MyDisplay 1 `ui `ux _digit2_val ]
 "38
-[; ;DS3231.c: 38:     }
-}
-[e :U 376 ]
+[; ;Display.c: 38:     MyDisplay.NumVal[3] = digit3_val;
+[e = *U + &U . _MyDisplay 1 * -> -> -> 3 `i `ui `ux -> -> # *U &U . _MyDisplay 1 `ui `ux _digit3_val ]
 "39
-[; ;DS3231.c: 39: }
-[e :UE 375 ]
+[; ;Display.c: 39: }
+[e :UE 369 ]
 }
 "41
-[; ;DS3231.c: 41: void DS3231_SetWeek(uint8_t data) {
-[v _DS3231_SetWeek `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetWeek ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"42
-[; ;DS3231.c: 42:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
+[; ;Display.c: 41: void Display_Set_Point(
+[v _Display_Set_Point `(v ~T0 @X0 1 ef4`a`a`a`a ]
 "43
-[; ;DS3231.c: 43:     if(data>=1 && data<8){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 8 `i 378  ]
+[; ;Display.c: 43:         _Bool digit2_val, _Bool digit3_val) {
 {
+[e :U _Display_Set_Point ]
+"42
+[; ;Display.c: 42:         _Bool digit0_val, _Bool digit1_val,
+[v _digit0_val `a ~T0 @X0 1 r1 ]
+[v _digit1_val `a ~T0 @X0 1 r2 ]
+"43
+[; ;Display.c: 43:         _Bool digit2_val, _Bool digit3_val) {
+[v _digit2_val `a ~T0 @X0 1 r3 ]
+[v _digit3_val `a ~T0 @X0 1 r4 ]
+[f ]
 "44
-[; ;DS3231.c: 44:         BCD_Data = data&0x07;
-[e = _BCD_Data -> & -> _data `i -> 7 `i `uc ]
+[; ;Display.c: 44:     MyDisplay.Point[0] = digit0_val;
+[e = *U + &U . _MyDisplay 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _MyDisplay 2 `ui `ux _digit0_val ]
 "45
-[; ;DS3231.c: 45:         I2C_Mem_Transmit( 0xD0, 0x03, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 3 `i `uc _BCD_Data ]
+[; ;Display.c: 45:     MyDisplay.Point[1] = digit1_val;
+[e = *U + &U . _MyDisplay 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _MyDisplay 2 `ui `ux _digit1_val ]
 "46
-[; ;DS3231.c: 46:     }
-}
-[e :U 378 ]
+[; ;Display.c: 46:     MyDisplay.Point[2] = digit2_val;
+[e = *U + &U . _MyDisplay 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _MyDisplay 2 `ui `ux _digit2_val ]
 "47
-[; ;DS3231.c: 47: }
-[e :UE 377 ]
+[; ;Display.c: 47:     MyDisplay.Point[3] = digit3_val;
+[e = *U + &U . _MyDisplay 2 * -> -> -> 3 `i `ui `ux -> -> # *U &U . _MyDisplay 2 `ui `ux _digit3_val ]
+"48
+[; ;Display.c: 48: }
+[e :UE 370 ]
 }
-"49
-[; ;DS3231.c: 49: void DS3231_SetMonth(uint8_t data) {
-[v _DS3231_SetMonth `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetMonth ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
 "50
-[; ;DS3231.c: 50:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
+[; ;Display.c: 50: void Display_ISR(void) {
+[v _Display_ISR `(v ~T0 @X0 1 ef ]
+{
+[e :U _Display_ISR ]
+[f ]
 "51
-[; ;DS3231.c: 51:     if(data>=1 && data<13){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 13 `i 380  ]
-{
+[; ;Display.c: 51:     static uint8_t digit = 0, BrightCnt = 0;
+[v F3245 `uc ~T0 @X0 1 s digit ]
+[i F3245
+-> -> 0 `i `uc
+]
+[v F3246 `uc ~T0 @X0 1 s BrightCnt ]
+[i F3246
+-> -> 0 `i `uc
+]
 "52
-[; ;DS3231.c: 52:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
+[; ;Display.c: 52:     if(BrightCnt >= 10) {
+[e $ ! >= -> F3246 `i -> 10 `i 372  ]
+{
 "53
-[; ;DS3231.c: 53:         I2C_Mem_Transmit( 0xD0, 0x05, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 5 `i `uc _BCD_Data ]
+[; ;Display.c: 53:         BrightCnt = 0;
+[e = F3246 -> -> 0 `i `uc ]
 "54
-[; ;DS3231.c: 54:     }
-}
-[e :U 380 ]
+[; ;Display.c: 54:         if(digit++ >= 3) {
+[e $ ! >= -> ++ F3245 -> -> 1 `i `uc `i -> 3 `i 373  ]
+{
 "55
-[; ;DS3231.c: 55: }
-[e :UE 379 ]
+[; ;Display.c: 55:             digit = 0;
+[e = F3245 -> -> 0 `i `uc ]
+"56
+[; ;Display.c: 56:         }
 }
-"57
-[; ;DS3231.c: 57: void DS3231_SetYear(uint8_t data) {
-[v _DS3231_SetYear `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetYear ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
+[e :U 373 ]
 "58
-[; ;DS3231.c: 58:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
+[; ;Display.c: 58:         LATBbits.LATB2 = 1;
+[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
 "59
-[; ;DS3231.c: 59:     if(data < 100) {
-[e $ ! < -> _data `i -> 100 `i 382  ]
-{
+[; ;Display.c: 59:         LATBbits.LATB3 = 1;
+[e = . . _LATBbits 0 3 -> -> 1 `i `uc ]
 "60
-[; ;DS3231.c: 60:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
+[; ;Display.c: 60:         LATBbits.LATB4 = 1;
+[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
 "61
-[; ;DS3231.c: 61:         I2C_Mem_Transmit(0xD0, 0x06, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 6 `i `uc _BCD_Data ]
-"62
-[; ;DS3231.c: 62:     }
-}
-[e :U 382 ]
-"63
-[; ;DS3231.c: 63: }
-[e :UE 381 ]
-}
-"66
-[; ;DS3231.c: 66: uint8_t DS3231_SecRead(void) {
-[v _DS3231_SecRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_SecRead ]
-[f ]
-"67
-[; ;DS3231.c: 67:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"68
-[; ;DS3231.c: 68:    I2C_Mem_Read( 0xD0, 0x00, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 0 `i `uc &U _BCD_Data ]
-"69
-[; ;DS3231.c: 69:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
-"70
-[; ;DS3231.c: 70:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 383  ]
-"71
-[; ;DS3231.c: 71: }
-[e :UE 383 ]
-}
-"73
-[; ;DS3231.c: 73: uint8_t DS3231_MinRead(void) {
-[v _DS3231_MinRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_MinRead ]
-[f ]
-"74
-[; ;DS3231.c: 74:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"75
-[; ;DS3231.c: 75:    I2C_Mem_Read( 0xD0, 0x01, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 1 `i `uc &U _BCD_Data ]
-"76
-[; ;DS3231.c: 76:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
-"77
-[; ;DS3231.c: 77:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 384  ]
-"78
-[; ;DS3231.c: 78: }
-[e :UE 384 ]
-}
-"80
-[; ;DS3231.c: 80: uint8_t DS3231_HourRead(void) {
-[v _DS3231_HourRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_HourRead ]
-[f ]
-"81
-[; ;DS3231.c: 81:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"82
-[; ;DS3231.c: 82:    I2C_Mem_Read( 0xD0, 0x02, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 2 `i `uc &U _BCD_Data ]
-"83
-[; ;DS3231.c: 83:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 3 `i -> 10 `i `uc ]
-"84
-[; ;DS3231.c: 84:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 385  ]
-"85
-[; ;DS3231.c: 85: }
-[e :UE 385 ]
-}
-"87
-[; ;DS3231.c: 87: uint8_t DS3231_WeekRead(void) {
-[v _DS3231_WeekRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_WeekRead ]
-[f ]
-"88
-[; ;DS3231.c: 88:    uint8_t data = 0;
+[; ;Display.c: 61:         LATBbits.LATB5 = 1;
+[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
+"64
+[; ;Display.c: 64:         uint8_t data = NumOut_Table[MyDisplay.NumVal[digit]];
 [v _data `uc ~T0 @X0 1 a ]
-[e = _data -> -> 0 `i `uc ]
-"89
-[; ;DS3231.c: 89:    I2C_Mem_Read( 0xD0, 0x03, &data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 3 `i `uc &U _data ]
-"90
-[; ;DS3231.c: 90:    return data;
-[e ) _data ]
-[e $UE 386  ]
-"91
-[; ;DS3231.c: 91: }
-[e :UE 386 ]
+[e = _data *U + &U _NumOut_Table * -> *U + &U . _MyDisplay 1 * -> F3245 `ux -> -> # *U &U . _MyDisplay 1 `ui `ux `ux -> -> # *U &U _NumOut_Table `ui `ux ]
+"65
+[; ;Display.c: 65:         if(MyDisplay.Point[digit]==1) data &= 0x7f;
+[e $ ! == -> *U + &U . _MyDisplay 2 * -> F3245 `ux -> -> # *U &U . _MyDisplay 2 `ui `ux `i -> 1 `i 374  ]
+[e =& _data -> -> 127 `i `uc ]
+[e :U 374 ]
+"66
+[; ;Display.c: 66:         LATD = data;
+[e = _LATD _data ]
+"69
+[; ;Display.c: 69:         LATBbits.LATB2 = ((digit==3)?0:1);
+[e = . . _LATBbits 0 2 -> ? == -> F3245 `i -> 3 `i : -> 0 `i -> 1 `i `uc ]
+"70
+[; ;Display.c: 70:         LATBbits.LATB3 = ((digit==2)?0:1);
+[e = . . _LATBbits 0 3 -> ? == -> F3245 `i -> 2 `i : -> 0 `i -> 1 `i `uc ]
+"71
+[; ;Display.c: 71:         LATBbits.LATB4 = ((digit==1)?0:1);
+[e = . . _LATBbits 0 4 -> ? == -> F3245 `i -> 1 `i : -> 0 `i -> 1 `i `uc ]
+"72
+[; ;Display.c: 72:         LATBbits.LATB5 = ((digit==0)?0:1);
+[e = . . _LATBbits 0 5 -> ? == -> F3245 `i -> 0 `i : -> 0 `i -> 1 `i `uc ]
+"74
+[; ;Display.c: 74:     }
 }
-"93
-[; ;DS3231.c: 93: uint8_t DS3231_DateRead(void) {
-[v _DS3231_DateRead `(uc ~T0 @X0 1 ef ]
+[e :U 372 ]
+"76
+[; ;Display.c: 76:     if(MyDisplay.Brightness[digit] <= BrightCnt) {
+[e $ ! <= -> *U + &U . _MyDisplay 0 * -> F3245 `ux -> -> # *U &U . _MyDisplay 0 `ui `ux `i -> F3246 `i 375  ]
 {
-[e :U _DS3231_DateRead ]
-[f ]
-"94
-[; ;DS3231.c: 94:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"95
-[; ;DS3231.c: 95:    I2C_Mem_Read( 0xD0, 0x04, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 4 `i `uc &U _BCD_Data ]
-"96
-[; ;DS3231.c: 96:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 3 `i -> 10 `i `uc ]
-"97
-[; ;DS3231.c: 97:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 387  ]
-"98
-[; ;DS3231.c: 98: }
-[e :UE 387 ]
+"77
+[; ;Display.c: 77:         if(digit==0) LATBbits.LATB5 = 1;
+[e $ ! == -> F3245 `i -> 0 `i 376  ]
+[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
+[e $U 377  ]
+"78
+[; ;Display.c: 78:         else if(digit==1) LATBbits.LATB4 = 1;
+[e :U 376 ]
+[e $ ! == -> F3245 `i -> 1 `i 378  ]
+[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
+[e $U 379  ]
+"79
+[; ;Display.c: 79:         else if(digit==2) LATBbits.LATB3 = 1;
+[e :U 378 ]
+[e $ ! == -> F3245 `i -> 2 `i 380  ]
+[e = . . _LATBbits 0 3 -> -> 1 `i `uc ]
+[e $U 381  ]
+"80
+[; ;Display.c: 80:         else if(digit==3) LATBbits.LATB2 = 1;
+[e :U 380 ]
+[e $ ! == -> F3245 `i -> 3 `i 382  ]
+[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
+[e :U 382 ]
+[e :U 381 ]
+[e :U 379 ]
+[e :U 377 ]
+"81
+[; ;Display.c: 81:     }
 }
-"100
-[; ;DS3231.c: 100: uint8_t DS3231_MonthRead(void) {
-[v _DS3231_MonthRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_MonthRead ]
-[f ]
-"101
-[; ;DS3231.c: 101:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"102
-[; ;DS3231.c: 102:    I2C_Mem_Read( 0xD0, 0x05, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 5 `i `uc &U _BCD_Data ]
-"103
-[; ;DS3231.c: 103:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x01)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 1 `i -> 10 `i `uc ]
-"104
-[; ;DS3231.c: 104:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 388  ]
-"105
-[; ;DS3231.c: 105: }
-[e :UE 388 ]
-}
-"107
-[; ;DS3231.c: 107: uint8_t DS3231_YearRead(void) {
-[v _DS3231_YearRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_YearRead ]
-[f ]
-"108
-[; ;DS3231.c: 108:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"109
-[; ;DS3231.c: 109:    I2C_Mem_Read( 0xD0, 0x06, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 6 `i `uc &U _BCD_Data ]
-"110
-[; ;DS3231.c: 110:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
-"111
-[; ;DS3231.c: 111:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 389  ]
-"112
-[; ;DS3231.c: 112: }
-[e :UE 389 ]
-}
-"114
-[; ;DS3231.c: 114: float DS3231_TemperureRead(void) {
-[v _DS3231_TemperureRead `(f ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_TemperureRead ]
-[f ]
-"115
-[; ;DS3231.c: 115:    uint8_t DATA_H,DATA_L = 0;
-[v _DATA_H `uc ~T0 @X0 1 a ]
-[v _DATA_L `uc ~T0 @X0 1 a ]
-[e = _DATA_L -> -> 0 `i `uc ]
-"116
-[; ;DS3231.c: 116:    I2C_Mem_Read(0xD0, 0x11, &DATA_H);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 17 `i `uc &U _DATA_H ]
-"117
-[; ;DS3231.c: 117:    I2C_Mem_Read(0xD0, 0x12, &DATA_L);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 18 `i `uc &U _DATA_L ]
-"118
-[; ;DS3231.c: 118:    return ((float)(((DATA_H&0x7F)<<2)|(DATA_L>>6))/4)*(((DATA_H&0x80)==0)?1:-1);
-[e ) * / -> | << & -> _DATA_H `i -> 127 `i -> 2 `i >> -> _DATA_L `i -> 6 `i `f -> -> 4 `i `f -> ? == & -> _DATA_H `i -> 128 `i -> 0 `i : -> 1 `i -U -> 1 `i `f ]
-[e $UE 390  ]
-"119
-[; ;DS3231.c: 119: }
-[e :UE 390 ]
-}
-"121
-[; ;DS3231.c: 121: void DS3231_ReadAll(RTC_t* time) {
-[v _DS3231_ReadAll `(v ~T0 @X0 1 ef1`*S1 ]
-{
-[e :U _DS3231_ReadAll ]
-[v _time `*S1 ~T0 @X0 1 r1 ]
-[f ]
-"122
-[; ;DS3231.c: 122:    time->Sec = DS3231_SecRead();
-[e = . *U _time 2 ( _DS3231_SecRead ..  ]
-"123
-[; ;DS3231.c: 123:    time->Min = DS3231_MinRead();
-[e = . *U _time 1 ( _DS3231_MinRead ..  ]
-"124
-[; ;DS3231.c: 124:    time->Hour = DS3231_HourRead();
-[e = . *U _time 0 ( _DS3231_HourRead ..  ]
-"125
-[; ;DS3231.c: 125:    time->Date = DS3231_DateRead();
-[e = . *U _time 6 ( _DS3231_DateRead ..  ]
-"126
-[; ;DS3231.c: 126:    time->Week = DS3231_WeekRead();
-[e = . *U _time 5 ( _DS3231_WeekRead ..  ]
-"127
-[; ;DS3231.c: 127:    time->Month = DS3231_MonthRead();
-[e = . *U _time 4 ( _DS3231_MonthRead ..  ]
-"128
-[; ;DS3231.c: 128:    time->Year = DS3231_YearRead();
-[e = . *U _time 3 ( _DS3231_YearRead ..  ]
-"129
-[; ;DS3231.c: 129: }
-[e :UE 391 ]
-}
-"131
-[; ;DS3231.c: 131: void DS3231_SetAll(RTC_t* time) {
-[v _DS3231_SetAll `(v ~T0 @X0 1 ef1`*S1 ]
-{
-[e :U _DS3231_SetAll ]
-[v _time `*S1 ~T0 @X0 1 r1 ]
-[f ]
-"132
-[; ;DS3231.c: 132:     DS3231_SetSec(time->Sec);
-[e ( _DS3231_SetSec (1 . *U _time 2 ]
-"133
-[; ;DS3231.c: 133:     DS3231_SetMin(time->Min);
-[e ( _DS3231_SetMin (1 . *U _time 1 ]
-"134
-[; ;DS3231.c: 134:     DS3231_SetHour(time->Hour);
-[e ( _DS3231_SetHour (1 . *U _time 0 ]
-"135
-[; ;DS3231.c: 135:     DS3231_SetDate(time->Date);
-[e ( _DS3231_SetDate (1 . *U _time 6 ]
-"136
-[; ;DS3231.c: 136:     DS3231_SetWeek(time->Week);
-[e ( _DS3231_SetWeek (1 . *U _time 5 ]
-"137
-[; ;DS3231.c: 137:     DS3231_SetMonth(time->Month);
-[e ( _DS3231_SetMonth (1 . *U _time 4 ]
-"138
-[; ;DS3231.c: 138:     DS3231_SetYear(time->Year);
-[e ( _DS3231_SetYear (1 . *U _time 3 ]
-"139
-[; ;DS3231.c: 139: }
-[e :UE 392 ]
+[e :U 375 ]
+"82
+[; ;Display.c: 82:     BrightCnt++;
+[e ++ F3246 -> -> 1 `i `uc ]
+"83
+[; ;Display.c: 83: }
+[e :UE 371 ]
 }

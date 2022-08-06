@@ -91,11 +91,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7186
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7186: extern volatile unsigned char SSPADD __attribute__((address(0xFC8)));
 [v _SSPADD `Vuc ~T0 @X0 0 e@4040 ]
-[v F3152 `(v ~T0 @X0 1 tf1`ul ]
-"183 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18.h
-[v __delay `JF3152 ~T0 @X0 0 e ]
-[p i __delay ]
-"6806 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+"6806
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 6806: extern volatile unsigned char SSPCON2 __attribute__((address(0xFC5)));
 [v _SSPCON2 `Vuc ~T0 @X0 0 e@4037 ]
 "6938
@@ -115,6 +111,82 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7193
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7193: extern volatile unsigned char SSPBUF __attribute__((address(0xFC9)));
 [v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
+"6 ./main.h
+[p x PLLDIV = 4 ]
+"7
+[p x CPUDIV = OSC1_PLL2 ]
+"8
+[p x USBDIV = 2 ]
+"11
+[p x FOSC = HSPLL_HS ]
+"12
+[p x FCMEN = OFF ]
+"13
+[p x IESO = OFF ]
+"16
+[p x PWRT = OFF ]
+"17
+[p x BOR = OFF ]
+"18
+[p x BORV = 3 ]
+"19
+[p x VREGEN = OFF ]
+"22
+[p x WDT = OFF ]
+"23
+[p x WDTPS = 32768 ]
+"26
+[p x CCP2MX = ON ]
+"27
+[p x PBADEN = ON ]
+"28
+[p x LPT1OSC = OFF ]
+"29
+[p x MCLRE = ON ]
+"32
+[p x STVREN = OFF ]
+"33
+[p x LVP = OFF ]
+"34
+[p x ICPRT = OFF ]
+"35
+[p x XINST = OFF ]
+"38
+[p x CP0 = OFF ]
+"39
+[p x CP1 = OFF ]
+"40
+[p x CP2 = OFF ]
+"41
+[p x CP3 = OFF ]
+"44
+[p x CPB = OFF ]
+"45
+[p x CPD = OFF ]
+"48
+[p x WRT0 = OFF ]
+"49
+[p x WRT1 = OFF ]
+"50
+[p x WRT2 = OFF ]
+"51
+[p x WRT3 = OFF ]
+"54
+[p x WRTC = OFF ]
+"55
+[p x WRTB = OFF ]
+"56
+[p x WRTD = OFF ]
+"59
+[p x EBTR0 = OFF ]
+"60
+[p x EBTR1 = OFF ]
+"61
+[p x EBTR2 = OFF ]
+"62
+[p x EBTR3 = OFF ]
+"65
+[p x EBTRB = OFF ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -625,72 +697,69 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8893
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"3 I2C.c
-[; ;I2C.c: 3: void I2C_Init(void){
+"4 I2C.c
+[; ;I2C.c: 4: void I2C_Init(void){
 [v _I2C_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_Init ]
 [f ]
-"4
-[; ;I2C.c: 4:     TRISBbits.RB1 = 1;
-[e = . . _TRISBbits 1 1 -> -> 1 `i `uc ]
 "5
-[; ;I2C.c: 5:     TRISBbits.RB0 = 1;
-[e = . . _TRISBbits 1 0 -> -> 1 `i `uc ]
+[; ;I2C.c: 5:     TRISBbits.RB1 = 1;
+[e = . . _TRISBbits 1 1 -> -> 1 `i `uc ]
 "6
-[; ;I2C.c: 6:     SSPSTATbits.SMP = 1;
-[e = . . _SSPSTATbits 2 7 -> -> 1 `i `uc ]
+[; ;I2C.c: 6:     TRISBbits.RB0 = 1;
+[e = . . _TRISBbits 1 0 -> -> 1 `i `uc ]
 "7
-[; ;I2C.c: 7:     SSPSTATbits.CKE = 0;
-[e = . . _SSPSTATbits 2 6 -> -> 0 `i `uc ]
+[; ;I2C.c: 7:     SSPSTATbits.SMP = 1;
+[e = . . _SSPSTATbits 2 7 -> -> 1 `i `uc ]
 "8
-[; ;I2C.c: 8:     SSPCON1bits.SSPM = 0x08;
-[e = . . _SSPCON1bits 0 0 -> -> 8 `i `uc ]
+[; ;I2C.c: 8:     SSPSTATbits.CKE = 0;
+[e = . . _SSPSTATbits 2 6 -> -> 0 `i `uc ]
 "9
-[; ;I2C.c: 9:     SSPADD = 119;
-[e = _SSPADD -> -> 119 `i `uc ]
+[; ;I2C.c: 9:     SSPCON1bits.SSPM = 0x08;
+[e = . . _SSPCON1bits 0 0 -> -> 8 `i `uc ]
 "10
-[; ;I2C.c: 10:     SSPCON1bits.SSPEN = 1;
-[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
+[; ;I2C.c: 10:     SSPADD = 29;
+[e = _SSPADD -> -> 29 `i `uc ]
 "11
-[; ;I2C.c: 11: }
+[; ;I2C.c: 11:     SSPCON1bits.SSPEN = 1;
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
+"12
+[; ;I2C.c: 12: }
 [e :UE 367 ]
 }
-"13
-[; ;I2C.c: 13: void I2C_is_idle(void) {
+"14
+[; ;I2C.c: 14: void I2C_is_idle(void) {
 [v _I2C_is_idle `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_is_idle ]
 [f ]
-"14
-[; ;I2C.c: 14:     uint16_t TimeOut = 0;
+"15
+[; ;I2C.c: 15:     uint16_t TimeOut = 0;
 [v _TimeOut `us ~T0 @X0 1 a ]
 [e = _TimeOut -> -> 0 `i `us ]
-"15
-[; ;I2C.c: 15:     while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ){
+"16
+[; ;I2C.c: 16:     while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ) {
 [e $U 369  ]
 [e :U 370 ]
 {
-"16
-[; ;I2C.c: 16:         if(TimeOut++>=100) {
-[e $ ! >= -> ++ _TimeOut -> -> 1 `i `us `ui -> -> 100 `i `ui 372  ]
-{
 "17
-[; ;I2C.c: 17:             break;
-[e $U 371  ]
+[; ;I2C.c: 17:         if(TimeOut++ >= 0xff) {
+[e $ ! >= -> ++ _TimeOut -> -> 1 `i `us `ui -> -> 255 `i `ui 372  ]
+{
 "18
-[; ;I2C.c: 18:         }
+[; ;I2C.c: 18:             break;
+[e $U 371  ]
+"19
+[; ;I2C.c: 19:         }
 }
 [e :U 372 ]
-"19
-[; ;I2C.c: 19:         _delay((unsigned long)((1)*(48000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
 "20
 [; ;I2C.c: 20:     };
 }
 [e :U 369 ]
-"15
-[; ;I2C.c: 15:     while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ){
+"16
+[; ;I2C.c: 16:     while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ) {
 [e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i != & -> _SSPSTAT `i -> 4 `i -> 0 `i 370  ]
 [e :U 371 ]
 "21
@@ -815,7 +884,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 383 ]
 }
 "55
-[; ;I2C.c: 55: void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data){
+[; ;I2C.c: 55: void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data) {
 [v _I2C_Mem_Transmit `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _I2C_Mem_Transmit ]
@@ -843,7 +912,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 387 ]
 }
 "63
-[; ;I2C.c: 63: void I2C_Mem_Read(uint8_t addr,uint8_t MemAddress,uint8_t *data){
+[; ;I2C.c: 63: void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data){
 [v _I2C_Mem_Read `(v ~T0 @X0 1 ef3`uc`uc`*uc ]
 {
 [e :U _I2C_Mem_Read ]
@@ -877,7 +946,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 388 ]
 }
 "73
-[; ;I2C.c: 73: void I2C_Master_Receive(uint8_t addr,uint8_t* data) {
+[; ;I2C.c: 73: void I2C_Master_Receive(uint8_t addr, uint8_t* data) {
 [v _I2C_Master_Receive `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
 [e :U _I2C_Master_Receive ]
@@ -901,7 +970,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 389 ]
 }
 "80
-[; ;I2C.c: 80: void I2C_Master_Transmit(uint8_t addr,uint8_t data) {
+[; ;I2C.c: 80: void I2C_Master_Transmit(uint8_t addr, uint8_t data) {
 [v _I2C_Master_Transmit `(v ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _I2C_Master_Transmit ]

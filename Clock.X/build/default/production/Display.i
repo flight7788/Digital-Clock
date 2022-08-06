@@ -1,4 +1,4 @@
-# 1 "DS3231.c"
+# 1 "Display.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,9 +6,11 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "DS3231.c" 2
-# 1 "./DS3231.h" 1
-# 17 "./DS3231.h"
+# 1 "Display.c" 2
+# 1 "./Display.h" 1
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
 
 
@@ -113,36 +115,108 @@ typedef int32_t int_fast32_t;
 typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 17 "./DS3231.h" 2
+# 4 "./Display.h" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
+# 5 "./Display.h" 2
 
 
 typedef struct {
-  uint8_t Hour, Min, Sec;
-  uint8_t Year, Month, Week, Date;
-}RTC_t;
+    uint8_t Brightness[4];
+    uint8_t NumVal[4];
+    _Bool Point[4];
+}Display_t;
 
-void DS3231_Init(void);
-uint8_t DS3231_SecRead(void);
-uint8_t DS3231_MinRead(void);
-uint8_t DS3231_HourRead(void);
-uint8_t DS3231_WeekRead(void);
-uint8_t DS3231_DateRead(void);
-uint8_t DS3231_MonthRead(void);
-uint8_t DS3231_YearRead(void);
-void DS3231_ReadAll(RTC_t* time);
-float DS3231_TemperureRead(void);
+typedef enum {
+    Dash = 10,
+    Blank = 11,
+    str_C = 12,
+}CustumChar_t;
 
-void DS3231_SetSec(uint8_t data);
-void DS3231_SetMin(uint8_t data);
-void DS3231_SetHour(uint8_t data);
-void DS3231_SetDate(uint8_t data);
-void DS3231_SetWeek(uint8_t data);
-void DS3231_SetMonth(uint8_t data);
-void DS3231_SetYear(uint8_t data);
-void DS3231_SetAll(RTC_t* time);
-# 1 "DS3231.c" 2
+void Display_Set_Brightness(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
 
-# 1 "./I2C.h" 1
+void Display_Set_NumVal(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
+
+void Display_Set_Point(
+        _Bool digit0_val, _Bool digit1_val,
+        _Bool digit2_val, _Bool digit3_val);
+
+void Display_ISR(void);
+# 1 "Display.c" 2
+
+# 1 "./main.h" 1
+
+
+
+
+
+#pragma config PLLDIV = 4
+#pragma config CPUDIV = OSC1_PLL2
+#pragma config USBDIV = 2
+
+
+#pragma config FOSC = HSPLL_HS
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOR = OFF
+#pragma config BORV = 3
+#pragma config VREGEN = OFF
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 32768
+
+
+#pragma config CCP2MX = ON
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = OFF
+#pragma config LVP = OFF
+#pragma config ICPRT = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+
+
+
 
 
 
@@ -5746,160 +5820,88 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 4 "./I2C.h" 2
+# 71 "./main.h" 2
+# 81 "./main.h"
+void GPIO_Init(void);
+void Interrupt_Init(void);
+void Timer0_Init(void);
+void Timer1_Init(void);
 
+int MySystick_ms(void);
+_Bool GetRisingEdge_SW2(void);
+_Bool GetRisingEdge_SW1(void);
+_Bool PressOverTime_SW1(int time);
+_Bool PressOverTime_SW2(int time);
+# 2 "Display.c" 2
+# 13 "Display.c"
+const uint8_t NumOut_Table[] = { 0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92,
+                                 0x82, 0xf8, 0x80, 0x90, 0xbf, 0xff,
+                                 0xc6
+                                };
+Display_t MyDisplay = {
+  .Brightness = { 9, 9, 9, 9 },
+  .NumVal = { 1, 2, 9, 8 },
+  .Point = { 0, 0, 0, 0 }
+};
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
-# 6 "./I2C.h" 2
-# 16 "./I2C.h"
-void I2C_Init(void);
-void I2C_is_idle(void);
-void I2C_Start(void);
-void I2C_RepStart(void);
-void I2C_Stop(void);
-void I2C_Write(uint8_t DATA);
-uint8_t I2C_Read(_Bool GenerateAck);
-
-void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data);
-void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data);
-void I2C_Master_Transmit(uint8_t addr, uint8_t data);
-void I2C_Master_Receive(uint8_t addr, uint8_t* data);
-# 2 "DS3231.c" 2
-
-
-
-void DS3231_Init(void) {
-    I2C_Init();
+void Display_Set_Brightness(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val) {
+    MyDisplay.Brightness[0] = digit0_val;
+    MyDisplay.Brightness[1] = digit1_val;
+    MyDisplay.Brightness[2] = digit2_val;
+    MyDisplay.Brightness[3] = digit3_val;
 }
 
-void DS3231_SetSec(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 60) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit(0xD0, 0x00, BCD_Data);
+void Display_Set_NumVal(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val) {
+    MyDisplay.NumVal[0] = digit0_val;
+    MyDisplay.NumVal[1] = digit1_val;
+    MyDisplay.NumVal[2] = digit2_val;
+    MyDisplay.NumVal[3] = digit3_val;
+}
+
+void Display_Set_Point(
+        _Bool digit0_val, _Bool digit1_val,
+        _Bool digit2_val, _Bool digit3_val) {
+    MyDisplay.Point[0] = digit0_val;
+    MyDisplay.Point[1] = digit1_val;
+    MyDisplay.Point[2] = digit2_val;
+    MyDisplay.Point[3] = digit3_val;
+}
+
+void Display_ISR(void) {
+    static uint8_t digit = 0, BrightCnt = 0;
+    if(BrightCnt >= 10) {
+        BrightCnt = 0;
+        if(digit++ >= 3) {
+            digit = 0;
+        }
+
+        LATBbits.LATB2 = 1;
+        LATBbits.LATB3 = 1;
+        LATBbits.LATB4 = 1;
+        LATBbits.LATB5 = 1;
+
+
+        uint8_t data = NumOut_Table[MyDisplay.NumVal[digit]];
+        if(MyDisplay.Point[digit]==1) data &= 0x7f;
+        LATD = data;
+
+
+        LATBbits.LATB2 = ((digit==3)?0:1);
+        LATBbits.LATB3 = ((digit==2)?0:1);
+        LATBbits.LATB4 = ((digit==1)?0:1);
+        LATBbits.LATB5 = ((digit==0)?0:1);
+
     }
-}
 
-void DS3231_SetMin(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 60) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x01, BCD_Data);
+    if(MyDisplay.Brightness[digit] <= BrightCnt) {
+        if(digit==0) LATBbits.LATB5 = 1;
+        else if(digit==1) LATBbits.LATB4 = 1;
+        else if(digit==2) LATBbits.LATB3 = 1;
+        else if(digit==3) LATBbits.LATB2 = 1;
     }
-}
-
-void DS3231_SetHour(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 24) {
-        BCD_Data = (((data/10)<<4)|(data%10))&0x3F;
-        I2C_Mem_Transmit( 0xD0,0x02, BCD_Data);
-    }
-}
-
-void DS3231_SetDate(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<32){
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x04, BCD_Data);
-    }
-}
-
-void DS3231_SetWeek(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<8){
-        BCD_Data = data&0x07;
-        I2C_Mem_Transmit( 0xD0, 0x03, BCD_Data);
-    }
-}
-
-void DS3231_SetMonth(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<13){
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x05, BCD_Data);
-    }
-}
-
-void DS3231_SetYear(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 100) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit(0xD0, 0x06, BCD_Data);
-    }
-}
-
-
-uint8_t DS3231_SecRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x00, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_MinRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x01, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_HourRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x02, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_WeekRead(void) {
-   uint8_t data = 0;
-   I2C_Mem_Read( 0xD0, 0x03, &data);
-   return data;
-}
-
-uint8_t DS3231_DateRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x04, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_MonthRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x05, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x01)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_YearRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x06, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-float DS3231_TemperureRead(void) {
-   uint8_t DATA_H,DATA_L = 0;
-   I2C_Mem_Read(0xD0, 0x11, &DATA_H);
-   I2C_Mem_Read(0xD0, 0x12, &DATA_L);
-   return ((float)(((DATA_H&0x7F)<<2)|(DATA_L>>6))/4)*(((DATA_H&0x80)==0)?1:-1);
-}
-
-void DS3231_ReadAll(RTC_t* time) {
-   time->Sec = DS3231_SecRead();
-   time->Min = DS3231_MinRead();
-   time->Hour = DS3231_HourRead();
-   time->Date = DS3231_DateRead();
-   time->Week = DS3231_WeekRead();
-   time->Month = DS3231_MonthRead();
-   time->Year = DS3231_YearRead();
-}
-
-void DS3231_SetAll(RTC_t* time) {
-    DS3231_SetSec(time->Sec);
-    DS3231_SetMin(time->Min);
-    DS3231_SetHour(time->Hour);
-    DS3231_SetDate(time->Date);
-    DS3231_SetWeek(time->Week);
-    DS3231_SetMonth(time->Month);
-    DS3231_SetYear(time->Year);
+    BrightCnt++;
 }

@@ -1,73 +1,65 @@
-#include <xc.h>
-#include <stdint.h>
-#include <stdbool.h>
 #include "main.h"
+
+#include <stdlib.h>
 #include "DS3231.h"
+#include "Display.h"
+#include "Task.h"
 
-#define    Dash    10
-#define    Blank   11
-#define    str_C   12
-
-typedef enum Mode {
-    Task_ShowTime,
-    Task_ShowDate, 
-    Task_ShowWeek,
-    Task_SetRTC,
-    Task_SetBrightness,
-}M;
-
-uint8_t NumOut_Table[] = { 0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 
-                           0x82, 0xf8, 0x80, 0x90, 0xbf, 0xff,
-                           0xc6
-                        };
-uint16_t Brightness[] = { 4, 4, 4, 4 }; // 0-10
-uint8_t NumBuf[] = { 1, 2, 9, 8 };
-bool  PointBuf[] = { false, false, false, false };
-T RTC, Set;
-M Mode = Task_ShowTime;
+RTC_t MyRTC;
+Task_t Mode = ShowTime;
 
 
 void __interrupt() ISR(void){   
-    if(INTCONbits.TMR0IF) {      
-        Display_ISR();
-        TMR0 = 65535-1000;
+    if(INTCONbits.TMR0IF) {   
+        TMR0 = 65535 - 1500;
         INTCONbits.TMR0IF = 0;
+        Display_ISR(); 
     }   
 }
 
 void main(void) {
-    ADCON1 = 0x0B;
-    TRISB = 0x00;
-    TRISC = 0xFF;
-    TRISD = 0X00;
-    TRISE = 0x0f;
-    DS3231_Init();
+    OSCCONbits.SCS = 0;
+    
+    GPIO_Init();
     Interrupt_Init();
     Timer0_Init();
+    Timer1_Init();
+    DS3231_Init();
+    
+    T0CONbits.TMR0ON = 1;
     
     while(1) {
-        TimeRead(&RTC);    
+
+        DS3231_ReadAll(&MyRTC);   
+        
         if(GetRisingEdge_SW2()) {
-            if(SW1 == 0) Mode = Task_SetRTC;
-            else Mode = Task_SetBrightness;
+            if(SW1 == 0) Mode = SetRTC;
+            else Mode = SetBrightness;
         }
+        
         if(GetRisingEdge_SW1() && (SW2 == 1)) { 
-            if(Mode++>=Task_ShowWeek) Mode = Task_ShowTime;
+            if(Mode++ >= ShowWeek) Mode = ShowTime;
         }
+        
         
         switch(Mode) {
-            case Task_ShowTime: ShowTime(); break;
-            case Task_ShowDate: ShowDate(); break;
-            case Task_ShowWeek: ShowWeek(); break;
-            case Task_SetRTC:   
-                SetRTC();  
-                Mode = Task_ShowTime;
+            case ShowTime: Task_ShowTime(MyRTC); break;
+            case ShowDate: Task_ShowDate(MyRTC); break;
+            case ShowWeek: Task_ShowWeek(MyRTC); break;
+            case SetRTC:   
+                while(SW1 == 0) { // wait for release
+                    Display_Set_NumVal(Dash, Dash, Dash, Dash);
+                    Display_Set_Point(false, false, false, false);
+                }
+                __delay_ms(1000);
+                Task_SetRTC(MyRTC);  
+                Mode = ShowTime;
                 break;
-            case Task_SetBrightness: 
+            case SetBrightness: 
                 while(!GetRisingEdge_SW2()) {
-                    SetBrightness();
+                    Task_SetBrightness();
                 }
-                Mode = Task_ShowTime;
+                Mode = ShowTime;
                 break;
             default: break;
         }
@@ -75,215 +67,102 @@ void main(void) {
     }
 }
 
-void SetBrightness(void) {
-    if(GetRisingEdge_SW1()) {
-        if(Brightness[0]++ >= 10) {
-            Brightness[0] = 0;
+
+
+bool PressOverTime_SW2(int time) {
+    static bool status = false;
+    static int old_cnt = 0;
+ 
+    if(SW2 == 0) {
+        if(abs(MySystick_ms() - old_cnt) >= time) {
+            status = true;
         }
     }
-    Brightness[1] = Brightness[0];
-    Brightness[2] = Brightness[0];
-    Brightness[3] = Brightness[0];
-    NumBuf[0] = str_C;
-    NumBuf[1] = Dash;
-    NumBuf[2] = Brightness[0] / 10;  
-    NumBuf[3] = Brightness[0] % 10;
-    PointBuf[1] = false;
-    PointBuf[0] = false;
-    PointBuf[2] = false;
-    PointBuf[3] = false;
+    else {
+        old_cnt = MySystick_ms();
+        status = false;
+    }
+    return status;
 }
 
-void SetRTC(void) {
-    static uint16_t BlinkTime = 0;
-    static bool flag = false;
-    uint8_t cnt = 0;
-    Set = RTC;
-    Set.Sec = 0;
-    Set.Year = 21;
-    while(cnt < 5) {
-        if(BlinkTime++ >= 2000) {
-            BlinkTime = 0;
-            flag = (flag==false)?true:false;
-        }
-        if(cnt==0 || cnt==1) {
-            if(cnt==0) {
-                NumBuf[0] = (flag==true)?(Set.Hour / 10):Blank;
-                NumBuf[1] = (flag==true)?(Set.Hour % 10):Blank;
-                NumBuf[2] = Set.Min / 10;  
-                NumBuf[3] = Set.Min % 10;
-            }
-            else {
-                NumBuf[0] = Set.Hour / 10;
-                NumBuf[1] = Set.Hour % 10;
-                NumBuf[2] = (flag==true)?(Set.Min / 10):Blank; 
-                NumBuf[3] = (flag==true)?(Set.Min % 10):Blank;
-            }
-            PointBuf[0] = false; PointBuf[1] = true; 
-            PointBuf[2] = true;  PointBuf[3] = false;
-        }
-        else if(cnt==2 || cnt==3) {
-            if(cnt==2) {
-                NumBuf[0] = (flag==true)?(Set.Month / 10):Blank;
-                NumBuf[1] = (flag==true)?(Set.Month % 10):Blank;
-                NumBuf[2] = Set.Date / 10;  
-                NumBuf[3] = Set.Date % 10;
-            }
-            else {
-                NumBuf[0] = Set.Month / 10;
-                NumBuf[1] = Set.Month % 10;
-                NumBuf[2] = (flag==true)?(Set.Date / 10):Blank;
-                NumBuf[3] = (flag==true)?(Set.Date % 10):Blank;
-            }
-            PointBuf[0] = false; PointBuf[1] = true; 
-            PointBuf[2] = false; PointBuf[3] = false;
-        }
-        else {
-            NumBuf[0] = Blank;
-            NumBuf[1] = Dash;
-            NumBuf[2] = (flag==true)?(Set.Week % 10):Blank;
-            NumBuf[3] = Dash;
-            PointBuf[0] = false; PointBuf[1] = false; 
-            PointBuf[2] = false; PointBuf[3] = false;
-            __delay_us(100);
-        }
-        
-        switch(cnt) {
-            case 0: 
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Hour++>=23) {
-                        Set.Hour = 0;
-                    }
-                }
-                break;
-            case 1: 
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Min++>=59) {
-                        Set.Min = 0;
-                    }
-                }
-                break;
-            case 2: 
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Month++>=12) {
-                        Set.Month = 1;
-                    }
-                }
-                break;
-            case 3: 
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Date++>=31) {
-                        Set.Date = 1;
-                    }
-                }
-                break;
-            case 4: 
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Week++>=7) {
-                        Set.Week = 1;
-                    }
-                }
-                break;
-            default: break;
-        }
-        if(GetRisingEdge_SW2()) { 
-            cnt++;
+bool PressOverTime_SW1(int time) {
+    static bool status = false;
+    static int old_cnt = 0;
+ 
+    if(SW1 == 0) {
+        if(abs(MySystick_ms() - old_cnt) >= time) {
+            status = true;
         }
     }
-    TimeSet(&Set);
-}
-
-void ShowWeek(void) {
-    NumBuf[0] = Blank;
-    NumBuf[1] = Dash;
-    NumBuf[2] = RTC.Week % 10;  
-    NumBuf[3] = Dash;
-    PointBuf[1] = false;
-    PointBuf[0] = false;
-    PointBuf[2] = false;
-    PointBuf[3] = false;
-}
-
-void ShowDate(void) {
-    NumBuf[0] = RTC.Month / 10;
-    NumBuf[1] = RTC.Month % 10;
-    NumBuf[2] = RTC.Date / 10;  
-    NumBuf[3] = RTC.Date % 10;
-    PointBuf[1] = true;
-    PointBuf[0] = false;
-    PointBuf[2] = false;
-    PointBuf[3] = false;
-}
-
-void ShowTime(void) {
-    static uint8_t old_sec = 0;
-    NumBuf[0] = RTC.Hour / 10;
-    NumBuf[1] = RTC.Hour % 10;
-    NumBuf[2] = RTC.Min / 10;  
-    NumBuf[3] = RTC.Min % 10;
-    if(RTC.Sec != old_sec) {
-        PointBuf[1] = (PointBuf[1]==false)?true:false;
-        PointBuf[2] = PointBuf[1];
-        old_sec = RTC.Sec;
+    else {
+        old_cnt = MySystick_ms();
+        status = false;
     }
+    return status;
 }
 
 bool GetRisingEdge_SW2(void) {
-    static bool flag = false;
+    static bool exist = false;
+    static bool Ready_f = false;
+    static int old_cnt = 0;
+ 
     if(SW2 == 0) {
-        flag = true;
+        exist = false;
+        Ready_f = true;
     }
-    else if(SW2 && flag) {
-        flag = false;
-        __delay_ms(300);
-        return true;
+    
+    if(Ready_f) {
+        if(abs(MySystick_ms() - old_cnt) >= 100) {
+            old_cnt = MySystick_ms();
+            Ready_f = false;
+            if(exist) return true;
+        }
+        else {
+            if(SW2 == 1) exist = true;
+        }
     }
     return false;
 }
 
 bool GetRisingEdge_SW1(void) {
-    static bool flag = false;
+    static bool exist = false;
+    static bool Ready_f = false;
+    static int old_cnt = 0;
+ 
     if(SW1 == 0) {
-        flag = true;
+        exist = false;
+        Ready_f = true;
     }
-    else if(SW1 && flag) {
-        flag = false;
-        __delay_ms(100);
-        return true;
+    
+    if(Ready_f) {
+        if(abs(MySystick_ms() - old_cnt) >= 50) {
+            old_cnt = MySystick_ms();
+            Ready_f = false;
+            if(exist) return true;
+        }
+        else {
+            if(SW1 == 1) exist = true;
+        }
     }
     return false;
 }
 
-void Display_ISR(void) {
-    static uint8_t digit = 0, BrightCnt = 0;
-    if(BrightCnt >= 10) {
-        BrightCnt = 0;
-        if(digit++ >= 3) {
-            digit = 0; 
-        }
-        /* Close display  */
-        SCAN0 = 1;     
-        SCAN1 = 1;
-        SCAN2 = 1;
-        SCAN3 = 1;
-        /*================ */
-        LATD = NumOut_Table[NumBuf[digit]] & ((PointBuf[digit]==true)?0x7f:0xff); 
-        /* Open display  */
-        SCAN0 = ((digit==3)?0:1);     
-        SCAN1 = ((digit==2)?0:1);  
-        SCAN2 = ((digit==1)?0:1);   
-        SCAN3 = ((digit==0)?0:1);  
-        /*================ */   
+int MySystick_ms(void) {
+    static int cnt = 0;
+    static uint16_t old_cnt = 0;
+    if(abs(TMR1 - old_cnt) >= 1500) {
+        old_cnt = TMR1;
+        if(cnt++ >= 9999) cnt = 0;
     }
-    
-    if(Brightness[digit] <= BrightCnt) {
-        if(digit==0) SCAN3 = 1;
-        else if(digit==1) SCAN2 = 1;
-        else if(digit==2) SCAN1 = 1;
-        else if(digit==3) SCAN0 = 1;
-    } 
-    BrightCnt++;
-    
+    return cnt;
+}
+
+void GPIO_Init(void) {
+    ADCON1 = 0x0B;
+    TRISB = 0x00;
+    TRISC = 0xFF;
+    TRISD = 0X00;
+    TRISE = 0x0f;
 }
 
 void Interrupt_Init(void) {
@@ -301,6 +180,14 @@ void Timer0_Init(void) {
     T0CONbits.T0SE = 0;     // Rising-edge
     T0CONbits.PSA = 0;      // Assigned prescaler
     T0CONbits.T0PS = 0;     // 1:2
-    TMR0 = 65535 - 6000;
-    T0CONbits.TMR0ON = 1;
+    TMR0 = 65535 - 1500;    // 48M / (4 * 2 * 1500) = 4KHz
+    T0CONbits.TMR0ON = 0;
+}
+
+void Timer1_Init(void) {
+    T1CONbits.RD16 = 1;     // 16-bit timer
+    T1CONbits.TMR1CS = 0;   // internal clock
+    T1CONbits.T1CKPS = 3;   // Assigned prescaler(1:8)
+    TMR1 = 65535 - 1500;    // 48M / (4 * 8 * 1500) = 1KHz
+    T1CONbits.TMR1ON = 1;
 }

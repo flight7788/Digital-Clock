@@ -7,6 +7,78 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
+# 1 "./main.h" 1
+
+
+
+
+
+#pragma config PLLDIV = 4
+#pragma config CPUDIV = OSC1_PLL2
+#pragma config USBDIV = 2
+
+
+#pragma config FOSC = HSPLL_HS
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOR = OFF
+#pragma config BORV = 3
+#pragma config VREGEN = OFF
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 32768
+
+
+#pragma config CCP2MX = ON
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = OFF
+#pragma config LVP = OFF
+#pragma config ICPRT = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+
+
+
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -5621,7 +5693,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 1 "main.c" 2
+# 71 "./main.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
@@ -5706,191 +5778,168 @@ typedef int32_t int_fast32_t;
 typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 2 "main.c" 2
+# 72 "./main.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
-# 3 "main.c" 2
-
-# 1 "./main.h" 1
+# 73 "./main.h" 2
 
 
 
 
 
 
-#pragma config PLLDIV = 4
-#pragma config CPUDIV = OSC1_PLL2
-#pragma config USBDIV = 2
 
 
-#pragma config FOSC = HSPLL_HS
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = OFF
-#pragma config BOR = OFF
-#pragma config BORV = 3
-#pragma config VREGEN = OFF
-
-
-#pragma config WDT = OFF
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = ON
-#pragma config PBADEN = ON
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = OFF
-#pragma config LVP = OFF
-#pragma config ICPRT = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-# 80 "./main.h"
+void GPIO_Init(void);
 void Interrupt_Init(void);
 void Timer0_Init(void);
-void Display_ISR(void);
+void Timer1_Init(void);
 
-void SetBrightness(void);
-void SetRTC(void);
-void ShowTime(void);
-void ShowDate(void);
-void ShowWeek(void);
+int MySystick_ms(void);
 _Bool GetRisingEdge_SW2(void);
 _Bool GetRisingEdge_SW1(void);
-# 4 "main.c" 2
+_Bool PressOverTime_SW1(int time);
+_Bool PressOverTime_SW2(int time);
+# 1 "main.c" 2
+
+
 
 # 1 "./DS3231.h" 1
-# 18 "./DS3231.h"
-typedef struct Time{
+# 19 "./DS3231.h"
+typedef struct {
   uint8_t Hour, Min, Sec;
   uint8_t Year, Month, Week, Date;
-}T;
+}RTC_t;
 
 void DS3231_Init(void);
-uint8_t SecRead(void);
-uint8_t MinRead(void);
-uint8_t HourRead(void);
-uint8_t WeekRead(void);
-uint8_t DateRead(void);
-uint8_t MonthRead(void);
-uint8_t YearRead(void);
-void TimeRead(T* time);
-float TemperureRead(void);
+uint8_t DS3231_SecRead(void);
+uint8_t DS3231_MinRead(void);
+uint8_t DS3231_HourRead(void);
+uint8_t DS3231_WeekRead(void);
+uint8_t DS3231_DateRead(void);
+uint8_t DS3231_MonthRead(void);
+uint8_t DS3231_YearRead(void);
+void DS3231_ReadAll(RTC_t* time);
+float DS3231_TemperureRead(void);
 
-void SetSec(uint8_t data);
-void SetMin(uint8_t data);
-void SetHour(uint8_t data);
-void SetDate(uint8_t data);
-void SetWeek(uint8_t data);
-void SetMonth(uint8_t data);
-void SetYear(uint8_t data);
-void TimeSet(T* time);
+void DS3231_SetSec(uint8_t data);
+void DS3231_SetMin(uint8_t data);
+void DS3231_SetHour(uint8_t data);
+void DS3231_SetDate(uint8_t data);
+void DS3231_SetWeek(uint8_t data);
+void DS3231_SetMonth(uint8_t data);
+void DS3231_SetYear(uint8_t data);
+void DS3231_SetAll(RTC_t* time);
+# 4 "main.c" 2
+
+# 1 "./Display.h" 1
+
+
+
+
+
+
+typedef struct {
+    uint8_t Brightness[4];
+    uint8_t NumVal[4];
+    _Bool Point[4];
+}Display_t;
+
+typedef enum {
+    Dash = 10,
+    Blank = 11,
+    str_C = 12,
+}CustumChar_t;
+
+void Display_Set_Brightness(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
+
+void Display_Set_NumVal(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
+
+void Display_Set_Point(
+        _Bool digit0_val, _Bool digit1_val,
+        _Bool digit2_val, _Bool digit3_val);
+
+void Display_ISR(void);
 # 5 "main.c" 2
 
+# 1 "./Task.h" 1
+# 10 "./Task.h"
+typedef enum {
+    ShowTime,
+    ShowDate,
+    ShowWeek,
+    SetRTC,
+    SetBrightness,
+}Task_t;
 
 
+void Task_SetBrightness(void);
+void Task_SetRTC(RTC_t CurrentRTC);
+void Task_ShowTime(RTC_t CurrentRTC);
+void Task_ShowDate(RTC_t CurrentRTC);
+void Task_ShowWeek(RTC_t CurrentRTC);
+# 6 "main.c" 2
 
 
-
-typedef enum Mode {
-    Task_ShowTime,
-    Task_ShowDate,
-    Task_ShowWeek,
-    Task_SetRTC,
-    Task_SetBrightness,
-}M;
-
-uint8_t NumOut_Table[] = { 0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92,
-                           0x82, 0xf8, 0x80, 0x90, 0xbf, 0xff,
-                           0xc6
-                        };
-uint16_t Brightness[] = { 4, 4, 4, 4 };
-uint8_t NumBuf[] = { 1, 2, 9, 8 };
-_Bool PointBuf[] = { 0, 0, 0, 0 };
-T RTC, Set;
-M Mode = Task_ShowTime;
+RTC_t MyRTC;
+Task_t Mode = ShowTime;
 
 
 void __attribute__((picinterrupt(("")))) ISR(void){
     if(INTCONbits.TMR0IF) {
-        Display_ISR();
-        TMR0 = 65535-1000;
+        TMR0 = 65535 - 1500;
         INTCONbits.TMR0IF = 0;
+        Display_ISR();
     }
 }
 
 void main(void) {
-    ADCON1 = 0x0B;
-    TRISB = 0x00;
-    TRISC = 0xFF;
-    TRISD = 0X00;
-    TRISE = 0x0f;
-    DS3231_Init();
+    OSCCONbits.SCS = 0;
+
+    GPIO_Init();
     Interrupt_Init();
     Timer0_Init();
+    Timer1_Init();
+    DS3231_Init();
+
+    T0CONbits.TMR0ON = 1;
 
     while(1) {
-        TimeRead(&RTC);
 
+        DS3231_ReadAll(&MyRTC);
 
         if(GetRisingEdge_SW2()) {
-            if(PORTEbits.RE0 == 0) Mode = Task_SetRTC;
-            else Mode = Task_SetBrightness;
+            if(PORTEbits.RE0 == 0) Mode = SetRTC;
+            else Mode = SetBrightness;
         }
 
         if(GetRisingEdge_SW1() && (PORTEbits.RE1 == 1)) {
-            if(Mode++>=Task_ShowWeek) Mode = Task_ShowTime;
+            if(Mode++ >= ShowWeek) Mode = ShowTime;
         }
-
-
 
 
         switch(Mode) {
-            case Task_ShowTime: ShowTime(); break;
-            case Task_ShowDate: ShowDate(); break;
-            case Task_ShowWeek: ShowWeek(); break;
-            case Task_SetRTC:
-                SetRTC();
-                Mode = Task_ShowTime;
+            case ShowTime: Task_ShowTime(MyRTC); break;
+            case ShowDate: Task_ShowDate(MyRTC); break;
+            case ShowWeek: Task_ShowWeek(MyRTC); break;
+            case SetRTC:
+                while(PORTEbits.RE0 == 0) {
+                    Display_Set_NumVal(Dash, Dash, Dash, Dash);
+                    Display_Set_Point(0, 0, 0, 0);
+                }
+                _delay((unsigned long)((1000)*(48000000/4000.0)));
+                Task_SetRTC(MyRTC);
+                Mode = ShowTime;
                 break;
-            case Task_SetBrightness:
+            case SetBrightness:
                 while(!GetRisingEdge_SW2()) {
-                    SetBrightness();
+                    Task_SetBrightness();
                 }
-                Mode = Task_ShowTime;
+                Mode = ShowTime;
                 break;
             default: break;
         }
@@ -5898,215 +5947,102 @@ void main(void) {
     }
 }
 
-void SetBrightness(void) {
-    if(GetRisingEdge_SW1()) {
-        if(Brightness[0]++ >= 10) {
-            Brightness[0] = 0;
+
+
+_Bool PressOverTime_SW2(int time) {
+    static _Bool status = 0;
+    static int old_cnt = 0;
+
+    if(PORTEbits.RE1 == 0) {
+        if(abs(MySystick_ms() - old_cnt) >= time) {
+            status = 1;
         }
     }
-    Brightness[1] = Brightness[0];
-    Brightness[2] = Brightness[0];
-    Brightness[3] = Brightness[0];
-    NumBuf[0] = 12;
-    NumBuf[1] = 10;
-    NumBuf[2] = Brightness[0] / 10;
-    NumBuf[3] = Brightness[0] % 10;
-    PointBuf[1] = 0;
-    PointBuf[0] = 0;
-    PointBuf[2] = 0;
-    PointBuf[3] = 0;
+    else {
+        old_cnt = MySystick_ms();
+        status = 0;
+    }
+    return status;
 }
 
-void SetRTC(void) {
-    static uint16_t BlinkTime = 0;
-    static _Bool flag = 0;
-    uint8_t cnt = 0;
-    Set = RTC;
-    Set.Sec = 0;
-    Set.Year = 21;
-    while(cnt < 5) {
-        if(BlinkTime++ >= 2000) {
-            BlinkTime = 0;
-            flag = (flag==0)?1:0;
-        }
-        if(cnt==0 || cnt==1) {
-            if(cnt==0) {
-                NumBuf[0] = (flag==1)?(Set.Hour / 10):11;
-                NumBuf[1] = (flag==1)?(Set.Hour % 10):11;
-                NumBuf[2] = Set.Min / 10;
-                NumBuf[3] = Set.Min % 10;
-            }
-            else {
-                NumBuf[0] = Set.Hour / 10;
-                NumBuf[1] = Set.Hour % 10;
-                NumBuf[2] = (flag==1)?(Set.Min / 10):11;
-                NumBuf[3] = (flag==1)?(Set.Min % 10):11;
-            }
-            PointBuf[0] = 0; PointBuf[1] = 1;
-            PointBuf[2] = 1; PointBuf[3] = 0;
-        }
-        else if(cnt==2 || cnt==3) {
-            if(cnt==2) {
-                NumBuf[0] = (flag==1)?(Set.Month / 10):11;
-                NumBuf[1] = (flag==1)?(Set.Month % 10):11;
-                NumBuf[2] = Set.Date / 10;
-                NumBuf[3] = Set.Date % 10;
-            }
-            else {
-                NumBuf[0] = Set.Month / 10;
-                NumBuf[1] = Set.Month % 10;
-                NumBuf[2] = (flag==1)?(Set.Date / 10):11;
-                NumBuf[3] = (flag==1)?(Set.Date % 10):11;
-            }
-            PointBuf[0] = 0; PointBuf[1] = 1;
-            PointBuf[2] = 0; PointBuf[3] = 0;
-        }
-        else {
-            NumBuf[0] = 11;
-            NumBuf[1] = 10;
-            NumBuf[2] = (flag==1)?(Set.Week % 10):11;
-            NumBuf[3] = 10;
-            PointBuf[0] = 0; PointBuf[1] = 0;
-            PointBuf[2] = 0; PointBuf[3] = 0;
-            _delay((unsigned long)((100)*(48000000/4000000.0)));
-        }
+_Bool PressOverTime_SW1(int time) {
+    static _Bool status = 0;
+    static int old_cnt = 0;
 
-        switch(cnt) {
-            case 0:
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Hour++>=23) {
-                        Set.Hour = 0;
-                    }
-                }
-                break;
-            case 1:
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Min++>=59) {
-                        Set.Min = 0;
-                    }
-                }
-                break;
-            case 2:
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Month++>=12) {
-                        Set.Month = 1;
-                    }
-                }
-                break;
-            case 3:
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Date++>=31) {
-                        Set.Date = 1;
-                    }
-                }
-                break;
-            case 4:
-                if(GetRisingEdge_SW1()) {
-                    if(Set.Week++>=7) {
-                        Set.Week = 1;
-                    }
-                }
-                break;
-            default: break;
-        }
-        if(GetRisingEdge_SW2()) {
-            cnt++;
+    if(PORTEbits.RE0 == 0) {
+        if(abs(MySystick_ms() - old_cnt) >= time) {
+            status = 1;
         }
     }
-    TimeSet(&Set);
-}
-
-void ShowWeek(void) {
-    NumBuf[0] = 11;
-    NumBuf[1] = 10;
-    NumBuf[2] = RTC.Week % 10;
-    NumBuf[3] = 10;
-    PointBuf[1] = 0;
-    PointBuf[0] = 0;
-    PointBuf[2] = 0;
-    PointBuf[3] = 0;
-}
-
-void ShowDate(void) {
-    NumBuf[0] = RTC.Month / 10;
-    NumBuf[1] = RTC.Month % 10;
-    NumBuf[2] = RTC.Date / 10;
-    NumBuf[3] = RTC.Date % 10;
-    PointBuf[1] = 1;
-    PointBuf[0] = 0;
-    PointBuf[2] = 0;
-    PointBuf[3] = 0;
-}
-
-void ShowTime(void) {
-    static uint8_t old_sec = 0;
-    NumBuf[0] = RTC.Hour / 10;
-    NumBuf[1] = RTC.Hour % 10;
-    NumBuf[2] = RTC.Min / 10;
-    NumBuf[3] = RTC.Min % 10;
-    if(RTC.Sec != old_sec) {
-        PointBuf[1] = (PointBuf[1]==0)?1:0;
-        PointBuf[2] = PointBuf[1];
-        old_sec = RTC.Sec;
+    else {
+        old_cnt = MySystick_ms();
+        status = 0;
     }
+    return status;
 }
 
 _Bool GetRisingEdge_SW2(void) {
-    static _Bool flag = 0;
+    static _Bool exist = 0;
+    static _Bool Ready_f = 0;
+    static int old_cnt = 0;
+
     if(PORTEbits.RE1 == 0) {
-        flag = 1;
+        exist = 0;
+        Ready_f = 1;
     }
-    else if(PORTEbits.RE1 && flag) {
-        flag = 0;
-        _delay((unsigned long)((300)*(48000000/4000.0)));
-        return 1;
+
+    if(Ready_f) {
+        if(abs(MySystick_ms() - old_cnt) >= 100) {
+            old_cnt = MySystick_ms();
+            Ready_f = 0;
+            if(exist) return 1;
+        }
+        else {
+            if(PORTEbits.RE1 == 1) exist = 1;
+        }
     }
     return 0;
 }
 
 _Bool GetRisingEdge_SW1(void) {
-    static _Bool flag = 0;
+    static _Bool exist = 0;
+    static _Bool Ready_f = 0;
+    static int old_cnt = 0;
+
     if(PORTEbits.RE0 == 0) {
-        flag = 1;
+        exist = 0;
+        Ready_f = 1;
     }
-    else if(PORTEbits.RE0 && flag) {
-        flag = 0;
-        _delay((unsigned long)((100)*(48000000/4000.0)));
-        return 1;
+
+    if(Ready_f) {
+        if(abs(MySystick_ms() - old_cnt) >= 50) {
+            old_cnt = MySystick_ms();
+            Ready_f = 0;
+            if(exist) return 1;
+        }
+        else {
+            if(PORTEbits.RE0 == 1) exist = 1;
+        }
     }
     return 0;
 }
 
-void Display_ISR(void) {
-    static uint8_t digit = 0, BrightCnt = 0;
-    if(BrightCnt >= 10) {
-        BrightCnt = 0;
-        if(digit++ >= 3) {
-            digit = 0;
-        }
-
-        LATBbits.LATB2 = 1;
-        LATBbits.LATB3 = 1;
-        LATBbits.LATB4 = 1;
-        LATBbits.LATB5 = 1;
-
-        LATD = NumOut_Table[NumBuf[digit]] & ((PointBuf[digit]==1)?0x7f:0xff);
-
-        LATBbits.LATB2 = ((digit==3)?0:1);
-        LATBbits.LATB3 = ((digit==2)?0:1);
-        LATBbits.LATB4 = ((digit==1)?0:1);
-        LATBbits.LATB5 = ((digit==0)?0:1);
-
+int MySystick_ms(void) {
+    static int cnt = 0;
+    static uint16_t old_cnt = 0;
+    if(abs(TMR1 - old_cnt) >= 1500) {
+        old_cnt = TMR1;
+        if(cnt++ >= 9999) cnt = 0;
     }
+    return cnt;
+}
 
-    if(Brightness[digit] <= BrightCnt) {
-        if(digit==0) LATBbits.LATB5 = 1;
-        else if(digit==1) LATBbits.LATB4 = 1;
-        else if(digit==2) LATBbits.LATB3 = 1;
-        else if(digit==3) LATBbits.LATB2 = 1;
-    }
-    BrightCnt++;
-
+void GPIO_Init(void) {
+    ADCON1 = 0x0B;
+    TRISB = 0x00;
+    TRISC = 0xFF;
+    TRISD = 0X00;
+    TRISE = 0x0f;
 }
 
 void Interrupt_Init(void) {
@@ -6124,6 +6060,14 @@ void Timer0_Init(void) {
     T0CONbits.T0SE = 0;
     T0CONbits.PSA = 0;
     T0CONbits.T0PS = 0;
-    TMR0 = 65535 - 6000;
-    T0CONbits.TMR0ON = 1;
+    TMR0 = 65535 - 1500;
+    T0CONbits.TMR0ON = 0;
+}
+
+void Timer1_Init(void) {
+    T1CONbits.RD16 = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.T1CKPS = 3;
+    TMR1 = 65535 - 1500;
+    T1CONbits.TMR1ON = 1;
 }

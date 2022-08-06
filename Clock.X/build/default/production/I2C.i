@@ -7,7 +7,75 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "I2C.c" 2
-# 1 "./I2C.h" 1
+# 1 "./main.h" 1
+
+
+
+
+
+#pragma config PLLDIV = 4
+#pragma config CPUDIV = OSC1_PLL2
+#pragma config USBDIV = 2
+
+
+#pragma config FOSC = HSPLL_HS
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOR = OFF
+#pragma config BORV = 3
+#pragma config VREGEN = OFF
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 32768
+
+
+#pragma config CCP2MX = ON
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = OFF
+#pragma config LVP = OFF
+#pragma config ICPRT = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+
+
+
 
 
 
@@ -5625,7 +5693,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 4 "./I2C.h" 2
+# 71 "./main.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
@@ -5710,10 +5778,31 @@ typedef int32_t int_fast32_t;
 typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 5 "./I2C.h" 2
+# 72 "./main.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
-# 6 "./I2C.h" 2
+# 73 "./main.h" 2
+
+
+
+
+
+
+
+
+void GPIO_Init(void);
+void Interrupt_Init(void);
+void Timer0_Init(void);
+void Timer1_Init(void);
+
+int MySystick_ms(void);
+_Bool GetRisingEdge_SW2(void);
+_Bool GetRisingEdge_SW1(void);
+_Bool PressOverTime_SW1(int time);
+_Bool PressOverTime_SW2(int time);
+# 1 "I2C.c" 2
+
+# 1 "./I2C.h" 1
 # 16 "./I2C.h"
 void I2C_Init(void);
 void I2C_is_idle(void);
@@ -5727,7 +5816,7 @@ void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data);
 void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data);
 void I2C_Master_Transmit(uint8_t addr, uint8_t data);
 void I2C_Master_Receive(uint8_t addr, uint8_t* data);
-# 1 "I2C.c" 2
+# 2 "I2C.c" 2
 
 
 void I2C_Init(void){
@@ -5736,17 +5825,16 @@ void I2C_Init(void){
     SSPSTATbits.SMP = 1;
     SSPSTATbits.CKE = 0;
     SSPCON1bits.SSPM = 0x08;
-    SSPADD = 119;
+    SSPADD = 29;
     SSPCON1bits.SSPEN = 1;
 }
 
 void I2C_is_idle(void) {
     uint16_t TimeOut = 0;
-    while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ){
-        if(TimeOut++>=100) {
+    while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04) ) {
+        if(TimeOut++ >= 0xff) {
             break;
         }
-        _delay((unsigned long)((1)*(48000000/4000.0)));
     };
 }
 
@@ -5782,7 +5870,7 @@ uint8_t I2C_Read(_Bool GenerateAck) {
     return data;
 }
 
-void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data){
+void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data) {
     I2C_Start();
     I2C_Write(addr&0xFE);
     I2C_Write(MemAddress);
@@ -5790,7 +5878,7 @@ void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data){
     I2C_Stop();
 }
 
-void I2C_Mem_Read(uint8_t addr,uint8_t MemAddress,uint8_t *data){
+void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data){
     I2C_Start();
     I2C_Write(addr&0xFE);
     I2C_Write(MemAddress);
@@ -5800,14 +5888,14 @@ void I2C_Mem_Read(uint8_t addr,uint8_t MemAddress,uint8_t *data){
     I2C_Stop();
 }
 
-void I2C_Master_Receive(uint8_t addr,uint8_t* data) {
+void I2C_Master_Receive(uint8_t addr, uint8_t* data) {
     I2C_Start();
     I2C_Write(addr | 0x01);
     *data = I2C_Read(0);
     I2C_Stop();
 }
 
-void I2C_Master_Transmit(uint8_t addr,uint8_t data) {
+void I2C_Master_Transmit(uint8_t addr, uint8_t data) {
     I2C_Start();
     I2C_Write(addr & 0xFE);
     I2C_Write(data);

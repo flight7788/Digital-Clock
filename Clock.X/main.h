@@ -2,7 +2,6 @@
 #define	MAIN_H
 
 
-
 // CONFIG1L
 #pragma config PLLDIV = 4       // PLL Prescaler Selection bits (Divide by 4 (16 MHz oscillator input))
 #pragma config CPUDIV = OSC1_PLL2// System Clock Postscaler Selection bits ([Primary Oscillator Src: /1][96 MHz PLL Src: /2])
@@ -65,30 +64,30 @@
 // CONFIG7H
 #pragma config EBTRB = OFF      // Boot Block Table Read Protection bit (Boot block (000000-0007FFh) is not protected from table reads executed in other blocks)
 
+
 #define _XTAL_FREQ 48000000
 
-#define SCAN0 LATBbits.LATB2
-#define SCAN1 LATBbits.LATB3
-#define SCAN2 LATBbits.LATB4
-#define SCAN3 LATBbits.LATB5
+
+#include <xc.h>
+#include <stdint.h>
+#include <stdbool.h>
+
 
 #define SW1 PORTEbits.RE0
 #define SW2 PORTEbits.RE1
 
 #define Buzzer LATCbits.LATC1
 
+void GPIO_Init(void);
 void Interrupt_Init(void);
 void Timer0_Init(void);
-void Display_ISR(void);
+void Timer1_Init(void);
 
-void SetBrightness(void);
-void SetRTC(void);
-void ShowTime(void);
-void ShowDate(void);
-void ShowWeek(void);
+int MySystick_ms(void);
 bool GetRisingEdge_SW2(void);
 bool GetRisingEdge_SW1(void);
-
+bool PressOverTime_SW1(int time);
+bool PressOverTime_SW2(int time);
 
 #endif	/* MAIN_H */
 

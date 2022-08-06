@@ -1,4 +1,4 @@
-# 1 "DS3231.c"
+# 1 "Task.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,143 +6,76 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "DS3231.c" 2
-# 1 "./DS3231.h" 1
-# 17 "./DS3231.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\musl_xc8.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 135 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uintptr_t;
-# 150 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long intptr_t;
-# 166 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef signed char int8_t;
-
-
-
-
-typedef short int16_t;
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-typedef long int32_t;
+# 1 "Task.c" 2
+# 1 "./main.h" 1
 
 
 
 
 
-typedef long long int64_t;
-# 196 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long intmax_t;
+#pragma config PLLDIV = 4
+#pragma config CPUDIV = OSC1_PLL2
+#pragma config USBDIV = 2
+
+
+#pragma config FOSC = HSPLL_HS
+#pragma config FCMEN = OFF
+#pragma config IESO = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOR = OFF
+#pragma config BORV = 3
+#pragma config VREGEN = OFF
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 32768
+
+
+#pragma config CCP2MX = ON
+#pragma config PBADEN = ON
+#pragma config LPT1OSC = OFF
+#pragma config MCLRE = ON
+
+
+#pragma config STVREN = OFF
+#pragma config LVP = OFF
+#pragma config ICPRT = OFF
+#pragma config XINST = OFF
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
 
 
 
-
-
-typedef unsigned char uint8_t;
-
-
-
-
-typedef unsigned short uint16_t;
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-typedef unsigned long uint32_t;
-
-
-
-
-
-typedef unsigned long long uint64_t;
-# 237 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long long uintmax_t;
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-
-
-typedef int8_t int_fast8_t;
-
-typedef int64_t int_fast64_t;
-
-
-typedef int8_t int_least8_t;
-typedef int16_t int_least16_t;
-
-typedef int24_t int_least24_t;
-
-typedef int32_t int_least32_t;
-
-typedef int64_t int_least64_t;
-
-
-typedef uint8_t uint_fast8_t;
-
-typedef uint64_t uint_fast64_t;
-
-
-typedef uint8_t uint_least8_t;
-typedef uint16_t uint_least16_t;
-
-typedef uint24_t uint_least24_t;
-
-typedef uint32_t uint_least32_t;
-
-typedef uint64_t uint_least64_t;
-# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/stdint.h" 1 3
-typedef int32_t int_fast16_t;
-typedef int32_t int_fast32_t;
-typedef uint32_t uint_fast16_t;
-typedef uint32_t uint_fast32_t;
-# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 17 "./DS3231.h" 2
-
-
-typedef struct {
-  uint8_t Hour, Min, Sec;
-  uint8_t Year, Month, Week, Date;
-}RTC_t;
-
-void DS3231_Init(void);
-uint8_t DS3231_SecRead(void);
-uint8_t DS3231_MinRead(void);
-uint8_t DS3231_HourRead(void);
-uint8_t DS3231_WeekRead(void);
-uint8_t DS3231_DateRead(void);
-uint8_t DS3231_MonthRead(void);
-uint8_t DS3231_YearRead(void);
-void DS3231_ReadAll(RTC_t* time);
-float DS3231_TemperureRead(void);
-
-void DS3231_SetSec(uint8_t data);
-void DS3231_SetMin(uint8_t data);
-void DS3231_SetHour(uint8_t data);
-void DS3231_SetDate(uint8_t data);
-void DS3231_SetWeek(uint8_t data);
-void DS3231_SetMonth(uint8_t data);
-void DS3231_SetYear(uint8_t data);
-void DS3231_SetAll(RTC_t* time);
-# 1 "DS3231.c" 2
-
-# 1 "./I2C.h" 1
 
 
 
@@ -159,7 +92,17 @@ extern double __fpnormalize(double);
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 1 3
-# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 3
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\musl_xc8.h" 1 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
+
+
+
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\features.h" 1 3
 # 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 3
@@ -168,6 +111,10 @@ extern double __fpnormalize(double);
 typedef long int wchar_t;
 # 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef unsigned size_t;
+# 176 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef __int24 int24_t;
+# 212 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef __uint24 uint24_t;
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
 
 
@@ -5746,160 +5693,350 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 32 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 4 "./I2C.h" 2
+# 71 "./main.h" 2
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 135 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 150 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 166 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 196 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 217 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 237 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
+# 72 "./main.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
-# 6 "./I2C.h" 2
-# 16 "./I2C.h"
-void I2C_Init(void);
-void I2C_is_idle(void);
-void I2C_Start(void);
-void I2C_RepStart(void);
-void I2C_Stop(void);
-void I2C_Write(uint8_t DATA);
-uint8_t I2C_Read(_Bool GenerateAck);
-
-void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data);
-void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data);
-void I2C_Master_Transmit(uint8_t addr, uint8_t data);
-void I2C_Master_Receive(uint8_t addr, uint8_t* data);
-# 2 "DS3231.c" 2
+# 73 "./main.h" 2
 
 
 
-void DS3231_Init(void) {
-    I2C_Init();
-}
 
-void DS3231_SetSec(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 60) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit(0xD0, 0x00, BCD_Data);
+
+
+
+
+void GPIO_Init(void);
+void Interrupt_Init(void);
+void Timer0_Init(void);
+void Timer1_Init(void);
+
+int MySystick_ms(void);
+_Bool GetRisingEdge_SW2(void);
+_Bool GetRisingEdge_SW1(void);
+_Bool PressOverTime_SW1(int time);
+_Bool PressOverTime_SW2(int time);
+# 1 "Task.c" 2
+
+# 1 "./Task.h" 1
+
+
+
+
+
+# 1 "./DS3231.h" 1
+# 19 "./DS3231.h"
+typedef struct {
+  uint8_t Hour, Min, Sec;
+  uint8_t Year, Month, Week, Date;
+}RTC_t;
+
+void DS3231_Init(void);
+uint8_t DS3231_SecRead(void);
+uint8_t DS3231_MinRead(void);
+uint8_t DS3231_HourRead(void);
+uint8_t DS3231_WeekRead(void);
+uint8_t DS3231_DateRead(void);
+uint8_t DS3231_MonthRead(void);
+uint8_t DS3231_YearRead(void);
+void DS3231_ReadAll(RTC_t* time);
+float DS3231_TemperureRead(void);
+
+void DS3231_SetSec(uint8_t data);
+void DS3231_SetMin(uint8_t data);
+void DS3231_SetHour(uint8_t data);
+void DS3231_SetDate(uint8_t data);
+void DS3231_SetWeek(uint8_t data);
+void DS3231_SetMonth(uint8_t data);
+void DS3231_SetYear(uint8_t data);
+void DS3231_SetAll(RTC_t* time);
+# 6 "./Task.h" 2
+
+# 1 "./Display.h" 1
+
+
+
+
+
+
+typedef struct {
+    uint8_t Brightness[4];
+    uint8_t NumVal[4];
+    _Bool Point[4];
+}Display_t;
+
+typedef enum {
+    Dash = 10,
+    Blank = 11,
+    str_C = 12,
+}CustumChar_t;
+
+void Display_Set_Brightness(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
+
+void Display_Set_NumVal(
+        uint8_t digit0_val, uint8_t digit1_val,
+        uint8_t digit2_val, uint8_t digit3_val);
+
+void Display_Set_Point(
+        _Bool digit0_val, _Bool digit1_val,
+        _Bool digit2_val, _Bool digit3_val);
+
+void Display_ISR(void);
+# 7 "./Task.h" 2
+
+
+
+typedef enum {
+    ShowTime,
+    ShowDate,
+    ShowWeek,
+    SetRTC,
+    SetBrightness,
+}Task_t;
+
+
+void Task_SetBrightness(void);
+void Task_SetRTC(RTC_t CurrentRTC);
+void Task_ShowTime(RTC_t CurrentRTC);
+void Task_ShowDate(RTC_t CurrentRTC);
+void Task_ShowWeek(RTC_t CurrentRTC);
+# 2 "Task.c" 2
+
+
+
+void Task_IncrementVal(uint8_t* targetVal, uint8_t minVal, uint8_t maxVal) {
+    static int PrevTime = 0;
+    _Bool Increment = 0;
+
+    if(abs(MySystick_ms() - PrevTime) >= 200) {
+       PrevTime = MySystick_ms();
+       Increment = 1;
+    }
+
+    if(GetRisingEdge_SW1()) {
+        if((*targetVal)++ >= maxVal) *targetVal = minVal;
+    }
+    else if(PressOverTime_SW1(700)) {
+        if(Increment) {
+            if((*targetVal)++ >= maxVal) *targetVal = minVal;
+        }
     }
 }
 
-void DS3231_SetMin(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 60) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x01, BCD_Data);
+void Task_SetBrightness(void) {
+    static uint8_t brightness = 8;
+    if(GetRisingEdge_SW1()) {
+        if(brightness++ >= 10) {
+            brightness = 1;
+        }
     }
+    Display_Set_Brightness(brightness, brightness,
+                           brightness, brightness);
+    Display_Set_NumVal(str_C, Dash, brightness / 10, brightness % 10);
+    Display_Set_Point(0, 0, 0, 0);
 }
 
-void DS3231_SetHour(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 24) {
-        BCD_Data = (((data/10)<<4)|(data%10))&0x3F;
-        I2C_Mem_Transmit( 0xD0,0x02, BCD_Data);
+void Task_SetRTC(RTC_t CurrentRTC) {
+    static int PrevTime = 0;
+    static _Bool Blink = 0;
+    RTC_t NewSet = CurrentRTC;
+    uint8_t seq_cnt = 0;
+
+    if(NewSet.Hour == 0) NewSet.Hour = 23;
+    else NewSet.Hour--;
+    NewSet.Sec = 0;
+
+    while(seq_cnt < 6) {
+
+        if(abs(MySystick_ms() - PrevTime) >= 150) {
+            PrevTime = MySystick_ms();
+            Blink = (Blink) ? 0 : 1;
+        }
+
+        switch(seq_cnt) {
+            case 0:
+                Task_IncrementVal(&NewSet.Hour, 0, 23);
+                Display_Set_NumVal((Blink) ? (NewSet.Hour / 10) : Blank,
+                                   (Blink) ? (NewSet.Hour % 10) : Blank,
+                                    NewSet.Min / 10,
+                                    NewSet.Min % 10);
+                break;
+
+            case 1:
+                Task_IncrementVal(&NewSet.Min, 0, 59);
+                Display_Set_NumVal(NewSet.Hour / 10,
+                                   NewSet.Hour % 10,
+                                   (Blink) ? (NewSet.Min / 10) : Blank,
+                                   (Blink) ? (NewSet.Min % 10) : Blank);
+                break;
+
+            case 2:
+                Task_IncrementVal(&NewSet.Year, 0, 99);
+                Display_Set_NumVal(2, 0,
+                              (Blink) ? (NewSet.Year / 10) : Blank,
+                              (Blink) ? (NewSet.Year % 10) : Blank);
+                break;
+
+            case 3:
+                Task_IncrementVal(&NewSet.Month, 1, 12);
+                Display_Set_NumVal((Blink) ? (NewSet.Month / 10) : Blank,
+                                   (Blink) ? (NewSet.Month % 10) : Blank,
+                                    NewSet.Date / 10,
+                                    NewSet.Date % 10);
+                break;
+
+            case 4:
+                Task_IncrementVal(&NewSet.Date, 1, 31);
+                Display_Set_NumVal(NewSet.Month / 10,
+                                   NewSet.Month % 10,
+                                   (Blink) ? (NewSet.Date / 10) : Blank,
+                                   (Blink) ? (NewSet.Date % 10) : Blank);
+                break;
+
+            case 5:
+                Task_IncrementVal(&NewSet.Week, 1, 7);
+                Display_Set_NumVal(Blank, Dash,
+                              (Blink) ? (NewSet.Week % 10) : Blank,
+                               Dash);
+                break;
+
+            default: break;
+        }
+
+
+        if(seq_cnt==0 || seq_cnt==1) {
+            Display_Set_Point(0, 1, 1, 0);
+        }
+        else if(seq_cnt==2) {
+
+            Display_Set_Point(0, 0, 0, 0);
+        }
+        else if(seq_cnt==3 || seq_cnt==4) {
+            Display_Set_Point(0, 1, 0, 0);
+        }
+        else if(seq_cnt==5) {
+            Display_Set_Point(0, 0, 0, 0);
+        }
+
+        if(GetRisingEdge_SW2() && PORTEbits.RE0) {
+            seq_cnt++;
+        }
     }
+
+    DS3231_SetAll(&NewSet);
 }
 
-void DS3231_SetDate(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<32){
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x04, BCD_Data);
+void Task_ShowWeek(RTC_t CurrentRTC) {
+    Display_Set_NumVal(Blank, Dash, CurrentRTC.Week % 10, Dash);
+    Display_Set_Point(0, 0, 0, 0);
+}
+
+void Task_ShowDate(RTC_t CurrentRTC) {
+    Display_Set_NumVal(CurrentRTC.Month / 10,
+                       CurrentRTC.Month % 10,
+                       CurrentRTC.Date / 10,
+                       CurrentRTC.Date % 10);
+    Display_Set_Point(0, 1, 0, 0);
+}
+
+void Task_ShowTime(RTC_t CurrentRTC) {
+    static uint8_t old_sec = 0;
+    static _Bool Point_blink = 0;
+
+    Display_Set_NumVal(CurrentRTC.Hour / 10,
+                       CurrentRTC.Hour % 10,
+                       CurrentRTC.Min / 10,
+                       CurrentRTC.Min % 10);
+    Display_Set_Point(0, Point_blink, Point_blink, 0);
+
+    if(CurrentRTC.Sec != old_sec) {
+        Point_blink = (Point_blink) ? 0 : 1;
+        old_sec = CurrentRTC.Sec;
     }
-}
-
-void DS3231_SetWeek(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<8){
-        BCD_Data = data&0x07;
-        I2C_Mem_Transmit( 0xD0, 0x03, BCD_Data);
-    }
-}
-
-void DS3231_SetMonth(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data>=1 && data<13){
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit( 0xD0, 0x05, BCD_Data);
-    }
-}
-
-void DS3231_SetYear(uint8_t data) {
-    uint8_t BCD_Data = 0;
-    if(data < 100) {
-        BCD_Data = ((data/10)<<4)|(data%10);
-        I2C_Mem_Transmit(0xD0, 0x06, BCD_Data);
-    }
-}
-
-
-uint8_t DS3231_SecRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x00, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_MinRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x01, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_HourRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x02, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_WeekRead(void) {
-   uint8_t data = 0;
-   I2C_Mem_Read( 0xD0, 0x03, &data);
-   return data;
-}
-
-uint8_t DS3231_DateRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x04, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_MonthRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x05, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x01)*10;
-   return Dec_Data;
-}
-
-uint8_t DS3231_YearRead(void) {
-   uint8_t BCD_Data = 0, Dec_Data = 0;
-   I2C_Mem_Read( 0xD0, 0x06, &BCD_Data);
-   Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-   return Dec_Data;
-}
-
-float DS3231_TemperureRead(void) {
-   uint8_t DATA_H,DATA_L = 0;
-   I2C_Mem_Read(0xD0, 0x11, &DATA_H);
-   I2C_Mem_Read(0xD0, 0x12, &DATA_L);
-   return ((float)(((DATA_H&0x7F)<<2)|(DATA_L>>6))/4)*(((DATA_H&0x80)==0)?1:-1);
-}
-
-void DS3231_ReadAll(RTC_t* time) {
-   time->Sec = DS3231_SecRead();
-   time->Min = DS3231_MinRead();
-   time->Hour = DS3231_HourRead();
-   time->Date = DS3231_DateRead();
-   time->Week = DS3231_WeekRead();
-   time->Month = DS3231_MonthRead();
-   time->Year = DS3231_YearRead();
-}
-
-void DS3231_SetAll(RTC_t* time) {
-    DS3231_SetSec(time->Sec);
-    DS3231_SetMin(time->Min);
-    DS3231_SetHour(time->Hour);
-    DS3231_SetDate(time->Date);
-    DS3231_SetWeek(time->Week);
-    DS3231_SetMonth(time->Month);
-    DS3231_SetYear(time->Year);
 }

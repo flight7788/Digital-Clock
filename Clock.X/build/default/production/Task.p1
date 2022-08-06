@@ -1,17 +1,142 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"16 ./I2C.h
-[; ;./I2C.h: 16: void I2C_Init(void);
-[v _I2C_Init `(v ~T0 @X0 0 ef ]
-"24
-[; ;./I2C.h: 24: void I2C_Mem_Transmit(uint8_t addr, uint8_t MemAddress, uint8_t data);
-[v _I2C_Mem_Transmit `(v ~T0 @X0 0 ef3`uc`uc`uc ]
-"25
-[; ;./I2C.h: 25: void I2C_Mem_Read(uint8_t addr, uint8_t MemAddress, uint8_t *data);
-[v _I2C_Mem_Read `(v ~T0 @X0 0 ef3`uc`uc`*uc ]
+"73 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\c99\stdlib.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\c99\stdlib.h: 73: int abs (int);
+[v _abs `(i ~T0 @X0 0 ef1`i ]
+"86 ./main.h
+[; ;./main.h: 86: int MySystick_ms(void);
+[v _MySystick_ms `(i ~T0 @X0 0 ef ]
+"88
+[; ;./main.h: 88: _Bool GetRisingEdge_SW1(void);
+[v _GetRisingEdge_SW1 `(a ~T0 @X0 0 ef ]
+"89
+[; ;./main.h: 89: _Bool PressOverTime_SW1(int time);
+[v _PressOverTime_SW1 `(a ~T0 @X0 0 ef1`i ]
+"19 ./Display.h
+[; ;./Display.h: 19: void Display_Set_Brightness(
+[v _Display_Set_Brightness `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
+"23
+[; ;./Display.h: 23: void Display_Set_NumVal(
+[v _Display_Set_NumVal `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
+"33 Task.c
+[; ;Task.c: 33:     Display_Set_NumVal(str_C, Dash, brightness / 10, brightness % 10);
+[c E3242 10 11 12 .. ]
+[n E3242 . Dash Blank str_C  ]
+"27 ./Display.h
+[; ;./Display.h: 27: void Display_Set_Point(
+[v _Display_Set_Point `(v ~T0 @X0 0 ef4`a`a`a`a ]
 "19 ./DS3231.h
 [; ;./DS3231.h: 19: typedef struct {
-[s S1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Hour Min Sec Year Month Week Date ]
+[s S367 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S367 . Hour Min Sec Year Month Week Date ]
+"87 ./main.h
+[; ;./main.h: 87: _Bool GetRisingEdge_SW2(void);
+[v _GetRisingEdge_SW2 `(a ~T0 @X0 0 ef ]
+"2832 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2832:     struct {
+[s S121 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S121 . RE0 RE1 RE2 RE3 . RDPU ]
+"2840
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2840:     struct {
+[s S122 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S122 . CK1SPP CK2SPP OESPP ]
+"2845
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2845:     struct {
+[s S123 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S123 . PD2 PC2 CCP10 CCP9E . CCP2E ]
+"2853
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2853:     struct {
+[s S124 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S124 . RDE WRE CS PC3E . PA2E ]
+"2861
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2861:     struct {
+[s S125 :2 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 ]
+[n S125 . . PB2 . RE7 ]
+"2831
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2831: typedef union {
+[u S120 `S121 1 `S122 1 `S123 1 `S124 1 `S125 1 ]
+[n S120 . . . . . . ]
+"2868
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2868: extern volatile PORTEbits_t PORTEbits __attribute__((address(0xF84)));
+[v _PORTEbits `VS120 ~T0 @X0 0 e@3972 ]
+"42 ./DS3231.h
+[; ;./DS3231.h: 42: void DS3231_SetAll(RTC_t* time);
+[v _DS3231_SetAll `(v ~T0 @X0 0 ef1`*S367 ]
+"6 ./main.h
+[p x PLLDIV = 4 ]
+"7
+[p x CPUDIV = OSC1_PLL2 ]
+"8
+[p x USBDIV = 2 ]
+"11
+[p x FOSC = HSPLL_HS ]
+"12
+[p x FCMEN = OFF ]
+"13
+[p x IESO = OFF ]
+"16
+[p x PWRT = OFF ]
+"17
+[p x BOR = OFF ]
+"18
+[p x BORV = 3 ]
+"19
+[p x VREGEN = OFF ]
+"22
+[p x WDT = OFF ]
+"23
+[p x WDTPS = 32768 ]
+"26
+[p x CCP2MX = ON ]
+"27
+[p x PBADEN = ON ]
+"28
+[p x LPT1OSC = OFF ]
+"29
+[p x MCLRE = ON ]
+"32
+[p x STVREN = OFF ]
+"33
+[p x LVP = OFF ]
+"34
+[p x ICPRT = OFF ]
+"35
+[p x XINST = OFF ]
+"38
+[p x CP0 = OFF ]
+"39
+[p x CP1 = OFF ]
+"40
+[p x CP2 = OFF ]
+"41
+[p x CP3 = OFF ]
+"44
+[p x CPB = OFF ]
+"45
+[p x CPD = OFF ]
+"48
+[p x WRT0 = OFF ]
+"49
+[p x WRT1 = OFF ]
+"50
+[p x WRT2 = OFF ]
+"51
+[p x WRT3 = OFF ]
+"54
+[p x WRTC = OFF ]
+"55
+[p x WRTB = OFF ]
+"56
+[p x WRTD = OFF ]
+"59
+[p x EBTR0 = OFF ]
+"60
+[p x EBTR1 = OFF ]
+"61
+[p x EBTR2 = OFF ]
+"62
+[p x EBTR3 = OFF ]
+"65
+[p x EBTRB = OFF ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -522,485 +647,425 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8893
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"5 DS3231.c
-[; ;DS3231.c: 5: void DS3231_Init(void) {
-[v _DS3231_Init `(v ~T0 @X0 1 ef ]
+"5 Task.c
+[; ;Task.c: 5: void Task_IncrementVal(uint8_t* targetVal, uint8_t minVal, uint8_t maxVal) {
+[v _Task_IncrementVal `(v ~T0 @X0 1 ef3`*uc`uc`uc ]
 {
-[e :U _DS3231_Init ]
+[e :U _Task_IncrementVal ]
+[v _targetVal `*uc ~T0 @X0 1 r1 ]
+[v _minVal `uc ~T0 @X0 1 r2 ]
+[v _maxVal `uc ~T0 @X0 1 r3 ]
 [f ]
 "6
-[; ;DS3231.c: 6:     I2C_Init();
-[e ( _I2C_Init ..  ]
+[; ;Task.c: 6:     static int PrevTime = 0;
+[v F3283 `i ~T0 @X0 1 s PrevTime ]
+[i F3283
+-> 0 `i
+]
 "7
-[; ;DS3231.c: 7: }
-[e :UE 368 ]
-}
+[; ;Task.c: 7:     _Bool Increment = 0;
+[v _Increment `a ~T0 @X0 1 a ]
+[e = _Increment -> -> 0 `i `a ]
 "9
-[; ;DS3231.c: 9: void DS3231_SetSec(uint8_t data) {
-[v _DS3231_SetSec `(v ~T0 @X0 1 ef1`uc ]
+[; ;Task.c: 9:     if(abs(MySystick_ms() - PrevTime) >= 200) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3283 -> 200 `i 370  ]
 {
-[e :U _DS3231_SetSec ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
 "10
-[; ;DS3231.c: 10:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
+[; ;Task.c: 10:        PrevTime = MySystick_ms();
+[e = F3283 ( _MySystick_ms ..  ]
 "11
-[; ;DS3231.c: 11:     if(data < 60) {
-[e $ ! < -> _data `i -> 60 `i 370  ]
-{
+[; ;Task.c: 11:        Increment = 1;
+[e = _Increment -> -> 1 `i `a ]
 "12
-[; ;DS3231.c: 12:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"13
-[; ;DS3231.c: 13:         I2C_Mem_Transmit(0xD0, 0x00, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 0 `i `uc _BCD_Data ]
-"14
-[; ;DS3231.c: 14:     }
+[; ;Task.c: 12:     }
 }
 [e :U 370 ]
+"14
+[; ;Task.c: 14:     if(GetRisingEdge_SW1()) {
+[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 371  ]
+{
 "15
-[; ;DS3231.c: 15: }
-[e :UE 369 ]
-}
-"17
-[; ;DS3231.c: 17: void DS3231_SetMin(uint8_t data) {
-[v _DS3231_SetMin `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetMin ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"18
-[; ;DS3231.c: 18:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"19
-[; ;DS3231.c: 19:     if(data < 60) {
-[e $ ! < -> _data `i -> 60 `i 372  ]
-{
-"20
-[; ;DS3231.c: 20:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"21
-[; ;DS3231.c: 21:         I2C_Mem_Transmit( 0xD0, 0x01, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 1 `i `uc _BCD_Data ]
-"22
-[; ;DS3231.c: 22:     }
-}
+[; ;Task.c: 15:         if((*targetVal)++ >= maxVal) *targetVal = minVal;
+[e $ ! >= -> ++ *U _targetVal -> -> 1 `i `uc `i -> _maxVal `i 372  ]
+[e = *U _targetVal _minVal ]
 [e :U 372 ]
-"23
-[; ;DS3231.c: 23: }
-[e :UE 371 ]
+"16
+[; ;Task.c: 16:     }
 }
-"25
-[; ;DS3231.c: 25: void DS3231_SetHour(uint8_t data) {
-[v _DS3231_SetHour `(v ~T0 @X0 1 ef1`uc ]
+[e $U 373  ]
+"17
+[; ;Task.c: 17:     else if(PressOverTime_SW1(700)) {
+[e :U 371 ]
+[e $ ! != -> ( _PressOverTime_SW1 (1 -> 700 `i `i -> 0 `i 374  ]
 {
-[e :U _DS3231_SetHour ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"26
-[; ;DS3231.c: 26:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"27
-[; ;DS3231.c: 27:     if(data < 24) {
-[e $ ! < -> _data `i -> 24 `i 374  ]
+"18
+[; ;Task.c: 18:         if(Increment) {
+[e $ ! != -> _Increment `i -> 0 `i 375  ]
 {
-"28
-[; ;DS3231.c: 28:         BCD_Data = (((data/10)<<4)|(data%10))&0x3F;
-[e = _BCD_Data -> & | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i -> 63 `i `uc ]
-"29
-[; ;DS3231.c: 29:         I2C_Mem_Transmit( 0xD0,0x02, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 2 `i `uc _BCD_Data ]
-"30
-[; ;DS3231.c: 30:     }
+"19
+[; ;Task.c: 19:             if((*targetVal)++ >= maxVal) *targetVal = minVal;
+[e $ ! >= -> ++ *U _targetVal -> -> 1 `i `uc `i -> _maxVal `i 376  ]
+[e = *U _targetVal _minVal ]
+[e :U 376 ]
+"20
+[; ;Task.c: 20:         }
+}
+[e :U 375 ]
+"21
+[; ;Task.c: 21:     }
 }
 [e :U 374 ]
-"31
-[; ;DS3231.c: 31: }
-[e :UE 373 ]
+[e :U 373 ]
+"22
+[; ;Task.c: 22: }
+[e :UE 369 ]
 }
-"33
-[; ;DS3231.c: 33: void DS3231_SetDate(uint8_t data) {
-[v _DS3231_SetDate `(v ~T0 @X0 1 ef1`uc ]
+"24
+[; ;Task.c: 24: void Task_SetBrightness(void) {
+[v _Task_SetBrightness `(v ~T0 @X0 1 ef ]
 {
-[e :U _DS3231_SetDate ]
-[v _data `uc ~T0 @X0 1 r1 ]
+[e :U _Task_SetBrightness ]
 [f ]
-"34
-[; ;DS3231.c: 34:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"35
-[; ;DS3231.c: 35:     if(data>=1 && data<32){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 32 `i 376  ]
+"25
+[; ;Task.c: 25:     static uint8_t brightness = 8;
+[v F3286 `uc ~T0 @X0 1 s brightness ]
+[i F3286
+-> -> 8 `i `uc
+]
+"26
+[; ;Task.c: 26:     if(GetRisingEdge_SW1()) {
+[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 378  ]
 {
-"36
-[; ;DS3231.c: 36:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"37
-[; ;DS3231.c: 37:         I2C_Mem_Transmit( 0xD0, 0x04, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 4 `i `uc _BCD_Data ]
-"38
-[; ;DS3231.c: 38:     }
+"27
+[; ;Task.c: 27:         if(brightness++ >= 10) {
+[e $ ! >= -> ++ F3286 -> -> 1 `i `uc `i -> 10 `i 379  ]
+{
+"28
+[; ;Task.c: 28:             brightness = 1;
+[e = F3286 -> -> 1 `i `uc ]
+"29
+[; ;Task.c: 29:         }
 }
-[e :U 376 ]
-"39
-[; ;DS3231.c: 39: }
-[e :UE 375 ]
-}
-"41
-[; ;DS3231.c: 41: void DS3231_SetWeek(uint8_t data) {
-[v _DS3231_SetWeek `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetWeek ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"42
-[; ;DS3231.c: 42:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"43
-[; ;DS3231.c: 43:     if(data>=1 && data<8){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 8 `i 378  ]
-{
-"44
-[; ;DS3231.c: 44:         BCD_Data = data&0x07;
-[e = _BCD_Data -> & -> _data `i -> 7 `i `uc ]
-"45
-[; ;DS3231.c: 45:         I2C_Mem_Transmit( 0xD0, 0x03, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 3 `i `uc _BCD_Data ]
-"46
-[; ;DS3231.c: 46:     }
+[e :U 379 ]
+"30
+[; ;Task.c: 30:     }
 }
 [e :U 378 ]
-"47
-[; ;DS3231.c: 47: }
+"31
+[; ;Task.c: 31:     Display_Set_Brightness(brightness, brightness,
+[e ( _Display_Set_Brightness (4 , , , F3286 F3286 F3286 F3286 ]
+"33
+[; ;Task.c: 33:     Display_Set_NumVal(str_C, Dash, brightness / 10, brightness % 10);
+[e ( _Display_Set_NumVal (4 , , , -> . `E3242 2 `uc -> . `E3242 0 `uc -> / -> F3286 `i -> 10 `i `uc -> % -> F3286 `i -> 10 `i `uc ]
+"34
+[; ;Task.c: 34:     Display_Set_Point(0, 0, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
+"35
+[; ;Task.c: 35: }
 [e :UE 377 ]
 }
-"49
-[; ;DS3231.c: 49: void DS3231_SetMonth(uint8_t data) {
-[v _DS3231_SetMonth `(v ~T0 @X0 1 ef1`uc ]
+"37
+[; ;Task.c: 37: void Task_SetRTC(RTC_t CurrentRTC) {
+[v _Task_SetRTC `(v ~T0 @X0 1 ef1`S367 ]
 {
-[e :U _DS3231_SetMonth ]
-[v _data `uc ~T0 @X0 1 r1 ]
+[e :U _Task_SetRTC ]
+[v _CurrentRTC `S367 ~T0 @X0 1 r1 ]
 [f ]
-"50
-[; ;DS3231.c: 50:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"51
-[; ;DS3231.c: 51:     if(data>=1 && data<13){
-[e $ ! && >= -> _data `i -> 1 `i < -> _data `i -> 13 `i 380  ]
-{
-"52
-[; ;DS3231.c: 52:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"53
-[; ;DS3231.c: 53:         I2C_Mem_Transmit( 0xD0, 0x05, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 5 `i `uc _BCD_Data ]
-"54
-[; ;DS3231.c: 54:     }
-}
-[e :U 380 ]
-"55
-[; ;DS3231.c: 55: }
-[e :UE 379 ]
-}
-"57
-[; ;DS3231.c: 57: void DS3231_SetYear(uint8_t data) {
-[v _DS3231_SetYear `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _DS3231_SetYear ]
-[v _data `uc ~T0 @X0 1 r1 ]
-[f ]
-"58
-[; ;DS3231.c: 58:     uint8_t BCD_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-"59
-[; ;DS3231.c: 59:     if(data < 100) {
-[e $ ! < -> _data `i -> 100 `i 382  ]
-{
-"60
-[; ;DS3231.c: 60:         BCD_Data = ((data/10)<<4)|(data%10);
-[e = _BCD_Data -> | << / -> _data `i -> 10 `i -> 4 `i % -> _data `i -> 10 `i `uc ]
-"61
-[; ;DS3231.c: 61:         I2C_Mem_Transmit(0xD0, 0x06, BCD_Data);
-[e ( _I2C_Mem_Transmit (3 , , -> -> 208 `i `uc -> -> 6 `i `uc _BCD_Data ]
-"62
-[; ;DS3231.c: 62:     }
-}
+"38
+[; ;Task.c: 38:     static int PrevTime = 0;
+[v F3289 `i ~T0 @X0 1 s PrevTime ]
+[i F3289
+-> 0 `i
+]
+"39
+[; ;Task.c: 39:     static _Bool Blink = 0;
+[v F3290 `a ~T0 @X0 1 s Blink ]
+[i F3290
+-> -> 0 `i `a
+]
+"40
+[; ;Task.c: 40:     RTC_t NewSet = CurrentRTC;
+[v _NewSet `S367 ~T0 @X0 1 a ]
+[e = _NewSet _CurrentRTC ]
+"41
+[; ;Task.c: 41:     uint8_t seq_cnt = 0;
+[v _seq_cnt `uc ~T0 @X0 1 a ]
+[e = _seq_cnt -> -> 0 `i `uc ]
+"43
+[; ;Task.c: 43:     if(NewSet.Hour == 0) NewSet.Hour = 23;
+[e $ ! == -> . _NewSet 0 `i -> 0 `i 381  ]
+[e = . _NewSet 0 -> -> 23 `i `uc ]
+[e $U 382  ]
+"44
+[; ;Task.c: 44:     else NewSet.Hour--;
+[e :U 381 ]
+[e -- . _NewSet 0 -> -> 1 `i `uc ]
 [e :U 382 ]
+"45
+[; ;Task.c: 45:     NewSet.Sec = 0;
+[e = . _NewSet 2 -> -> 0 `i `uc ]
+"47
+[; ;Task.c: 47:     while(seq_cnt < 6) {
+[e $U 383  ]
+[e :U 384 ]
+{
+"49
+[; ;Task.c: 49:         if(abs(MySystick_ms() - PrevTime) >= 150) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3289 -> 150 `i 386  ]
+{
+"50
+[; ;Task.c: 50:             PrevTime = MySystick_ms();
+[e = F3289 ( _MySystick_ms ..  ]
+"51
+[; ;Task.c: 51:             Blink = (Blink) ? 0 : 1;
+[e = F3290 -> ? != -> F3290 `i -> 0 `i : -> 0 `i -> 1 `i `a ]
+"52
+[; ;Task.c: 52:         }
+}
+[e :U 386 ]
+"54
+[; ;Task.c: 54:         switch(seq_cnt) {
+[e $U 388  ]
+{
+"55
+[; ;Task.c: 55:             case 0:
+[e :U 389 ]
+"56
+[; ;Task.c: 56:                 Task_IncrementVal(&NewSet.Hour, 0, 23);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 0 -> -> 0 `i `uc -> -> 23 `i `uc ]
+"57
+[; ;Task.c: 57:                 Display_Set_NumVal((Blink) ? (NewSet.Hour / 10) : Blank,
+[e ( _Display_Set_NumVal (4 , , , -> ? != -> F3290 `i -> 0 `i : / -> . _NewSet 0 `i -> 10 `i . `E3242 1 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 0 `i -> 10 `i . `E3242 1 `uc -> / -> . _NewSet 1 `i -> 10 `i `uc -> % -> . _NewSet 1 `i -> 10 `i `uc ]
+"61
+[; ;Task.c: 61:                 break;
+[e $U 387  ]
 "63
-[; ;DS3231.c: 63: }
-[e :UE 381 ]
-}
-"66
-[; ;DS3231.c: 66: uint8_t DS3231_SecRead(void) {
-[v _DS3231_SecRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_SecRead ]
-[f ]
-"67
-[; ;DS3231.c: 67:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"68
-[; ;DS3231.c: 68:    I2C_Mem_Read( 0xD0, 0x00, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 0 `i `uc &U _BCD_Data ]
+[; ;Task.c: 63:             case 1:
+[e :U 390 ]
+"64
+[; ;Task.c: 64:                 Task_IncrementVal(&NewSet.Min, 0, 59);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 1 -> -> 0 `i `uc -> -> 59 `i `uc ]
+"65
+[; ;Task.c: 65:                 Display_Set_NumVal(NewSet.Hour / 10,
+[e ( _Display_Set_NumVal (4 , , , -> / -> . _NewSet 0 `i -> 10 `i `uc -> % -> . _NewSet 0 `i -> 10 `i `uc -> ? != -> F3290 `i -> 0 `i : / -> . _NewSet 1 `i -> 10 `i . `E3242 1 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 1 `i -> 10 `i . `E3242 1 `uc ]
 "69
-[; ;DS3231.c: 69:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
-"70
-[; ;DS3231.c: 70:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 383  ]
+[; ;Task.c: 69:                 break;
+[e $U 387  ]
 "71
-[; ;DS3231.c: 71: }
-[e :UE 383 ]
-}
+[; ;Task.c: 71:             case 2:
+[e :U 391 ]
+"72
+[; ;Task.c: 72:                 Task_IncrementVal(&NewSet.Year, 0, 99);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 3 -> -> 0 `i `uc -> -> 99 `i `uc ]
 "73
-[; ;DS3231.c: 73: uint8_t DS3231_MinRead(void) {
-[v _DS3231_MinRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_MinRead ]
-[f ]
-"74
-[; ;DS3231.c: 74:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"75
-[; ;DS3231.c: 75:    I2C_Mem_Read( 0xD0, 0x01, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 1 `i `uc &U _BCD_Data ]
+[; ;Task.c: 73:                 Display_Set_NumVal(2, 0,
+[e ( _Display_Set_NumVal (4 , , , -> -> 2 `i `uc -> -> 0 `i `uc -> ? != -> F3290 `i -> 0 `i : / -> . _NewSet 3 `i -> 10 `i . `E3242 1 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 3 `i -> 10 `i . `E3242 1 `uc ]
 "76
-[; ;DS3231.c: 76:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
-"77
-[; ;DS3231.c: 77:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 384  ]
+[; ;Task.c: 76:                 break;
+[e $U 387  ]
 "78
-[; ;DS3231.c: 78: }
-[e :UE 384 ]
-}
+[; ;Task.c: 78:             case 3:
+[e :U 392 ]
+"79
+[; ;Task.c: 79:                 Task_IncrementVal(&NewSet.Month, 1, 12);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 4 -> -> 1 `i `uc -> -> 12 `i `uc ]
 "80
-[; ;DS3231.c: 80: uint8_t DS3231_HourRead(void) {
-[v _DS3231_HourRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_HourRead ]
-[f ]
-"81
-[; ;DS3231.c: 81:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"82
-[; ;DS3231.c: 82:    I2C_Mem_Read( 0xD0, 0x02, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 2 `i `uc &U _BCD_Data ]
-"83
-[; ;DS3231.c: 83:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 3 `i -> 10 `i `uc ]
+[; ;Task.c: 80:                 Display_Set_NumVal((Blink) ? (NewSet.Month / 10) : Blank,
+[e ( _Display_Set_NumVal (4 , , , -> ? != -> F3290 `i -> 0 `i : / -> . _NewSet 4 `i -> 10 `i . `E3242 1 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 4 `i -> 10 `i . `E3242 1 `uc -> / -> . _NewSet 6 `i -> 10 `i `uc -> % -> . _NewSet 6 `i -> 10 `i `uc ]
 "84
-[; ;DS3231.c: 84:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 385  ]
-"85
-[; ;DS3231.c: 85: }
-[e :UE 385 ]
-}
+[; ;Task.c: 84:                 break;
+[e $U 387  ]
+"86
+[; ;Task.c: 86:             case 4:
+[e :U 393 ]
 "87
-[; ;DS3231.c: 87: uint8_t DS3231_WeekRead(void) {
-[v _DS3231_WeekRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_WeekRead ]
-[f ]
+[; ;Task.c: 87:                 Task_IncrementVal(&NewSet.Date, 1, 31);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 6 -> -> 1 `i `uc -> -> 31 `i `uc ]
 "88
-[; ;DS3231.c: 88:    uint8_t data = 0;
-[v _data `uc ~T0 @X0 1 a ]
-[e = _data -> -> 0 `i `uc ]
-"89
-[; ;DS3231.c: 89:    I2C_Mem_Read( 0xD0, 0x03, &data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 3 `i `uc &U _data ]
-"90
-[; ;DS3231.c: 90:    return data;
-[e ) _data ]
-[e $UE 386  ]
-"91
-[; ;DS3231.c: 91: }
-[e :UE 386 ]
-}
-"93
-[; ;DS3231.c: 93: uint8_t DS3231_DateRead(void) {
-[v _DS3231_DateRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_DateRead ]
-[f ]
+[; ;Task.c: 88:                 Display_Set_NumVal(NewSet.Month / 10,
+[e ( _Display_Set_NumVal (4 , , , -> / -> . _NewSet 4 `i -> 10 `i `uc -> % -> . _NewSet 4 `i -> 10 `i `uc -> ? != -> F3290 `i -> 0 `i : / -> . _NewSet 6 `i -> 10 `i . `E3242 1 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 6 `i -> 10 `i . `E3242 1 `uc ]
+"92
+[; ;Task.c: 92:                 break;
+[e $U 387  ]
 "94
-[; ;DS3231.c: 94:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
+[; ;Task.c: 94:             case 5:
+[e :U 394 ]
 "95
-[; ;DS3231.c: 95:    I2C_Mem_Read( 0xD0, 0x04, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 4 `i `uc &U _BCD_Data ]
+[; ;Task.c: 95:                 Task_IncrementVal(&NewSet.Week, 1, 7);
+[e ( _Task_IncrementVal (3 , , &U . _NewSet 5 -> -> 1 `i `uc -> -> 7 `i `uc ]
 "96
-[; ;DS3231.c: 96:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x03)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 3 `i -> 10 `i `uc ]
-"97
-[; ;DS3231.c: 97:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 387  ]
-"98
-[; ;DS3231.c: 98: }
-[e :UE 387 ]
-}
-"100
-[; ;DS3231.c: 100: uint8_t DS3231_MonthRead(void) {
-[v _DS3231_MonthRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_MonthRead ]
-[f ]
+[; ;Task.c: 96:                 Display_Set_NumVal(Blank, Dash,
+[e ( _Display_Set_NumVal (4 , , , -> . `E3242 1 `uc -> . `E3242 0 `uc -> ? != -> F3290 `i -> 0 `i : % -> . _NewSet 5 `i -> 10 `i . `E3242 1 `uc -> . `E3242 0 `uc ]
+"99
+[; ;Task.c: 99:                 break;
+[e $U 387  ]
 "101
-[; ;DS3231.c: 101:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
+[; ;Task.c: 101:             default: break;
+[e :U 395 ]
+[e $U 387  ]
 "102
-[; ;DS3231.c: 102:    I2C_Mem_Read( 0xD0, 0x05, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 5 `i `uc &U _BCD_Data ]
-"103
-[; ;DS3231.c: 103:    Dec_Data = (BCD_Data&0x0F) + ((BCD_Data>>4)&0x01)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * & >> -> _BCD_Data `i -> 4 `i -> 1 `i -> 10 `i `uc ]
-"104
-[; ;DS3231.c: 104:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 388  ]
+[; ;Task.c: 102:         }
+}
+[e $U 387  ]
+[e :U 388 ]
+[e [\ -> _seq_cnt `i , $ -> 0 `i 389
+ , $ -> 1 `i 390
+ , $ -> 2 `i 391
+ , $ -> 3 `i 392
+ , $ -> 4 `i 393
+ , $ -> 5 `i 394
+ 395 ]
+[e :U 387 ]
 "105
-[; ;DS3231.c: 105: }
-[e :UE 388 ]
-}
+[; ;Task.c: 105:         if(seq_cnt==0 || seq_cnt==1) {
+[e $ ! || == -> _seq_cnt `i -> 0 `i == -> _seq_cnt `i -> 1 `i 396  ]
+{
+"106
+[; ;Task.c: 106:             Display_Set_Point(0, 1, 1, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 1 `i `a -> -> 1 `i `a -> -> 0 `i `a ]
 "107
-[; ;DS3231.c: 107: uint8_t DS3231_YearRead(void) {
-[v _DS3231_YearRead `(uc ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_YearRead ]
-[f ]
+[; ;Task.c: 107:         }
+}
+[e $U 397  ]
 "108
-[; ;DS3231.c: 108:    uint8_t BCD_Data = 0, Dec_Data = 0;
-[v _BCD_Data `uc ~T0 @X0 1 a ]
-[e = _BCD_Data -> -> 0 `i `uc ]
-[v _Dec_Data `uc ~T0 @X0 1 a ]
-[e = _Dec_Data -> -> 0 `i `uc ]
-"109
-[; ;DS3231.c: 109:    I2C_Mem_Read( 0xD0, 0x06, &BCD_Data);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 6 `i `uc &U _BCD_Data ]
+[; ;Task.c: 108:         else if(seq_cnt==2) {
+[e :U 396 ]
+[e $ ! == -> _seq_cnt `i -> 2 `i 398  ]
+{
 "110
-[; ;DS3231.c: 110:    Dec_Data = (BCD_Data&0x0F) + (BCD_Data>>4)*10;
-[e = _Dec_Data -> + & -> _BCD_Data `i -> 15 `i * >> -> _BCD_Data `i -> 4 `i -> 10 `i `uc ]
+[; ;Task.c: 110:             Display_Set_Point(0, 0, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
 "111
-[; ;DS3231.c: 111:    return Dec_Data;
-[e ) _Dec_Data ]
-[e $UE 389  ]
+[; ;Task.c: 111:         }
+}
+[e $U 399  ]
 "112
-[; ;DS3231.c: 112: }
-[e :UE 389 ]
-}
+[; ;Task.c: 112:         else if(seq_cnt==3 || seq_cnt==4) {
+[e :U 398 ]
+[e $ ! || == -> _seq_cnt `i -> 3 `i == -> _seq_cnt `i -> 4 `i 400  ]
+{
+"113
+[; ;Task.c: 113:             Display_Set_Point(0, 1, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 1 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
 "114
-[; ;DS3231.c: 114: float DS3231_TemperureRead(void) {
-[v _DS3231_TemperureRead `(f ~T0 @X0 1 ef ]
-{
-[e :U _DS3231_TemperureRead ]
-[f ]
+[; ;Task.c: 114:         }
+}
+[e $U 401  ]
 "115
-[; ;DS3231.c: 115:    uint8_t DATA_H,DATA_L = 0;
-[v _DATA_H `uc ~T0 @X0 1 a ]
-[v _DATA_L `uc ~T0 @X0 1 a ]
-[e = _DATA_L -> -> 0 `i `uc ]
+[; ;Task.c: 115:         else if(seq_cnt==5) {
+[e :U 400 ]
+[e $ ! == -> _seq_cnt `i -> 5 `i 402  ]
+{
 "116
-[; ;DS3231.c: 116:    I2C_Mem_Read(0xD0, 0x11, &DATA_H);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 17 `i `uc &U _DATA_H ]
+[; ;Task.c: 116:             Display_Set_Point(0, 0, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
 "117
-[; ;DS3231.c: 117:    I2C_Mem_Read(0xD0, 0x12, &DATA_L);
-[e ( _I2C_Mem_Read (3 , , -> -> 208 `i `uc -> -> 18 `i `uc &U _DATA_L ]
-"118
-[; ;DS3231.c: 118:    return ((float)(((DATA_H&0x7F)<<2)|(DATA_L>>6))/4)*(((DATA_H&0x80)==0)?1:-1);
-[e ) * / -> | << & -> _DATA_H `i -> 127 `i -> 2 `i >> -> _DATA_L `i -> 6 `i `f -> -> 4 `i `f -> ? == & -> _DATA_H `i -> 128 `i -> 0 `i : -> 1 `i -U -> 1 `i `f ]
-[e $UE 390  ]
+[; ;Task.c: 117:         }
+}
+[e :U 402 ]
+[e :U 401 ]
+[e :U 399 ]
+[e :U 397 ]
 "119
-[; ;DS3231.c: 119: }
-[e :UE 390 ]
-}
+[; ;Task.c: 119:         if(GetRisingEdge_SW2() && PORTEbits.RE0) {
+[e $ ! && != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i != -> . . _PORTEbits 0 0 `i -> 0 `i 403  ]
+{
+"120
+[; ;Task.c: 120:             seq_cnt++;
+[e ++ _seq_cnt -> -> 1 `i `uc ]
 "121
-[; ;DS3231.c: 121: void DS3231_ReadAll(RTC_t* time) {
-[v _DS3231_ReadAll `(v ~T0 @X0 1 ef1`*S1 ]
-{
-[e :U _DS3231_ReadAll ]
-[v _time `*S1 ~T0 @X0 1 r1 ]
-[f ]
-"122
-[; ;DS3231.c: 122:    time->Sec = DS3231_SecRead();
-[e = . *U _time 2 ( _DS3231_SecRead ..  ]
-"123
-[; ;DS3231.c: 123:    time->Min = DS3231_MinRead();
-[e = . *U _time 1 ( _DS3231_MinRead ..  ]
-"124
-[; ;DS3231.c: 124:    time->Hour = DS3231_HourRead();
-[e = . *U _time 0 ( _DS3231_HourRead ..  ]
-"125
-[; ;DS3231.c: 125:    time->Date = DS3231_DateRead();
-[e = . *U _time 6 ( _DS3231_DateRead ..  ]
-"126
-[; ;DS3231.c: 126:    time->Week = DS3231_WeekRead();
-[e = . *U _time 5 ( _DS3231_WeekRead ..  ]
-"127
-[; ;DS3231.c: 127:    time->Month = DS3231_MonthRead();
-[e = . *U _time 4 ( _DS3231_MonthRead ..  ]
-"128
-[; ;DS3231.c: 128:    time->Year = DS3231_YearRead();
-[e = . *U _time 3 ( _DS3231_YearRead ..  ]
-"129
-[; ;DS3231.c: 129: }
-[e :UE 391 ]
+[; ;Task.c: 121:         }
 }
-"131
-[; ;DS3231.c: 131: void DS3231_SetAll(RTC_t* time) {
-[v _DS3231_SetAll `(v ~T0 @X0 1 ef1`*S1 ]
+[e :U 403 ]
+"122
+[; ;Task.c: 122:     }
+}
+[e :U 383 ]
+"47
+[; ;Task.c: 47:     while(seq_cnt < 6) {
+[e $ < -> _seq_cnt `i -> 6 `i 384  ]
+[e :U 385 ]
+"124
+[; ;Task.c: 124:     DS3231_SetAll(&NewSet);
+[e ( _DS3231_SetAll (1 &U _NewSet ]
+"125
+[; ;Task.c: 125: }
+[e :UE 380 ]
+}
+"127
+[; ;Task.c: 127: void Task_ShowWeek(RTC_t CurrentRTC) {
+[v _Task_ShowWeek `(v ~T0 @X0 1 ef1`S367 ]
 {
-[e :U _DS3231_SetAll ]
-[v _time `*S1 ~T0 @X0 1 r1 ]
+[e :U _Task_ShowWeek ]
+[v _CurrentRTC `S367 ~T0 @X0 1 r1 ]
 [f ]
+"128
+[; ;Task.c: 128:     Display_Set_NumVal(Blank, Dash, CurrentRTC.Week % 10, Dash);
+[e ( _Display_Set_NumVal (4 , , , -> . `E3242 1 `uc -> . `E3242 0 `uc -> % -> . _CurrentRTC 5 `i -> 10 `i `uc -> . `E3242 0 `uc ]
+"129
+[; ;Task.c: 129:     Display_Set_Point(0, 0, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
+"130
+[; ;Task.c: 130: }
+[e :UE 404 ]
+}
 "132
-[; ;DS3231.c: 132:     DS3231_SetSec(time->Sec);
-[e ( _DS3231_SetSec (1 . *U _time 2 ]
+[; ;Task.c: 132: void Task_ShowDate(RTC_t CurrentRTC) {
+[v _Task_ShowDate `(v ~T0 @X0 1 ef1`S367 ]
+{
+[e :U _Task_ShowDate ]
+[v _CurrentRTC `S367 ~T0 @X0 1 r1 ]
+[f ]
 "133
-[; ;DS3231.c: 133:     DS3231_SetMin(time->Min);
-[e ( _DS3231_SetMin (1 . *U _time 1 ]
-"134
-[; ;DS3231.c: 134:     DS3231_SetHour(time->Hour);
-[e ( _DS3231_SetHour (1 . *U _time 0 ]
-"135
-[; ;DS3231.c: 135:     DS3231_SetDate(time->Date);
-[e ( _DS3231_SetDate (1 . *U _time 6 ]
-"136
-[; ;DS3231.c: 136:     DS3231_SetWeek(time->Week);
-[e ( _DS3231_SetWeek (1 . *U _time 5 ]
+[; ;Task.c: 133:     Display_Set_NumVal(CurrentRTC.Month / 10,
+[e ( _Display_Set_NumVal (4 , , , -> / -> . _CurrentRTC 4 `i -> 10 `i `uc -> % -> . _CurrentRTC 4 `i -> 10 `i `uc -> / -> . _CurrentRTC 6 `i -> 10 `i `uc -> % -> . _CurrentRTC 6 `i -> 10 `i `uc ]
 "137
-[; ;DS3231.c: 137:     DS3231_SetMonth(time->Month);
-[e ( _DS3231_SetMonth (1 . *U _time 4 ]
+[; ;Task.c: 137:     Display_Set_Point(0, 1, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 1 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
 "138
-[; ;DS3231.c: 138:     DS3231_SetYear(time->Year);
-[e ( _DS3231_SetYear (1 . *U _time 3 ]
-"139
-[; ;DS3231.c: 139: }
-[e :UE 392 ]
+[; ;Task.c: 138: }
+[e :UE 405 ]
+}
+"140
+[; ;Task.c: 140: void Task_ShowTime(RTC_t CurrentRTC) {
+[v _Task_ShowTime `(v ~T0 @X0 1 ef1`S367 ]
+{
+[e :U _Task_ShowTime ]
+[v _CurrentRTC `S367 ~T0 @X0 1 r1 ]
+[f ]
+"141
+[; ;Task.c: 141:     static uint8_t old_sec = 0;
+[v F3299 `uc ~T0 @X0 1 s old_sec ]
+[i F3299
+-> -> 0 `i `uc
+]
+"142
+[; ;Task.c: 142:     static _Bool Point_blink = 0;
+[v F3300 `a ~T0 @X0 1 s Point_blink ]
+[i F3300
+-> -> 0 `i `a
+]
+"144
+[; ;Task.c: 144:     Display_Set_NumVal(CurrentRTC.Hour / 10,
+[e ( _Display_Set_NumVal (4 , , , -> / -> . _CurrentRTC 0 `i -> 10 `i `uc -> % -> . _CurrentRTC 0 `i -> 10 `i `uc -> / -> . _CurrentRTC 1 `i -> 10 `i `uc -> % -> . _CurrentRTC 1 `i -> 10 `i `uc ]
+"148
+[; ;Task.c: 148:     Display_Set_Point(0, Point_blink, Point_blink, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a F3300 F3300 -> -> 0 `i `a ]
+"150
+[; ;Task.c: 150:     if(CurrentRTC.Sec != old_sec) {
+[e $ ! != -> . _CurrentRTC 2 `i -> F3299 `i 407  ]
+{
+"151
+[; ;Task.c: 151:         Point_blink = (Point_blink) ? 0 : 1;
+[e = F3300 -> ? != -> F3300 `i -> 0 `i : -> 0 `i -> 1 `i `a ]
+"152
+[; ;Task.c: 152:         old_sec = CurrentRTC.Sec;
+[e = F3299 . _CurrentRTC 2 ]
+"153
+[; ;Task.c: 153:     }
+}
+[e :U 407 ]
+"154
+[; ;Task.c: 154: }
+[e :UE 406 ]
 }

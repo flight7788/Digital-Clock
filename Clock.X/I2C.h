@@ -5,13 +5,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define _XTAL_FREQ 48000000
 
 #define SDA		 PORTBbits.RB0
 #define SDA_IO 	 TRISBbits.RB0
 #define SCK		 PORTBbits.RB1
 #define SCK_IO	 TRISBbits.RB1
 
+#define SetTimeOut  0xff
 
 void I2C_Init(void);
 void I2C_is_idle(void);

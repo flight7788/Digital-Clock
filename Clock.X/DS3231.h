@@ -1,6 +1,7 @@
 #ifndef DS3231_H
 #define	DS3231_H
 
+
 #define i2c_addr 0xD0
 
 #define Sec_Reg     0x00
@@ -15,30 +16,30 @@
 
 #include <stdint.h>
 
-typedef struct Time{
+typedef struct {
   uint8_t Hour, Min, Sec;
   uint8_t Year, Month, Week, Date;
-}T;
+}RTC_t;
 
 void DS3231_Init(void);
-uint8_t SecRead(void);
-uint8_t MinRead(void);
-uint8_t HourRead(void);
-uint8_t WeekRead(void);
-uint8_t DateRead(void);
-uint8_t MonthRead(void);
-uint8_t YearRead(void);
-void TimeRead(T* time);
-float TemperureRead(void);
+uint8_t DS3231_SecRead(void);
+uint8_t DS3231_MinRead(void);
+uint8_t DS3231_HourRead(void);
+uint8_t DS3231_WeekRead(void);
+uint8_t DS3231_DateRead(void);
+uint8_t DS3231_MonthRead(void);
+uint8_t DS3231_YearRead(void);
+void DS3231_ReadAll(RTC_t* time);
+float DS3231_TemperureRead(void);
 
-void SetSec(uint8_t data);
-void SetMin(uint8_t data);
-void SetHour(uint8_t data);
-void SetDate(uint8_t data);
-void SetWeek(uint8_t data);
-void SetMonth(uint8_t data);
-void SetYear(uint8_t data);
-void TimeSet(T* time);
+void DS3231_SetSec(uint8_t data);
+void DS3231_SetMin(uint8_t data);
+void DS3231_SetHour(uint8_t data);
+void DS3231_SetDate(uint8_t data);
+void DS3231_SetWeek(uint8_t data);
+void DS3231_SetMonth(uint8_t data);
+void DS3231_SetYear(uint8_t data);
+void DS3231_SetAll(RTC_t* time);
 
 #endif	/* DS3231_H */
 

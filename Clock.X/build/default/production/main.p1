@@ -1,12 +1,12 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"18 ./DS3231.h
-[; ;./DS3231.h: 18: typedef struct Time{
+"19 ./DS3231.h
+[; ;./DS3231.h: 19: typedef struct {
 [s S367 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S367 Time Hour Min Sec Year Month Week Date ]
-"27 main.c
-[; ;main.c: 27: M Mode = Task_ShowTime;
-[c E3236 0 1 2 3 4 .. ]
-[n E3236 Mode Task_ShowTime Task_ShowDate Task_ShowWeek Task_SetRTC Task_SetBrightness  ]
+[n S367 . Hour Min Sec Year Month Week Date ]
+"9 main.c
+[; ;main.c: 9: Task_t Mode = ShowTime;
+[c E3263 0 1 2 3 4 .. ]
+[n E3263 . ShowTime ShowDate ShowWeek SetRTC SetBrightness  ]
 [t ~ __interrupt . k ]
 [t T36 __interrupt ]
 "8588 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
@@ -28,42 +28,63 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8614
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8614: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS359 ~T0 @X0 0 e@4082 ]
-"82 ./main.h
-[; ;./main.h: 82: void Display_ISR(void);
-[v _Display_ISR `(v ~T0 @X0 0 ef ]
-"8139 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+"8139
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8139: extern volatile unsigned short TMR0 __attribute__((address(0xFD6)));
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
+"31 ./Display.h
+[; ;./Display.h: 31: void Display_ISR(void);
+[v _Display_ISR `(v ~T0 @X0 0 ef ]
 [p mainexit ]
-"6581
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 6581: extern volatile unsigned char ADCON1 __attribute__((address(0xFC1)));
-[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"3625
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3625: extern volatile unsigned char TRISB __attribute__((address(0xF93)));
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"3847
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3847: extern volatile unsigned char TRISC __attribute__((address(0xF94)));
-[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
-"4001
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 4001: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
-[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
-"4223
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 4223: extern volatile unsigned char TRISE __attribute__((address(0xF96)));
-[v _TRISE `Vuc ~T0 @X0 0 e@3990 ]
-"23 ./DS3231.h
-[; ;./DS3231.h: 23: void DS3231_Init(void);
-[v _DS3231_Init `(v ~T0 @X0 0 ef ]
-"80 ./main.h
-[; ;./main.h: 80: void Interrupt_Init(void);
+"7992 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7992:     struct {
+[s S344 :2 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S344 . SCS IOFS OSTS IRCF IDLEN ]
+"7999
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7999:     struct {
+[s S345 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S345 . SCS0 SCS1 FLTS . IRCF0 IRCF1 IRCF2 ]
+"7991
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7991: typedef union {
+[u S343 `S344 1 `S345 1 ]
+[n S343 . . . ]
+"8009
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8009: extern volatile OSCCONbits_t OSCCONbits __attribute__((address(0xFD3)));
+[v _OSCCONbits `VS343 ~T0 @X0 0 e@4051 ]
+"81 ./main.h
+[; ;./main.h: 81: void GPIO_Init(void);
+[v _GPIO_Init `(v ~T0 @X0 0 ef ]
+"82
+[; ;./main.h: 82: void Interrupt_Init(void);
 [v _Interrupt_Init `(v ~T0 @X0 0 ef ]
-"81
-[; ;./main.h: 81: void Timer0_Init(void);
+"83
+[; ;./main.h: 83: void Timer0_Init(void);
 [v _Timer0_Init `(v ~T0 @X0 0 ef ]
-"31 ./DS3231.h
-[; ;./DS3231.h: 31: void TimeRead(T* time);
-[v _TimeRead `(v ~T0 @X0 0 ef1`*S367 ]
-"89 ./main.h
-[; ;./main.h: 89: _Bool GetRisingEdge_SW2(void);
+"84
+[; ;./main.h: 84: void Timer1_Init(void);
+[v _Timer1_Init `(v ~T0 @X0 0 ef ]
+"24 ./DS3231.h
+[; ;./DS3231.h: 24: void DS3231_Init(void);
+[v _DS3231_Init `(v ~T0 @X0 0 ef ]
+"8075 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8075:     struct {
+[s S347 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S347 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
+"8083
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8083:     struct {
+[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S348 . T0PS0 T0PS1 T0PS2 ]
+"8074
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8074: typedef union {
+[u S346 `S347 1 `S348 1 ]
+[n S346 . . . ]
+"8089
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8089: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
+[v _T0CONbits `VS346 ~T0 @X0 0 e@4053 ]
+"32 ./DS3231.h
+[; ;./DS3231.h: 32: void DS3231_ReadAll(RTC_t* time);
+[v _DS3231_ReadAll `(v ~T0 @X0 0 ef1`*S367 ]
+"87 ./main.h
+[; ;./main.h: 87: _Bool GetRisingEdge_SW2(void);
 [v _GetRisingEdge_SW2 `(a ~T0 @X0 0 ef ]
 "2832 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2832:     struct {
@@ -92,49 +113,62 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2868
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 2868: extern volatile PORTEbits_t PORTEbits __attribute__((address(0xF84)));
 [v _PORTEbits `VS120 ~T0 @X0 0 e@3972 ]
-"90 ./main.h
-[; ;./main.h: 90: _Bool GetRisingEdge_SW1(void);
+"88 ./main.h
+[; ;./main.h: 88: _Bool GetRisingEdge_SW1(void);
 [v _GetRisingEdge_SW1 `(a ~T0 @X0 0 ef ]
-"86
-[; ;./main.h: 86: void ShowTime(void);
-[v _ShowTime `(v ~T0 @X0 0 ef ]
-"87
-[; ;./main.h: 87: void ShowDate(void);
-[v _ShowDate `(v ~T0 @X0 0 ef ]
-"88
-[; ;./main.h: 88: void ShowWeek(void);
-[v _ShowWeek `(v ~T0 @X0 0 ef ]
-"85
-[; ;./main.h: 85: void SetRTC(void);
-[v _SetRTC `(v ~T0 @X0 0 ef ]
-"84
-[; ;./main.h: 84: void SetBrightness(void);
-[v _SetBrightness `(v ~T0 @X0 0 ef ]
+"21 ./Task.h
+[; ;./Task.h: 21: void Task_ShowTime(RTC_t CurrentRTC);
+[v _Task_ShowTime `(v ~T0 @X0 0 ef1`S367 ]
+"22
+[; ;./Task.h: 22: void Task_ShowDate(RTC_t CurrentRTC);
+[v _Task_ShowDate `(v ~T0 @X0 0 ef1`S367 ]
+"23
+[; ;./Task.h: 23: void Task_ShowWeek(RTC_t CurrentRTC);
+[v _Task_ShowWeek `(v ~T0 @X0 0 ef1`S367 ]
+"23 ./Display.h
+[; ;./Display.h: 23: void Display_Set_NumVal(
+[v _Display_Set_NumVal `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
+"51 main.c
+[; ;main.c: 51:                     Display_Set_NumVal(Dash, Dash, Dash, Dash);
+[c E3242 10 11 12 .. ]
+[n E3242 . Dash Blank str_C  ]
+"27 ./Display.h
+[; ;./Display.h: 27: void Display_Set_Point(
+[v _Display_Set_Point `(v ~T0 @X0 0 ef4`a`a`a`a ]
 [v F3152 `(v ~T0 @X0 1 tf1`ul ]
 "183 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18.h
 [v __delay `JF3152 ~T0 @X0 0 e ]
 [p i __delay ]
-"41 ./DS3231.h
-[; ;./DS3231.h: 41: void TimeSet(T* time);
-[v _TimeSet `(v ~T0 @X0 0 ef1`*S367 ]
-"3079 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3079:     struct {
-[s S130 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S130 . LATB0 LATB1 LATB2 LATB3 LATB4 LATB5 LATB6 LATB7 ]
-"3089
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3089:     struct {
-[s S131 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S131 . LB0 LB1 LB2 LB3 LB4 LB5 LB6 LB7 ]
-"3078
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3078: typedef union {
-[u S129 `S130 1 `S131 1 ]
-[n S129 . . . ]
-"3100
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3100: extern volatile LATBbits_t LATBbits __attribute__((address(0xF8A)));
-[v _LATBbits `VS129 ~T0 @X0 0 e@3978 ]
-"3263
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3263: extern volatile unsigned char LATD __attribute__((address(0xF8C)));
-[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
+"20 ./Task.h
+[; ;./Task.h: 20: void Task_SetRTC(RTC_t CurrentRTC);
+[v _Task_SetRTC `(v ~T0 @X0 0 ef1`S367 ]
+"19
+[; ;./Task.h: 19: void Task_SetBrightness(void);
+[v _Task_SetBrightness `(v ~T0 @X0 0 ef ]
+"73 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\c99\stdlib.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\c99\stdlib.h: 73: int abs (int);
+[v _abs `(i ~T0 @X0 0 ef1`i ]
+"86 ./main.h
+[; ;./main.h: 86: int MySystick_ms(void);
+[v _MySystick_ms `(i ~T0 @X0 0 ef ]
+"7518 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7518: extern volatile unsigned short TMR1 __attribute__((address(0xFCE)));
+[v _TMR1 `Vus ~T0 @X0 0 e@4046 ]
+"6581
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 6581: extern volatile unsigned char ADCON1 __attribute__((address(0xFC1)));
+[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
+"3625
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3625: extern volatile unsigned char TRISB __attribute__((address(0xF93)));
+[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+"3847
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 3847: extern volatile unsigned char TRISC __attribute__((address(0xF94)));
+[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
+"4001
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 4001: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
+[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"4223
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 4223: extern volatile unsigned char TRISE __attribute__((address(0xF96)));
+[v _TRISE `Vuc ~T0 @X0 0 e@3990 ]
 "7545
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7545:     struct {
 [s S322 :1 `uc 1 ]
@@ -193,21 +227,105 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8532
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8532: extern volatile INTCON2bits_t INTCON2bits __attribute__((address(0xFF1)));
 [v _INTCON2bits `VS355 ~T0 @X0 0 e@4081 ]
-"8075
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8075:     struct {
-[s S347 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S347 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"8083
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8083:     struct {
-[s S348 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S348 . T0PS0 T0PS1 T0PS2 ]
-"8074
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8074: typedef union {
-[u S346 `S347 1 `S348 1 ]
-[n S346 . . . ]
-"8089
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8089: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
-[v _T0CONbits `VS346 ~T0 @X0 0 e@4053 ]
+"7421
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7421:     struct {
+[s S317 :2 `uc 1 :1 `uc 1 ]
+[n S317 . . NOT_T1SYNC ]
+"7425
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7425:     struct {
+[s S318 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S318 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS T1RUN RD16 ]
+"7434
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7434:     struct {
+[s S319 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S319 . . T1SYNC . T1CKPS0 T1CKPS1 ]
+"7441
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7441:     struct {
+[s S320 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S320 . . SOSCEN . T1RD16 ]
+"7420
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7420: typedef union {
+[u S316 `S317 1 `S318 1 `S319 1 `S320 1 ]
+[n S316 . . . . . ]
+"7448
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 7448: extern volatile T1CONbits_t T1CONbits __attribute__((address(0xFCD)));
+[v _T1CONbits `VS316 ~T0 @X0 0 e@4045 ]
+"6 ./main.h
+[p x PLLDIV = 4 ]
+"7
+[p x CPUDIV = OSC1_PLL2 ]
+"8
+[p x USBDIV = 2 ]
+"11
+[p x FOSC = HSPLL_HS ]
+"12
+[p x FCMEN = OFF ]
+"13
+[p x IESO = OFF ]
+"16
+[p x PWRT = OFF ]
+"17
+[p x BOR = OFF ]
+"18
+[p x BORV = 3 ]
+"19
+[p x VREGEN = OFF ]
+"22
+[p x WDT = OFF ]
+"23
+[p x WDTPS = 32768 ]
+"26
+[p x CCP2MX = ON ]
+"27
+[p x PBADEN = ON ]
+"28
+[p x LPT1OSC = OFF ]
+"29
+[p x MCLRE = ON ]
+"32
+[p x STVREN = OFF ]
+"33
+[p x LVP = OFF ]
+"34
+[p x ICPRT = OFF ]
+"35
+[p x XINST = OFF ]
+"38
+[p x CP0 = OFF ]
+"39
+[p x CP1 = OFF ]
+"40
+[p x CP2 = OFF ]
+"41
+[p x CP3 = OFF ]
+"44
+[p x CPB = OFF ]
+"45
+[p x CPD = OFF ]
+"48
+[p x WRT0 = OFF ]
+"49
+[p x WRT1 = OFF ]
+"50
+[p x WRT2 = OFF ]
+"51
+[p x WRT3 = OFF ]
+"54
+[p x WRTC = OFF ]
+"55
+[p x WRTB = OFF ]
+"56
+[p x WRTD = OFF ]
+"59
+[p x EBTR0 = OFF ]
+"60
+[p x EBTR1 = OFF ]
+"61
+[p x EBTR2 = OFF ]
+"62
+[p x EBTR3 = OFF ]
+"65
+[p x EBTRB = OFF ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -718,1129 +836,655 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8893
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"7 ./main.h
-[p x PLLDIV = 4 ]
-"8
-[p x CPUDIV = OSC1_PLL2 ]
+"8 main.c
+[; ;main.c: 8: RTC_t MyRTC;
+[v _MyRTC `S367 ~T0 @X0 1 e ]
 "9
-[p x USBDIV = 2 ]
-"12
-[p x FOSC = HSPLL_HS ]
-"13
-[p x FCMEN = OFF ]
-"14
-[p x IESO = OFF ]
-"17
-[p x PWRT = OFF ]
-"18
-[p x BOR = OFF ]
-"19
-[p x BORV = 3 ]
-"20
-[p x VREGEN = OFF ]
-"23
-[p x WDT = OFF ]
-"24
-[p x WDTPS = 32768 ]
-"27
-[p x CCP2MX = ON ]
-"28
-[p x PBADEN = ON ]
-"29
-[p x LPT1OSC = OFF ]
-"30
-[p x MCLRE = ON ]
-"33
-[p x STVREN = OFF ]
-"34
-[p x LVP = OFF ]
-"35
-[p x ICPRT = OFF ]
-"36
-[p x XINST = OFF ]
-"39
-[p x CP0 = OFF ]
-"40
-[p x CP1 = OFF ]
-"41
-[p x CP2 = OFF ]
-"42
-[p x CP3 = OFF ]
-"45
-[p x CPB = OFF ]
-"46
-[p x CPD = OFF ]
-"49
-[p x WRT0 = OFF ]
-"50
-[p x WRT1 = OFF ]
-"51
-[p x WRT2 = OFF ]
-"52
-[p x WRT3 = OFF ]
-"55
-[p x WRTC = OFF ]
-"56
-[p x WRTB = OFF ]
-"57
-[p x WRTD = OFF ]
-"60
-[p x EBTR0 = OFF ]
-"61
-[p x EBTR1 = OFF ]
-"62
-[p x EBTR2 = OFF ]
-"63
-[p x EBTR3 = OFF ]
-"66
-[p x EBTRB = OFF ]
-"19 main.c
-[; ;main.c: 19: uint8_t NumOut_Table[] = { 0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92,
-[v _NumOut_Table `uc ~T0 @X0 -> 13 `i e ]
-[i _NumOut_Table
-:U ..
--> -> 192 `i `uc
--> -> 249 `i `uc
--> -> 164 `i `uc
--> -> 176 `i `uc
--> -> 153 `i `uc
--> -> 146 `i `uc
--> -> 130 `i `uc
--> -> 248 `i `uc
--> -> 128 `i `uc
--> -> 144 `i `uc
--> -> 191 `i `uc
--> -> 255 `i `uc
--> -> 198 `i `uc
-..
-]
-"23
-[; ;main.c: 23: uint16_t Brightness[] = { 4, 4, 4, 4 };
-[v _Brightness `us ~T0 @X0 -> 4 `i e ]
-[i _Brightness
-:U ..
--> -> 4 `i `us
--> -> 4 `i `us
--> -> 4 `i `us
--> -> 4 `i `us
-..
-]
-"24
-[; ;main.c: 24: uint8_t NumBuf[] = { 1, 2, 9, 8 };
-[v _NumBuf `uc ~T0 @X0 -> 4 `i e ]
-[i _NumBuf
-:U ..
--> -> 1 `i `uc
--> -> 2 `i `uc
--> -> 9 `i `uc
--> -> 8 `i `uc
-..
-]
-"25
-[; ;main.c: 25: _Bool PointBuf[] = { 0, 0, 0, 0 };
-[v _PointBuf `a ~T0 @X0 -> 4 `i e ]
-[i _PointBuf
-:U ..
--> -> 0 `i `a
--> -> 0 `i `a
--> -> 0 `i `a
--> -> 0 `i `a
-..
-]
-"26
-[; ;main.c: 26: T RTC, Set;
-[v _RTC `S367 ~T0 @X0 1 e ]
-[v _Set `S367 ~T0 @X0 1 e ]
-"27
-[; ;main.c: 27: M Mode = Task_ShowTime;
-[v _Mode `E3236 ~T0 @X0 1 e ]
+[; ;main.c: 9: Task_t Mode = ShowTime;
+[v _Mode `E3263 ~T0 @X0 1 e ]
 [i _Mode
-. `E3236 0
+. `E3263 0
 ]
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"30
-[; ;main.c: 30: void __attribute__((picinterrupt(("")))) ISR(void){
+"12
+[; ;main.c: 12: void __attribute__((picinterrupt(("")))) ISR(void){
 [v _ISR `(v ~T36 @X0 1 ef ]
 {
 [e :U _ISR ]
 [f ]
-"31
-[; ;main.c: 31:     if(INTCONbits.TMR0IF) {
-[e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 369  ]
+"13
+[; ;main.c: 13:     if(INTCONbits.TMR0IF) {
+[e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 370  ]
 {
-"32
-[; ;main.c: 32:         Display_ISR();
-[e ( _Display_ISR ..  ]
-"33
-[; ;main.c: 33:         TMR0 = 65535-1000;
-[e = _TMR0 -> - -> 65535 `l -> -> 1000 `i `l `us ]
-"34
-[; ;main.c: 34:         INTCONbits.TMR0IF = 0;
+"14
+[; ;main.c: 14:         TMR0 = 65535 - 1500;
+[e = _TMR0 -> - -> 65535 `l -> -> 1500 `i `l `us ]
+"15
+[; ;main.c: 15:         INTCONbits.TMR0IF = 0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"35
-[; ;main.c: 35:     }
+"16
+[; ;main.c: 16:         Display_ISR();
+[e ( _Display_ISR ..  ]
+"17
+[; ;main.c: 17:     }
 }
-[e :U 369 ]
-"36
-[; ;main.c: 36: }
-[e :UE 368 ]
+[e :U 370 ]
+"18
+[; ;main.c: 18: }
+[e :UE 369 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"38
-[; ;main.c: 38: void main(void) {
+"20
+[; ;main.c: 20: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"39
-[; ;main.c: 39:     ADCON1 = 0x0B;
-[e = _ADCON1 -> -> 11 `i `uc ]
-"40
-[; ;main.c: 40:     TRISB = 0x00;
-[e = _TRISB -> -> 0 `i `uc ]
-"41
-[; ;main.c: 41:     TRISC = 0xFF;
-[e = _TRISC -> -> 255 `i `uc ]
-"42
-[; ;main.c: 42:     TRISD = 0X00;
-[e = _TRISD -> -> 0 `i `uc ]
-"43
-[; ;main.c: 43:     TRISE = 0x0f;
-[e = _TRISE -> -> 15 `i `uc ]
-"44
-[; ;main.c: 44:     DS3231_Init();
-[e ( _DS3231_Init ..  ]
-"45
-[; ;main.c: 45:     Interrupt_Init();
+"21
+[; ;main.c: 21:     OSCCONbits.SCS = 0;
+[e = . . _OSCCONbits 0 0 -> -> 0 `i `uc ]
+"23
+[; ;main.c: 23:     GPIO_Init();
+[e ( _GPIO_Init ..  ]
+"24
+[; ;main.c: 24:     Interrupt_Init();
 [e ( _Interrupt_Init ..  ]
-"46
-[; ;main.c: 46:     Timer0_Init();
+"25
+[; ;main.c: 25:     Timer0_Init();
 [e ( _Timer0_Init ..  ]
-"48
-[; ;main.c: 48:     while(1) {
-[e :U 372 ]
+"26
+[; ;main.c: 26:     Timer1_Init();
+[e ( _Timer1_Init ..  ]
+"27
+[; ;main.c: 27:     DS3231_Init();
+[e ( _DS3231_Init ..  ]
+"29
+[; ;main.c: 29:     T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+"31
+[; ;main.c: 31:     while(1) {
+[e :U 373 ]
 {
-"49
-[; ;main.c: 49:         TimeRead(&RTC);
-[e ( _TimeRead (1 &U _RTC ]
-"52
-[; ;main.c: 52:         if(GetRisingEdge_SW2()) {
-[e $ ! != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i 374  ]
+"33
+[; ;main.c: 33:         DS3231_ReadAll(&MyRTC);
+[e ( _DS3231_ReadAll (1 &U _MyRTC ]
+"35
+[; ;main.c: 35:         if(GetRisingEdge_SW2()) {
+[e $ ! != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i 375  ]
 {
-"53
-[; ;main.c: 53:             if(PORTEbits.RE0 == 0) Mode = Task_SetRTC;
-[e $ ! == -> . . _PORTEbits 0 0 `i -> 0 `i 375  ]
-[e = _Mode . `E3236 3 ]
-[e $U 376  ]
-"54
-[; ;main.c: 54:             else Mode = Task_SetBrightness;
-[e :U 375 ]
-[e = _Mode . `E3236 4 ]
+"36
+[; ;main.c: 36:             if(PORTEbits.RE0 == 0) Mode = SetRTC;
+[e $ ! == -> . . _PORTEbits 0 0 `i -> 0 `i 376  ]
+[e = _Mode . `E3263 3 ]
+[e $U 377  ]
+"37
+[; ;main.c: 37:             else Mode = SetBrightness;
 [e :U 376 ]
-"55
-[; ;main.c: 55:         }
-}
-[e :U 374 ]
-"57
-[; ;main.c: 57:         if(GetRisingEdge_SW1() && (PORTEbits.RE1 == 1)) {
-[e $ ! && != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i == -> . . _PORTEbits 0 1 `i -> 1 `i 377  ]
-{
-"58
-[; ;main.c: 58:             if(Mode++>=Task_ShowWeek) Mode = Task_ShowTime;
-[e $ ! >= -> ++ _Mode -> -> 1 `i `E3236 `ui -> . `E3236 2 `ui 378  ]
-[e = _Mode . `E3236 0 ]
-[e :U 378 ]
-"59
-[; ;main.c: 59:         }
-}
+[e = _Mode . `E3263 4 ]
 [e :U 377 ]
-"64
-[; ;main.c: 64:         switch(Mode) {
-[e $U 380  ]
+"38
+[; ;main.c: 38:         }
+}
+[e :U 375 ]
+"40
+[; ;main.c: 40:         if(GetRisingEdge_SW1() && (PORTEbits.RE1 == 1)) {
+[e $ ! && != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i == -> . . _PORTEbits 0 1 `i -> 1 `i 378  ]
 {
-"65
-[; ;main.c: 65:             case Task_ShowTime: ShowTime(); break;
-[e :U 381 ]
-[e ( _ShowTime ..  ]
-[e $U 379  ]
-"66
-[; ;main.c: 66:             case Task_ShowDate: ShowDate(); break;
+"41
+[; ;main.c: 41:             if(Mode++ >= ShowWeek) Mode = ShowTime;
+[e $ ! >= -> ++ _Mode -> -> 1 `i `E3263 `ui -> . `E3263 2 `ui 379  ]
+[e = _Mode . `E3263 0 ]
+[e :U 379 ]
+"42
+[; ;main.c: 42:         }
+}
+[e :U 378 ]
+"45
+[; ;main.c: 45:         switch(Mode) {
+[e $U 381  ]
+{
+"46
+[; ;main.c: 46:             case ShowTime: Task_ShowTime(MyRTC); break;
 [e :U 382 ]
-[e ( _ShowDate ..  ]
-[e $U 379  ]
-"67
-[; ;main.c: 67:             case Task_ShowWeek: ShowWeek(); break;
+[e ( _Task_ShowTime (1 _MyRTC ]
+[e $U 380  ]
+"47
+[; ;main.c: 47:             case ShowDate: Task_ShowDate(MyRTC); break;
 [e :U 383 ]
-[e ( _ShowWeek ..  ]
-[e $U 379  ]
-"68
-[; ;main.c: 68:             case Task_SetRTC:
+[e ( _Task_ShowDate (1 _MyRTC ]
+[e $U 380  ]
+"48
+[; ;main.c: 48:             case ShowWeek: Task_ShowWeek(MyRTC); break;
 [e :U 384 ]
-"69
-[; ;main.c: 69:                 SetRTC();
-[e ( _SetRTC ..  ]
-"70
-[; ;main.c: 70:                 Mode = Task_ShowTime;
-[e = _Mode . `E3236 0 ]
-"71
-[; ;main.c: 71:                 break;
-[e $U 379  ]
-"72
-[; ;main.c: 72:             case Task_SetBrightness:
+[e ( _Task_ShowWeek (1 _MyRTC ]
+[e $U 380  ]
+"49
+[; ;main.c: 49:             case SetRTC:
 [e :U 385 ]
-"73
-[; ;main.c: 73:                 while(!GetRisingEdge_SW2()) {
+"50
+[; ;main.c: 50:                 while(PORTEbits.RE0 == 0) {
 [e $U 386  ]
 [e :U 387 ]
 {
-"74
-[; ;main.c: 74:                     SetBrightness();
-[e ( _SetBrightness ..  ]
-"75
-[; ;main.c: 75:                 }
+"51
+[; ;main.c: 51:                     Display_Set_NumVal(Dash, Dash, Dash, Dash);
+[e ( _Display_Set_NumVal (4 , , , -> . `E3242 0 `uc -> . `E3242 0 `uc -> . `E3242 0 `uc -> . `E3242 0 `uc ]
+"52
+[; ;main.c: 52:                     Display_Set_Point(0, 0, 0, 0);
+[e ( _Display_Set_Point (4 , , , -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a -> -> 0 `i `a ]
+"53
+[; ;main.c: 53:                 }
 }
 [e :U 386 ]
-"73
-[; ;main.c: 73:                 while(!GetRisingEdge_SW2()) {
-[e $ ! != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i 387  ]
+"50
+[; ;main.c: 50:                 while(PORTEbits.RE0 == 0) {
+[e $ == -> . . _PORTEbits 0 0 `i -> 0 `i 387  ]
 [e :U 388 ]
-"76
-[; ;main.c: 76:                 Mode = Task_ShowTime;
-[e = _Mode . `E3236 0 ]
-"77
-[; ;main.c: 77:                 break;
-[e $U 379  ]
-"78
-[; ;main.c: 78:             default: break;
+"54
+[; ;main.c: 54:                 _delay((unsigned long)((1000)*(48000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
+"55
+[; ;main.c: 55:                 Task_SetRTC(MyRTC);
+[e ( _Task_SetRTC (1 _MyRTC ]
+"56
+[; ;main.c: 56:                 Mode = ShowTime;
+[e = _Mode . `E3263 0 ]
+"57
+[; ;main.c: 57:                 break;
+[e $U 380  ]
+"58
+[; ;main.c: 58:             case SetBrightness:
 [e :U 389 ]
-[e $U 379  ]
+"59
+[; ;main.c: 59:                 while(!GetRisingEdge_SW2()) {
+[e $U 390  ]
+[e :U 391 ]
+{
+"60
+[; ;main.c: 60:                     Task_SetBrightness();
+[e ( _Task_SetBrightness ..  ]
+"61
+[; ;main.c: 61:                 }
+}
+[e :U 390 ]
+"59
+[; ;main.c: 59:                 while(!GetRisingEdge_SW2()) {
+[e $ ! != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i 391  ]
+[e :U 392 ]
+"62
+[; ;main.c: 62:                 Mode = ShowTime;
+[e = _Mode . `E3263 0 ]
+"63
+[; ;main.c: 63:                 break;
+[e $U 380  ]
+"64
+[; ;main.c: 64:             default: break;
+[e :U 393 ]
+[e $U 380  ]
+"65
+[; ;main.c: 65:         }
+}
+[e $U 380  ]
+[e :U 381 ]
+[e [\ -> _Mode `ui , $ -> . `E3263 0 `ui 382
+ , $ -> . `E3263 1 `ui 383
+ , $ -> . `E3263 2 `ui 384
+ , $ -> . `E3263 3 `ui 385
+ , $ -> . `E3263 4 `ui 389
+ 393 ]
+[e :U 380 ]
+"67
+[; ;main.c: 67:     }
+}
+[e :U 372 ]
+[e $U 373  ]
+[e :U 374 ]
+"68
+[; ;main.c: 68: }
+[e :UE 371 ]
+}
+"72
+[; ;main.c: 72: _Bool PressOverTime_SW2(int time) {
+[v _PressOverTime_SW2 `(a ~T0 @X0 1 ef1`i ]
+{
+[e :U _PressOverTime_SW2 ]
+[v _time `i ~T0 @X0 1 r1 ]
+[f ]
+"73
+[; ;main.c: 73:     static _Bool status = 0;
+[v F3285 `a ~T0 @X0 1 s status ]
+[i F3285
+-> -> 0 `i `a
+]
+"74
+[; ;main.c: 74:     static int old_cnt = 0;
+[v F3286 `i ~T0 @X0 1 s old_cnt ]
+[i F3286
+-> 0 `i
+]
+"76
+[; ;main.c: 76:     if(PORTEbits.RE1 == 0) {
+[e $ ! == -> . . _PORTEbits 0 1 `i -> 0 `i 395  ]
+{
+"77
+[; ;main.c: 77:         if(abs(MySystick_ms() - old_cnt) >= time) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3286 _time 396  ]
+{
+"78
+[; ;main.c: 78:             status = 1;
+[e = F3285 -> -> 1 `i `a ]
 "79
 [; ;main.c: 79:         }
 }
-[e $U 379  ]
-[e :U 380 ]
-[e [\ -> _Mode `ui , $ -> . `E3236 0 `ui 381
- , $ -> . `E3236 1 `ui 382
- , $ -> . `E3236 2 `ui 383
- , $ -> . `E3236 3 `ui 384
- , $ -> . `E3236 4 `ui 385
- 389 ]
-[e :U 379 ]
+[e :U 396 ]
+"80
+[; ;main.c: 80:     }
+}
+[e $U 397  ]
 "81
-[; ;main.c: 81:     }
-}
-[e :U 371 ]
-[e $U 372  ]
-[e :U 373 ]
-"82
-[; ;main.c: 82: }
-[e :UE 370 ]
-}
-"84
-[; ;main.c: 84: void SetBrightness(void) {
-[v _SetBrightness `(v ~T0 @X0 1 ef ]
-{
-[e :U _SetBrightness ]
-[f ]
-"85
-[; ;main.c: 85:     if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 391  ]
-{
-"86
-[; ;main.c: 86:         if(Brightness[0]++ >= 10) {
-[e $ ! >= -> ++ *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux -> -> 1 `i `us `ui -> -> 10 `i `ui 392  ]
-{
-"87
-[; ;main.c: 87:             Brightness[0] = 0;
-[e = *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux -> -> 0 `i `us ]
-"88
-[; ;main.c: 88:         }
-}
-[e :U 392 ]
-"89
-[; ;main.c: 89:     }
-}
-[e :U 391 ]
-"90
-[; ;main.c: 90:     Brightness[1] = Brightness[0];
-[e = *U + &U _Brightness * -> -> -> 1 `i `ui `ux -> -> # *U &U _Brightness `ui `ux *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux ]
-"91
-[; ;main.c: 91:     Brightness[2] = Brightness[0];
-[e = *U + &U _Brightness * -> -> -> 2 `i `ui `ux -> -> # *U &U _Brightness `ui `ux *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux ]
-"92
-[; ;main.c: 92:     Brightness[3] = Brightness[0];
-[e = *U + &U _Brightness * -> -> -> 3 `i `ui `ux -> -> # *U &U _Brightness `ui `ux *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux ]
-"93
-[; ;main.c: 93:     NumBuf[0] = 12;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 12 `i `uc ]
-"94
-[; ;main.c: 94:     NumBuf[1] = 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 10 `i `uc ]
-"95
-[; ;main.c: 95:     NumBuf[2] = Brightness[0] / 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux `ui -> -> 10 `i `ui `uc ]
-"96
-[; ;main.c: 96:     NumBuf[3] = Brightness[0] % 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> *U + &U _Brightness * -> -> -> 0 `i `ui `ux -> -> # *U &U _Brightness `ui `ux `ui -> -> 10 `i `ui `uc ]
-"97
-[; ;main.c: 97:     PointBuf[1] = 0;
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"98
-[; ;main.c: 98:     PointBuf[0] = 0;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"99
-[; ;main.c: 99:     PointBuf[2] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"100
-[; ;main.c: 100:     PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"101
-[; ;main.c: 101: }
-[e :UE 390 ]
-}
-"103
-[; ;main.c: 103: void SetRTC(void) {
-[v _SetRTC `(v ~T0 @X0 1 ef ]
-{
-[e :U _SetRTC ]
-[f ]
-"104
-[; ;main.c: 104:     static uint16_t BlinkTime = 0;
-[v F3254 `us ~T0 @X0 1 s BlinkTime ]
-[i F3254
--> -> 0 `i `us
-]
-"105
-[; ;main.c: 105:     static _Bool flag = 0;
-[v F3255 `a ~T0 @X0 1 s flag ]
-[i F3255
--> -> 0 `i `a
-]
-"106
-[; ;main.c: 106:     uint8_t cnt = 0;
-[v _cnt `uc ~T0 @X0 1 a ]
-[e = _cnt -> -> 0 `i `uc ]
-"107
-[; ;main.c: 107:     Set = RTC;
-[e = _Set _RTC ]
-"108
-[; ;main.c: 108:     Set.Sec = 0;
-[e = . _Set 2 -> -> 0 `i `uc ]
-"109
-[; ;main.c: 109:     Set.Year = 21;
-[e = . _Set 3 -> -> 21 `i `uc ]
-"110
-[; ;main.c: 110:     while(cnt < 5) {
-[e $U 394  ]
+[; ;main.c: 81:     else {
 [e :U 395 ]
 {
-"111
-[; ;main.c: 111:         if(BlinkTime++ >= 2000) {
-[e $ ! >= -> ++ F3254 -> -> 1 `i `us `ui -> -> 2000 `i `ui 397  ]
-{
-"112
-[; ;main.c: 112:             BlinkTime = 0;
-[e = F3254 -> -> 0 `i `us ]
-"113
-[; ;main.c: 113:             flag = (flag==0)?1:0;
-[e = F3255 -> ? == -> F3255 `i -> 0 `i : -> 1 `i -> 0 `i `a ]
-"114
-[; ;main.c: 114:         }
+"82
+[; ;main.c: 82:         old_cnt = MySystick_ms();
+[e = F3286 ( _MySystick_ms ..  ]
+"83
+[; ;main.c: 83:         status = 0;
+[e = F3285 -> -> 0 `i `a ]
+"84
+[; ;main.c: 84:     }
 }
 [e :U 397 ]
-"115
-[; ;main.c: 115:         if(cnt==0 || cnt==1) {
-[e $ ! || == -> _cnt `i -> 0 `i == -> _cnt `i -> 1 `i 398  ]
-{
-"116
-[; ;main.c: 116:             if(cnt==0) {
-[e $ ! == -> _cnt `i -> 0 `i 399  ]
-{
-"117
-[; ;main.c: 117:                 NumBuf[0] = (flag==1)?(Set.Hour / 10):11;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : / -> . _Set 0 `i -> 10 `i -> 11 `i `uc ]
-"118
-[; ;main.c: 118:                 NumBuf[1] = (flag==1)?(Set.Hour % 10):11;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : % -> . _Set 0 `i -> 10 `i -> 11 `i `uc ]
-"119
-[; ;main.c: 119:                 NumBuf[2] = Set.Min / 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _Set 1 `i -> 10 `i `uc ]
-"120
-[; ;main.c: 120:                 NumBuf[3] = Set.Min % 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _Set 1 `i -> 10 `i `uc ]
-"121
-[; ;main.c: 121:             }
+"85
+[; ;main.c: 85:     return status;
+[e ) F3285 ]
+[e $UE 394  ]
+"86
+[; ;main.c: 86: }
+[e :UE 394 ]
 }
-[e $U 400  ]
-"122
-[; ;main.c: 122:             else {
-[e :U 399 ]
+"88
+[; ;main.c: 88: _Bool PressOverTime_SW1(int time) {
+[v _PressOverTime_SW1 `(a ~T0 @X0 1 ef1`i ]
 {
-"123
-[; ;main.c: 123:                 NumBuf[0] = Set.Hour / 10;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _Set 0 `i -> 10 `i `uc ]
-"124
-[; ;main.c: 124:                 NumBuf[1] = Set.Hour % 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _Set 0 `i -> 10 `i `uc ]
-"125
-[; ;main.c: 125:                 NumBuf[2] = (flag==1)?(Set.Min / 10):11;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : / -> . _Set 1 `i -> 10 `i -> 11 `i `uc ]
-"126
-[; ;main.c: 126:                 NumBuf[3] = (flag==1)?(Set.Min % 10):11;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : % -> . _Set 1 `i -> 10 `i -> 11 `i `uc ]
-"127
-[; ;main.c: 127:             }
+[e :U _PressOverTime_SW1 ]
+[v _time `i ~T0 @X0 1 r1 ]
+[f ]
+"89
+[; ;main.c: 89:     static _Bool status = 0;
+[v F3289 `a ~T0 @X0 1 s status ]
+[i F3289
+-> -> 0 `i `a
+]
+"90
+[; ;main.c: 90:     static int old_cnt = 0;
+[v F3290 `i ~T0 @X0 1 s old_cnt ]
+[i F3290
+-> 0 `i
+]
+"92
+[; ;main.c: 92:     if(PORTEbits.RE0 == 0) {
+[e $ ! == -> . . _PORTEbits 0 0 `i -> 0 `i 399  ]
+{
+"93
+[; ;main.c: 93:         if(abs(MySystick_ms() - old_cnt) >= time) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3290 _time 400  ]
+{
+"94
+[; ;main.c: 94:             status = 1;
+[e = F3289 -> -> 1 `i `a ]
+"95
+[; ;main.c: 95:         }
 }
 [e :U 400 ]
-"128
-[; ;main.c: 128:             PointBuf[0] = 0; PointBuf[1] = 1;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 1 `i `a ]
-"129
-[; ;main.c: 129:             PointBuf[2] = 1; PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 1 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"130
-[; ;main.c: 130:         }
+"96
+[; ;main.c: 96:     }
 }
 [e $U 401  ]
-"131
-[; ;main.c: 131:         else if(cnt==2 || cnt==3) {
-[e :U 398 ]
-[e $ ! || == -> _cnt `i -> 2 `i == -> _cnt `i -> 3 `i 402  ]
+"97
+[; ;main.c: 97:     else {
+[e :U 399 ]
 {
-"132
-[; ;main.c: 132:             if(cnt==2) {
-[e $ ! == -> _cnt `i -> 2 `i 403  ]
-{
-"133
-[; ;main.c: 133:                 NumBuf[0] = (flag==1)?(Set.Month / 10):11;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : / -> . _Set 4 `i -> 10 `i -> 11 `i `uc ]
-"134
-[; ;main.c: 134:                 NumBuf[1] = (flag==1)?(Set.Month % 10):11;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : % -> . _Set 4 `i -> 10 `i -> 11 `i `uc ]
-"135
-[; ;main.c: 135:                 NumBuf[2] = Set.Date / 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _Set 6 `i -> 10 `i `uc ]
-"136
-[; ;main.c: 136:                 NumBuf[3] = Set.Date % 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _Set 6 `i -> 10 `i `uc ]
-"137
-[; ;main.c: 137:             }
+"98
+[; ;main.c: 98:         old_cnt = MySystick_ms();
+[e = F3290 ( _MySystick_ms ..  ]
+"99
+[; ;main.c: 99:         status = 0;
+[e = F3289 -> -> 0 `i `a ]
+"100
+[; ;main.c: 100:     }
 }
-[e $U 404  ]
-"138
-[; ;main.c: 138:             else {
-[e :U 403 ]
-{
-"139
-[; ;main.c: 139:                 NumBuf[0] = Set.Month / 10;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _Set 4 `i -> 10 `i `uc ]
-"140
-[; ;main.c: 140:                 NumBuf[1] = Set.Month % 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _Set 4 `i -> 10 `i `uc ]
-"141
-[; ;main.c: 141:                 NumBuf[2] = (flag==1)?(Set.Date / 10):11;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : / -> . _Set 6 `i -> 10 `i -> 11 `i `uc ]
-"142
-[; ;main.c: 142:                 NumBuf[3] = (flag==1)?(Set.Date % 10):11;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : % -> . _Set 6 `i -> 10 `i -> 11 `i `uc ]
-"143
-[; ;main.c: 143:             }
-}
-[e :U 404 ]
-"144
-[; ;main.c: 144:             PointBuf[0] = 0; PointBuf[1] = 1;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 1 `i `a ]
-"145
-[; ;main.c: 145:             PointBuf[2] = 0; PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"146
-[; ;main.c: 146:         }
-}
-[e $U 405  ]
-"147
-[; ;main.c: 147:         else {
-[e :U 402 ]
-{
-"148
-[; ;main.c: 148:             NumBuf[0] = 11;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 11 `i `uc ]
-"149
-[; ;main.c: 149:             NumBuf[1] = 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 10 `i `uc ]
-"150
-[; ;main.c: 150:             NumBuf[2] = (flag==1)?(Set.Week % 10):11;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> ? == -> F3255 `i -> 1 `i : % -> . _Set 5 `i -> 10 `i -> 11 `i `uc ]
-"151
-[; ;main.c: 151:             NumBuf[3] = 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 10 `i `uc ]
-"152
-[; ;main.c: 152:             PointBuf[0] = 0; PointBuf[1] = 0;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"153
-[; ;main.c: 153:             PointBuf[2] = 0; PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"154
-[; ;main.c: 154:             _delay((unsigned long)((100)*(48000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 48000000 `l `d .4000000.0 `ul ]
-"155
-[; ;main.c: 155:         }
-}
-[e :U 405 ]
 [e :U 401 ]
-"157
-[; ;main.c: 157:         switch(cnt) {
-[e $U 407  ]
-{
-"158
-[; ;main.c: 158:             case 0:
-[e :U 408 ]
-"159
-[; ;main.c: 159:                 if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 409  ]
-{
-"160
-[; ;main.c: 160:                     if(Set.Hour++>=23) {
-[e $ ! >= -> ++ . _Set 0 -> -> 1 `i `uc `i -> 23 `i 410  ]
-{
-"161
-[; ;main.c: 161:                         Set.Hour = 0;
-[e = . _Set 0 -> -> 0 `i `uc ]
-"162
-[; ;main.c: 162:                     }
+"101
+[; ;main.c: 101:     return status;
+[e ) F3289 ]
+[e $UE 398  ]
+"102
+[; ;main.c: 102: }
+[e :UE 398 ]
 }
-[e :U 410 ]
-"163
-[; ;main.c: 163:                 }
-}
-[e :U 409 ]
-"164
-[; ;main.c: 164:                 break;
-[e $U 406  ]
-"165
-[; ;main.c: 165:             case 1:
-[e :U 411 ]
-"166
-[; ;main.c: 166:                 if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 412  ]
-{
-"167
-[; ;main.c: 167:                     if(Set.Min++>=59) {
-[e $ ! >= -> ++ . _Set 1 -> -> 1 `i `uc `i -> 59 `i 413  ]
-{
-"168
-[; ;main.c: 168:                         Set.Min = 0;
-[e = . _Set 1 -> -> 0 `i `uc ]
-"169
-[; ;main.c: 169:                     }
-}
-[e :U 413 ]
-"170
-[; ;main.c: 170:                 }
-}
-[e :U 412 ]
-"171
-[; ;main.c: 171:                 break;
-[e $U 406  ]
-"172
-[; ;main.c: 172:             case 2:
-[e :U 414 ]
-"173
-[; ;main.c: 173:                 if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 415  ]
-{
-"174
-[; ;main.c: 174:                     if(Set.Month++>=12) {
-[e $ ! >= -> ++ . _Set 4 -> -> 1 `i `uc `i -> 12 `i 416  ]
-{
-"175
-[; ;main.c: 175:                         Set.Month = 1;
-[e = . _Set 4 -> -> 1 `i `uc ]
-"176
-[; ;main.c: 176:                     }
-}
-[e :U 416 ]
-"177
-[; ;main.c: 177:                 }
-}
-[e :U 415 ]
-"178
-[; ;main.c: 178:                 break;
-[e $U 406  ]
-"179
-[; ;main.c: 179:             case 3:
-[e :U 417 ]
-"180
-[; ;main.c: 180:                 if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 418  ]
-{
-"181
-[; ;main.c: 181:                     if(Set.Date++>=31) {
-[e $ ! >= -> ++ . _Set 6 -> -> 1 `i `uc `i -> 31 `i 419  ]
-{
-"182
-[; ;main.c: 182:                         Set.Date = 1;
-[e = . _Set 6 -> -> 1 `i `uc ]
-"183
-[; ;main.c: 183:                     }
-}
-[e :U 419 ]
-"184
-[; ;main.c: 184:                 }
-}
-[e :U 418 ]
-"185
-[; ;main.c: 185:                 break;
-[e $U 406  ]
-"186
-[; ;main.c: 186:             case 4:
-[e :U 420 ]
-"187
-[; ;main.c: 187:                 if(GetRisingEdge_SW1()) {
-[e $ ! != -> ( _GetRisingEdge_SW1 ..  `i -> 0 `i 421  ]
-{
-"188
-[; ;main.c: 188:                     if(Set.Week++>=7) {
-[e $ ! >= -> ++ . _Set 5 -> -> 1 `i `uc `i -> 7 `i 422  ]
-{
-"189
-[; ;main.c: 189:                         Set.Week = 1;
-[e = . _Set 5 -> -> 1 `i `uc ]
-"190
-[; ;main.c: 190:                     }
-}
-[e :U 422 ]
-"191
-[; ;main.c: 191:                 }
-}
-[e :U 421 ]
-"192
-[; ;main.c: 192:                 break;
-[e $U 406  ]
-"193
-[; ;main.c: 193:             default: break;
-[e :U 423 ]
-[e $U 406  ]
-"194
-[; ;main.c: 194:         }
-}
-[e $U 406  ]
-[e :U 407 ]
-[e [\ -> _cnt `i , $ -> 0 `i 408
- , $ -> 1 `i 411
- , $ -> 2 `i 414
- , $ -> 3 `i 417
- , $ -> 4 `i 420
- 423 ]
-[e :U 406 ]
-"195
-[; ;main.c: 195:         if(GetRisingEdge_SW2()) {
-[e $ ! != -> ( _GetRisingEdge_SW2 ..  `i -> 0 `i 424  ]
-{
-"196
-[; ;main.c: 196:             cnt++;
-[e ++ _cnt -> -> 1 `i `uc ]
-"197
-[; ;main.c: 197:         }
-}
-[e :U 424 ]
-"198
-[; ;main.c: 198:     }
-}
-[e :U 394 ]
-"110
-[; ;main.c: 110:     while(cnt < 5) {
-[e $ < -> _cnt `i -> 5 `i 395  ]
-[e :U 396 ]
-"199
-[; ;main.c: 199:     TimeSet(&Set);
-[e ( _TimeSet (1 &U _Set ]
-"200
-[; ;main.c: 200: }
-[e :UE 393 ]
-}
-"202
-[; ;main.c: 202: void ShowWeek(void) {
-[v _ShowWeek `(v ~T0 @X0 1 ef ]
-{
-[e :U _ShowWeek ]
-[f ]
-"203
-[; ;main.c: 203:     NumBuf[0] = 11;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 11 `i `uc ]
-"204
-[; ;main.c: 204:     NumBuf[1] = 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 10 `i `uc ]
-"205
-[; ;main.c: 205:     NumBuf[2] = RTC.Week % 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _RTC 5 `i -> 10 `i `uc ]
-"206
-[; ;main.c: 206:     NumBuf[3] = 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> -> 10 `i `uc ]
-"207
-[; ;main.c: 207:     PointBuf[1] = 0;
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"208
-[; ;main.c: 208:     PointBuf[0] = 0;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"209
-[; ;main.c: 209:     PointBuf[2] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"210
-[; ;main.c: 210:     PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"211
-[; ;main.c: 211: }
-[e :UE 425 ]
-}
-"213
-[; ;main.c: 213: void ShowDate(void) {
-[v _ShowDate `(v ~T0 @X0 1 ef ]
-{
-[e :U _ShowDate ]
-[f ]
-"214
-[; ;main.c: 214:     NumBuf[0] = RTC.Month / 10;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _RTC 4 `i -> 10 `i `uc ]
-"215
-[; ;main.c: 215:     NumBuf[1] = RTC.Month % 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _RTC 4 `i -> 10 `i `uc ]
-"216
-[; ;main.c: 216:     NumBuf[2] = RTC.Date / 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _RTC 6 `i -> 10 `i `uc ]
-"217
-[; ;main.c: 217:     NumBuf[3] = RTC.Date % 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _RTC 6 `i -> 10 `i `uc ]
-"218
-[; ;main.c: 218:     PointBuf[1] = 1;
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 1 `i `a ]
-"219
-[; ;main.c: 219:     PointBuf[0] = 0;
-[e = *U + &U _PointBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"220
-[; ;main.c: 220:     PointBuf[2] = 0;
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"221
-[; ;main.c: 221:     PointBuf[3] = 0;
-[e = *U + &U _PointBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> -> 0 `i `a ]
-"222
-[; ;main.c: 222: }
-[e :UE 426 ]
-}
-"224
-[; ;main.c: 224: void ShowTime(void) {
-[v _ShowTime `(v ~T0 @X0 1 ef ]
-{
-[e :U _ShowTime ]
-[f ]
-"225
-[; ;main.c: 225:     static uint8_t old_sec = 0;
-[v F3260 `uc ~T0 @X0 1 s old_sec ]
-[i F3260
--> -> 0 `i `uc
-]
-"226
-[; ;main.c: 226:     NumBuf[0] = RTC.Hour / 10;
-[e = *U + &U _NumBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _RTC 0 `i -> 10 `i `uc ]
-"227
-[; ;main.c: 227:     NumBuf[1] = RTC.Hour % 10;
-[e = *U + &U _NumBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _RTC 0 `i -> 10 `i `uc ]
-"228
-[; ;main.c: 228:     NumBuf[2] = RTC.Min / 10;
-[e = *U + &U _NumBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> / -> . _RTC 1 `i -> 10 `i `uc ]
-"229
-[; ;main.c: 229:     NumBuf[3] = RTC.Min % 10;
-[e = *U + &U _NumBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _NumBuf `ui `ux -> % -> . _RTC 1 `i -> 10 `i `uc ]
-"230
-[; ;main.c: 230:     if(RTC.Sec != old_sec) {
-[e $ ! != -> . _RTC 2 `i -> F3260 `i 428  ]
-{
-"231
-[; ;main.c: 231:         PointBuf[1] = (PointBuf[1]==0)?1:0;
-[e = *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux -> ? == -> *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux `i -> 0 `i : -> 1 `i -> 0 `i `a ]
-"232
-[; ;main.c: 232:         PointBuf[2] = PointBuf[1];
-[e = *U + &U _PointBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux *U + &U _PointBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _PointBuf `ui `ux ]
-"233
-[; ;main.c: 233:         old_sec = RTC.Sec;
-[e = F3260 . _RTC 2 ]
-"234
-[; ;main.c: 234:     }
-}
-[e :U 428 ]
-"235
-[; ;main.c: 235: }
-[e :UE 427 ]
-}
-"237
-[; ;main.c: 237: _Bool GetRisingEdge_SW2(void) {
+"104
+[; ;main.c: 104: _Bool GetRisingEdge_SW2(void) {
 [v _GetRisingEdge_SW2 `(a ~T0 @X0 1 ef ]
 {
 [e :U _GetRisingEdge_SW2 ]
 [f ]
-"238
-[; ;main.c: 238:     static _Bool flag = 0;
-[v F3262 `a ~T0 @X0 1 s flag ]
-[i F3262
+"105
+[; ;main.c: 105:     static _Bool exist = 0;
+[v F3292 `a ~T0 @X0 1 s exist ]
+[i F3292
 -> -> 0 `i `a
 ]
-"239
-[; ;main.c: 239:     if(PORTEbits.RE1 == 0) {
-[e $ ! == -> . . _PORTEbits 0 1 `i -> 0 `i 430  ]
+"106
+[; ;main.c: 106:     static _Bool Ready_f = 0;
+[v F3293 `a ~T0 @X0 1 s Ready_f ]
+[i F3293
+-> -> 0 `i `a
+]
+"107
+[; ;main.c: 107:     static int old_cnt = 0;
+[v F3294 `i ~T0 @X0 1 s old_cnt ]
+[i F3294
+-> 0 `i
+]
+"109
+[; ;main.c: 109:     if(PORTEbits.RE1 == 0) {
+[e $ ! == -> . . _PORTEbits 0 1 `i -> 0 `i 403  ]
 {
-"240
-[; ;main.c: 240:         flag = 1;
-[e = F3262 -> -> 1 `i `a ]
-"241
-[; ;main.c: 241:     }
+"110
+[; ;main.c: 110:         exist = 0;
+[e = F3292 -> -> 0 `i `a ]
+"111
+[; ;main.c: 111:         Ready_f = 1;
+[e = F3293 -> -> 1 `i `a ]
+"112
+[; ;main.c: 112:     }
 }
-[e $U 431  ]
-"242
-[; ;main.c: 242:     else if(PORTEbits.RE1 && flag) {
-[e :U 430 ]
-[e $ ! && != -> . . _PORTEbits 0 1 `i -> 0 `i != -> F3262 `i -> 0 `i 432  ]
+[e :U 403 ]
+"114
+[; ;main.c: 114:     if(Ready_f) {
+[e $ ! != -> F3293 `i -> 0 `i 404  ]
 {
-"243
-[; ;main.c: 243:         flag = 0;
-[e = F3262 -> -> 0 `i `a ]
-"244
-[; ;main.c: 244:         _delay((unsigned long)((300)*(48000000/4000.0)));
-[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
-"245
-[; ;main.c: 245:         return 1;
+"115
+[; ;main.c: 115:         if(abs(MySystick_ms() - old_cnt) >= 100) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3294 -> 100 `i 405  ]
+{
+"116
+[; ;main.c: 116:             old_cnt = MySystick_ms();
+[e = F3294 ( _MySystick_ms ..  ]
+"117
+[; ;main.c: 117:             Ready_f = 0;
+[e = F3293 -> -> 0 `i `a ]
+"118
+[; ;main.c: 118:             if(exist) return 1;
+[e $ ! != -> F3292 `i -> 0 `i 406  ]
 [e ) -> -> 1 `i `a ]
-[e $UE 429  ]
-"246
-[; ;main.c: 246:     }
+[e $UE 402  ]
+[e :U 406 ]
+"119
+[; ;main.c: 119:         }
 }
-[e :U 432 ]
-[e :U 431 ]
-"247
-[; ;main.c: 247:     return 0;
+[e $U 407  ]
+"120
+[; ;main.c: 120:         else {
+[e :U 405 ]
+{
+"121
+[; ;main.c: 121:             if(PORTEbits.RE1 == 1) exist = 1;
+[e $ ! == -> . . _PORTEbits 0 1 `i -> 1 `i 408  ]
+[e = F3292 -> -> 1 `i `a ]
+[e :U 408 ]
+"122
+[; ;main.c: 122:         }
+}
+[e :U 407 ]
+"123
+[; ;main.c: 123:     }
+}
+[e :U 404 ]
+"124
+[; ;main.c: 124:     return 0;
 [e ) -> -> 0 `i `a ]
-[e $UE 429  ]
-"248
-[; ;main.c: 248: }
-[e :UE 429 ]
+[e $UE 402  ]
+"125
+[; ;main.c: 125: }
+[e :UE 402 ]
 }
-"250
-[; ;main.c: 250: _Bool GetRisingEdge_SW1(void) {
+"127
+[; ;main.c: 127: _Bool GetRisingEdge_SW1(void) {
 [v _GetRisingEdge_SW1 `(a ~T0 @X0 1 ef ]
 {
 [e :U _GetRisingEdge_SW1 ]
 [f ]
-"251
-[; ;main.c: 251:     static _Bool flag = 0;
-[v F3264 `a ~T0 @X0 1 s flag ]
-[i F3264
+"128
+[; ;main.c: 128:     static _Bool exist = 0;
+[v F3296 `a ~T0 @X0 1 s exist ]
+[i F3296
 -> -> 0 `i `a
 ]
-"252
-[; ;main.c: 252:     if(PORTEbits.RE0 == 0) {
-[e $ ! == -> . . _PORTEbits 0 0 `i -> 0 `i 434  ]
+"129
+[; ;main.c: 129:     static _Bool Ready_f = 0;
+[v F3297 `a ~T0 @X0 1 s Ready_f ]
+[i F3297
+-> -> 0 `i `a
+]
+"130
+[; ;main.c: 130:     static int old_cnt = 0;
+[v F3298 `i ~T0 @X0 1 s old_cnt ]
+[i F3298
+-> 0 `i
+]
+"132
+[; ;main.c: 132:     if(PORTEbits.RE0 == 0) {
+[e $ ! == -> . . _PORTEbits 0 0 `i -> 0 `i 410  ]
 {
-"253
-[; ;main.c: 253:         flag = 1;
-[e = F3264 -> -> 1 `i `a ]
-"254
-[; ;main.c: 254:     }
+"133
+[; ;main.c: 133:         exist = 0;
+[e = F3296 -> -> 0 `i `a ]
+"134
+[; ;main.c: 134:         Ready_f = 1;
+[e = F3297 -> -> 1 `i `a ]
+"135
+[; ;main.c: 135:     }
 }
-[e $U 435  ]
-"255
-[; ;main.c: 255:     else if(PORTEbits.RE0 && flag) {
-[e :U 434 ]
-[e $ ! && != -> . . _PORTEbits 0 0 `i -> 0 `i != -> F3264 `i -> 0 `i 436  ]
+[e :U 410 ]
+"137
+[; ;main.c: 137:     if(Ready_f) {
+[e $ ! != -> F3297 `i -> 0 `i 411  ]
 {
-"256
-[; ;main.c: 256:         flag = 0;
-[e = F3264 -> -> 0 `i `a ]
-"257
-[; ;main.c: 257:         _delay((unsigned long)((100)*(48000000/4000.0)));
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
-"258
-[; ;main.c: 258:         return 1;
+"138
+[; ;main.c: 138:         if(abs(MySystick_ms() - old_cnt) >= 50) {
+[e $ ! >= ( _abs (1 - ( _MySystick_ms ..  F3298 -> 50 `i 412  ]
+{
+"139
+[; ;main.c: 139:             old_cnt = MySystick_ms();
+[e = F3298 ( _MySystick_ms ..  ]
+"140
+[; ;main.c: 140:             Ready_f = 0;
+[e = F3297 -> -> 0 `i `a ]
+"141
+[; ;main.c: 141:             if(exist) return 1;
+[e $ ! != -> F3296 `i -> 0 `i 413  ]
 [e ) -> -> 1 `i `a ]
-[e $UE 433  ]
-"259
-[; ;main.c: 259:     }
+[e $UE 409  ]
+[e :U 413 ]
+"142
+[; ;main.c: 142:         }
 }
-[e :U 436 ]
-[e :U 435 ]
-"260
-[; ;main.c: 260:     return 0;
+[e $U 414  ]
+"143
+[; ;main.c: 143:         else {
+[e :U 412 ]
+{
+"144
+[; ;main.c: 144:             if(PORTEbits.RE0 == 1) exist = 1;
+[e $ ! == -> . . _PORTEbits 0 0 `i -> 1 `i 415  ]
+[e = F3296 -> -> 1 `i `a ]
+[e :U 415 ]
+"145
+[; ;main.c: 145:         }
+}
+[e :U 414 ]
+"146
+[; ;main.c: 146:     }
+}
+[e :U 411 ]
+"147
+[; ;main.c: 147:     return 0;
 [e ) -> -> 0 `i `a ]
-[e $UE 433  ]
-"261
-[; ;main.c: 261: }
-[e :UE 433 ]
+[e $UE 409  ]
+"148
+[; ;main.c: 148: }
+[e :UE 409 ]
 }
-"263
-[; ;main.c: 263: void Display_ISR(void) {
-[v _Display_ISR `(v ~T0 @X0 1 ef ]
+"150
+[; ;main.c: 150: int MySystick_ms(void) {
+[v _MySystick_ms `(i ~T0 @X0 1 ef ]
 {
-[e :U _Display_ISR ]
+[e :U _MySystick_ms ]
 [f ]
-"264
-[; ;main.c: 264:     static uint8_t digit = 0, BrightCnt = 0;
-[v F3266 `uc ~T0 @X0 1 s digit ]
-[i F3266
--> -> 0 `i `uc
+"151
+[; ;main.c: 151:     static int cnt = 0;
+[v F3300 `i ~T0 @X0 1 s cnt ]
+[i F3300
+-> 0 `i
 ]
-[v F3267 `uc ~T0 @X0 1 s BrightCnt ]
-[i F3267
--> -> 0 `i `uc
+"152
+[; ;main.c: 152:     static uint16_t old_cnt = 0;
+[v F3301 `us ~T0 @X0 1 s old_cnt ]
+[i F3301
+-> -> 0 `i `us
 ]
-"265
-[; ;main.c: 265:     if(BrightCnt >= 10) {
-[e $ ! >= -> F3267 `i -> 10 `i 438  ]
+"153
+[; ;main.c: 153:     if(abs(TMR1 - old_cnt) >= 1500) {
+[e $ ! >= ( _abs (1 -> - -> _TMR1 `ui -> F3301 `ui `i -> 1500 `i 417  ]
 {
-"266
-[; ;main.c: 266:         BrightCnt = 0;
-[e = F3267 -> -> 0 `i `uc ]
-"267
-[; ;main.c: 267:         if(digit++ >= 3) {
-[e $ ! >= -> ++ F3266 -> -> 1 `i `uc `i -> 3 `i 439  ]
+"154
+[; ;main.c: 154:         old_cnt = TMR1;
+[e = F3301 _TMR1 ]
+"155
+[; ;main.c: 155:         if(cnt++ >= 9999) cnt = 0;
+[e $ ! >= ++ F3300 -> 1 `i -> 9999 `i 418  ]
+[e = F3300 -> 0 `i ]
+[e :U 418 ]
+"156
+[; ;main.c: 156:     }
+}
+[e :U 417 ]
+"157
+[; ;main.c: 157:     return cnt;
+[e ) F3300 ]
+[e $UE 416  ]
+"158
+[; ;main.c: 158: }
+[e :UE 416 ]
+}
+"160
+[; ;main.c: 160: void GPIO_Init(void) {
+[v _GPIO_Init `(v ~T0 @X0 1 ef ]
 {
-"268
-[; ;main.c: 268:             digit = 0;
-[e = F3266 -> -> 0 `i `uc ]
-"269
-[; ;main.c: 269:         }
+[e :U _GPIO_Init ]
+[f ]
+"161
+[; ;main.c: 161:     ADCON1 = 0x0B;
+[e = _ADCON1 -> -> 11 `i `uc ]
+"162
+[; ;main.c: 162:     TRISB = 0x00;
+[e = _TRISB -> -> 0 `i `uc ]
+"163
+[; ;main.c: 163:     TRISC = 0xFF;
+[e = _TRISC -> -> 255 `i `uc ]
+"164
+[; ;main.c: 164:     TRISD = 0X00;
+[e = _TRISD -> -> 0 `i `uc ]
+"165
+[; ;main.c: 165:     TRISE = 0x0f;
+[e = _TRISE -> -> 15 `i `uc ]
+"166
+[; ;main.c: 166: }
+[e :UE 419 ]
 }
-[e :U 439 ]
-"271
-[; ;main.c: 271:         LATBbits.LATB2 = 1;
-[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
-"272
-[; ;main.c: 272:         LATBbits.LATB3 = 1;
-[e = . . _LATBbits 0 3 -> -> 1 `i `uc ]
-"273
-[; ;main.c: 273:         LATBbits.LATB4 = 1;
-[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
-"274
-[; ;main.c: 274:         LATBbits.LATB5 = 1;
-[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
-"276
-[; ;main.c: 276:         LATD = NumOut_Table[NumBuf[digit]] & ((PointBuf[digit]==1)?0x7f:0xff);
-[e = _LATD -> & -> *U + &U _NumOut_Table * -> *U + &U _NumBuf * -> F3266 `ux -> -> # *U &U _NumBuf `ui `ux `ux -> -> # *U &U _NumOut_Table `ui `ux `i ? == -> *U + &U _PointBuf * -> F3266 `ux -> -> # *U &U _PointBuf `ui `ux `i -> 1 `i : -> 127 `i -> 255 `i `uc ]
-"278
-[; ;main.c: 278:         LATBbits.LATB2 = ((digit==3)?0:1);
-[e = . . _LATBbits 0 2 -> ? == -> F3266 `i -> 3 `i : -> 0 `i -> 1 `i `uc ]
-"279
-[; ;main.c: 279:         LATBbits.LATB3 = ((digit==2)?0:1);
-[e = . . _LATBbits 0 3 -> ? == -> F3266 `i -> 2 `i : -> 0 `i -> 1 `i `uc ]
-"280
-[; ;main.c: 280:         LATBbits.LATB4 = ((digit==1)?0:1);
-[e = . . _LATBbits 0 4 -> ? == -> F3266 `i -> 1 `i : -> 0 `i -> 1 `i `uc ]
-"281
-[; ;main.c: 281:         LATBbits.LATB5 = ((digit==0)?0:1);
-[e = . . _LATBbits 0 5 -> ? == -> F3266 `i -> 0 `i : -> 0 `i -> 1 `i `uc ]
-"283
-[; ;main.c: 283:     }
-}
-[e :U 438 ]
-"285
-[; ;main.c: 285:     if(Brightness[digit] <= BrightCnt) {
-[e $ ! <= -> *U + &U _Brightness * -> F3266 `ux -> -> # *U &U _Brightness `ui `ux `ui -> F3267 `ui 440  ]
-{
-"286
-[; ;main.c: 286:         if(digit==0) LATBbits.LATB5 = 1;
-[e $ ! == -> F3266 `i -> 0 `i 441  ]
-[e = . . _LATBbits 0 5 -> -> 1 `i `uc ]
-[e $U 442  ]
-"287
-[; ;main.c: 287:         else if(digit==1) LATBbits.LATB4 = 1;
-[e :U 441 ]
-[e $ ! == -> F3266 `i -> 1 `i 443  ]
-[e = . . _LATBbits 0 4 -> -> 1 `i `uc ]
-[e $U 444  ]
-"288
-[; ;main.c: 288:         else if(digit==2) LATBbits.LATB3 = 1;
-[e :U 443 ]
-[e $ ! == -> F3266 `i -> 2 `i 445  ]
-[e = . . _LATBbits 0 3 -> -> 1 `i `uc ]
-[e $U 446  ]
-"289
-[; ;main.c: 289:         else if(digit==3) LATBbits.LATB2 = 1;
-[e :U 445 ]
-[e $ ! == -> F3266 `i -> 3 `i 447  ]
-[e = . . _LATBbits 0 2 -> -> 1 `i `uc ]
-[e :U 447 ]
-[e :U 446 ]
-[e :U 444 ]
-[e :U 442 ]
-"290
-[; ;main.c: 290:     }
-}
-[e :U 440 ]
-"291
-[; ;main.c: 291:     BrightCnt++;
-[e ++ F3267 -> -> 1 `i `uc ]
-"293
-[; ;main.c: 293: }
-[e :UE 437 ]
-}
-"295
-[; ;main.c: 295: void Interrupt_Init(void) {
+"168
+[; ;main.c: 168: void Interrupt_Init(void) {
 [v _Interrupt_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _Interrupt_Init ]
 [f ]
-"296
-[; ;main.c: 296:     INTCONbits.PEIE = 1;
+"169
+[; ;main.c: 169:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"297
-[; ;main.c: 297:     INTCONbits.GIE = 1;
+"170
+[; ;main.c: 170:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"298
-[; ;main.c: 298:     RCONbits.IPEN = 1;
+"171
+[; ;main.c: 171:     RCONbits.IPEN = 1;
 [e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
-"299
-[; ;main.c: 299:     INTCON2bits.TMR0IP = 1;
+"172
+[; ;main.c: 172:     INTCON2bits.TMR0IP = 1;
 [e = . . _INTCON2bits 1 2 -> -> 1 `i `uc ]
-"300
-[; ;main.c: 300:     INTCONbits.TMR0IF = 0;
+"173
+[; ;main.c: 173:     INTCONbits.TMR0IF = 0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"301
-[; ;main.c: 301:     INTCONbits.TMR0IE = 1;
+"174
+[; ;main.c: 174:     INTCONbits.TMR0IE = 1;
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"302
-[; ;main.c: 302: }
-[e :UE 448 ]
+"175
+[; ;main.c: 175: }
+[e :UE 420 ]
 }
-"304
-[; ;main.c: 304: void Timer0_Init(void) {
+"177
+[; ;main.c: 177: void Timer0_Init(void) {
 [v _Timer0_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _Timer0_Init ]
 [f ]
-"305
-[; ;main.c: 305:     T0CONbits.T08BIT = 0;
+"178
+[; ;main.c: 178:     T0CONbits.T08BIT = 0;
 [e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-"306
-[; ;main.c: 306:     T0CONbits.T0CS = 0;
+"179
+[; ;main.c: 179:     T0CONbits.T0CS = 0;
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-"307
-[; ;main.c: 307:     T0CONbits.T0SE = 0;
+"180
+[; ;main.c: 180:     T0CONbits.T0SE = 0;
 [e = . . _T0CONbits 0 2 -> -> 0 `i `uc ]
-"308
-[; ;main.c: 308:     T0CONbits.PSA = 0;
+"181
+[; ;main.c: 181:     T0CONbits.PSA = 0;
 [e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-"309
-[; ;main.c: 309:     T0CONbits.T0PS = 0;
+"182
+[; ;main.c: 182:     T0CONbits.T0PS = 0;
 [e = . . _T0CONbits 0 0 -> -> 0 `i `uc ]
-"310
-[; ;main.c: 310:     TMR0 = 65535 - 6000;
-[e = _TMR0 -> - -> 65535 `l -> -> 6000 `i `l `us ]
-"311
-[; ;main.c: 311:     T0CONbits.TMR0ON = 1;
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"312
-[; ;main.c: 312: }
-[e :UE 449 ]
+"183
+[; ;main.c: 183:     TMR0 = 65535 - 1500;
+[e = _TMR0 -> - -> 65535 `l -> -> 1500 `i `l `us ]
+"184
+[; ;main.c: 184:     T0CONbits.TMR0ON = 0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"185
+[; ;main.c: 185: }
+[e :UE 421 ]
+}
+"187
+[; ;main.c: 187: void Timer1_Init(void) {
+[v _Timer1_Init `(v ~T0 @X0 1 ef ]
+{
+[e :U _Timer1_Init ]
+[f ]
+"188
+[; ;main.c: 188:     T1CONbits.RD16 = 1;
+[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
+"189
+[; ;main.c: 189:     T1CONbits.TMR1CS = 0;
+[e = . . _T1CONbits 1 1 -> -> 0 `i `uc ]
+"190
+[; ;main.c: 190:     T1CONbits.T1CKPS = 3;
+[e = . . _T1CONbits 1 4 -> -> 3 `i `uc ]
+"191
+[; ;main.c: 191:     TMR1 = 65535 - 1500;
+[e = _TMR1 -> - -> 65535 `l -> -> 1500 `i `l `us ]
+"192
+[; ;main.c: 192:     T1CONbits.TMR1ON = 1;
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+"193
+[; ;main.c: 193: }
+[e :UE 422 ]
 }
