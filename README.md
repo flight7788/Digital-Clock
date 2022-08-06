@@ -1,6 +1,6 @@
 # Digital-Clock
 
-![Project Image](https://github.com/flight7788//blob/main/GrippallBLE_UI.png)
+![Project Image](https://github.com/flight7788/Digital-Clock/blob/master/figure.JPG)
 
 ---
 
